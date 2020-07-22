@@ -1,7 +1,7 @@
 ﻿namespace DrinkFinder.Common.Interfaces
 {
-    public interface IEntity<TIdType>
+    public interface IEntity<T>
     {
-        TIdType Id { get; set; }
+        T Id { get; set; }
     }
 }

@@ -1,17 +1,12 @@
-﻿using DrinkFinder.Common.Interfaces;
+﻿using DrinkFinder.Infrastructure.Persistence.Abstract;
 using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DrinkFinder.Infrastructure.Persistence.Entities
 {
-    [Table("Photo")]
-    public class Photo : IEntity<Guid>
+    public class Photo : BaseEntity
     {
-        [Key]
-        public Guid Id { get; set; }
-        public Establishment Establishment { get; set; }
-        public Uri Uri { get; set; }
+        public Uri Location { get; set; }
 
+        public Establishment Establishment { get; set; }
     }
 }

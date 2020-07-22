@@ -1,17 +1,13 @@
-﻿using DrinkFinder.Common.Interfaces;
+﻿using DrinkFinder.Infrastructure.Persistence.Abstract;
 using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DrinkFinder.Infrastructure.Persistence.Entities
 {
-    [Table("Timetable")]
-    public class Timetable : IEntity<Guid>
+    public class Timetable : BaseEntity
     {
-        [Key]
-        public Guid Id { get; set; }
-        public Establishment Establishment { get; set; }
         public TimeSpan OpeningHour { get; set; }
         public TimeSpan ClosingHour { get; set; }
+
+        public Establishment Establishment { get; set; }
     }
 }
