@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DrinkFinder.Infrastructure.Migrations
+namespace DrinkFinder.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(DrinkFinderContext))]
-    [Migration("20200722103127_Init")]
+    [Migration("20200722122129_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

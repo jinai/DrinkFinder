@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DrinkFinder.Infrastructure.Migrations
+namespace DrinkFinder.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(DrinkFinderContext))]
     partial class DrinkFinderContextModelSnapshot : ModelSnapshot
