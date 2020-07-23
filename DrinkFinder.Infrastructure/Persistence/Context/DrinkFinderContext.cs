@@ -1,4 +1,4 @@
-﻿using DrinkFinder.Infrastructure.Persistence.Abstract;
+﻿using DrinkFinder.Common.Interfaces;
 using DrinkFinder.Infrastructure.Persistence.Entities;
 using DrinkFinder.Infrastructure.Persistence.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -19,15 +19,15 @@ namespace DrinkFinder.Infrastructure.Persistence.Context
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            foreach (var entry in ChangeTracker.Entries<BaseEntity>())
+            foreach (var entry in ChangeTracker.Entries<IEntity<Guid>>())
             {
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedAt = DateTime.Now;
+                        entry.Entity.AddedDate = DateTime.Now;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.LastEditedAt = DateTime.Now;
+                        entry.Entity.ModifiedDate = DateTime.Now;
                         break;
                 }
             }

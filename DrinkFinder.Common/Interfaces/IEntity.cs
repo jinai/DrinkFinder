@@ -1,7 +1,12 @@
-﻿namespace DrinkFinder.Common.Interfaces
+﻿using System;
+
+namespace DrinkFinder.Common.Interfaces
 {
-    public interface IEntity<T>
+    public interface IEntity<TId>
     {
-        T Id { get; set; }
+        TId Id { get; set; }
+        public DateTime AddedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
