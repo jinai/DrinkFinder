@@ -12,6 +12,9 @@ namespace DrinkFinder.Infrastructure.Persistence.Configurations
             builder.ToTable("Photo");
             builder.HasKey(p => p.Id);
 
+            builder.HasIndex(p => p.Location)
+                .IsUnique();
+
             builder.Property<Guid>("EstablishmentId");
 
             builder.HasOne(p => p.Establishment)
