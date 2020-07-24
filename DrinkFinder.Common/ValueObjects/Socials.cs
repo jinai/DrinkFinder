@@ -1,8 +1,7 @@
-﻿using DrinkFinder.Common.Abstract;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace DrinkFinder.Infrastructure.Persistence.ValueObjects
+namespace DrinkFinder.Common.ValueObjects
 {
     public class Socials : ValueObject
     {
