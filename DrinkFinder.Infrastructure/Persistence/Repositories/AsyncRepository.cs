@@ -20,7 +20,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
             this.dbSet = context.Set<TEntity>();
         }
 
-        public async ValueTask<TEntity> GetById(TId id)
+        public async Task<TEntity> GetById(TId id)
         {
             return await dbSet.FindAsync(id);
         }
@@ -30,7 +30,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
             return await dbSet.FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<IEnumerable<TEntity>> Get(Expression<Func<TEntity, bool>> predicate = null)
+        public async Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicate = null)
         {
             IQueryable<TEntity> query = dbSet;
 
@@ -42,29 +42,29 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
             return await query.ToListAsync();
         }
 
-        public async ValueTask<TEntity> Add(TEntity entity)
+        public async Task<TEntity> Add(TEntity entity)
         {
             var added = await dbSet.AddAsync(entity);
             return added.Entity;
         }
 
-        public TEntity Update(TEntity entity)
+        public Task<TEntity> Update(TEntity entity)
         {
             var updated = context.Attach<TEntity>(entity);
             updated.State = EntityState.Modified;
-            return updated.Entity;
+            return Task.FromResult(updated.Entity);
         }
 
-        public async ValueTask<bool> Remove(TId id)
+        public async Task<bool> Remove(TId id)
         {
             TEntity entityToDelete = await dbSet.FindAsync(id);
-            return Remove(entityToDelete);
+            return await Remove(entityToDelete);
         }
 
-        public bool Remove(TEntity entity)
+        public async Task<bool> Remove(TEntity entity)
         {
             entity.IsDeleted = true;
-            var removed = Update(entity);
+            var removed = await Update(entity);
             return removed.IsDeleted;
         }
 
