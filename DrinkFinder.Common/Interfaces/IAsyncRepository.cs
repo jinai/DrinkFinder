@@ -13,8 +13,8 @@ namespace DrinkFinder.Common.Interfaces
 
         Task<TEntity> Add(TEntity entity);
         Task<TEntity> Update(TEntity entity);
-        Task<bool> Remove(TId id);
-        Task<bool> Remove(TEntity entity);
+        Task<TEntity> Remove(TId id);
+        Task<TEntity> Remove(TEntity entity);
 
         Task<int> Count(Expression<Func<TEntity, bool>> predicate = null);
     }

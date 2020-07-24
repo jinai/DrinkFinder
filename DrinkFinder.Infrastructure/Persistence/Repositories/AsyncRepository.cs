@@ -55,17 +55,19 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
             return Task.FromResult(updated.Entity);
         }
 
-        public async Task<bool> Remove(TId id)
+        public async Task<TEntity> Remove(TId id)
         {
             TEntity entityToDelete = await dbSet.FindAsync(id);
             return await Remove(entityToDelete);
         }
 
-        public async Task<bool> Remove(TEntity entity)
+        public Task<TEntity> Remove(TEntity entity)
         {
-            entity.IsDeleted = true;
-            var removed = await Update(entity);
-            return removed.IsDeleted;
+            if (context.Entry(entity).State == EntityState.Detached)
+            {
+                dbSet.Attach(entity);
+            }
+            return Task.FromResult(dbSet.Remove(entity).Entity);
         }
 
         public async Task<int> Count(Expression<Func<TEntity, bool>> predicate = null)

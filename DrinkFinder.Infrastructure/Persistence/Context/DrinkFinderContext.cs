@@ -25,9 +25,14 @@ namespace DrinkFinder.Infrastructure.Persistence.Context
                 {
                     case EntityState.Added:
                         entry.Entity.AddedDate = DateTime.Now;
+                        entry.Entity.IsDeleted = false;
                         break;
                     case EntityState.Modified:
                         entry.Entity.ModifiedDate = DateTime.Now;
+                        break;
+                    case EntityState.Deleted:
+                        entry.State = EntityState.Modified;
+                        entry.Entity.IsDeleted = true;
                         break;
                 }
             }
@@ -39,11 +44,16 @@ namespace DrinkFinder.Infrastructure.Persistence.Context
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(builder);
+
+            builder.Entity<Establishment>().HasQueryFilter(e => !e.IsDeleted);
+            builder.Entity<News>().HasQueryFilter(e => !e.IsDeleted);
+            builder.Entity<Photo>().HasQueryFilter(e => !e.IsDeleted);
+            builder.Entity<Timetable>().HasQueryFilter(e => !e.IsDeleted);
         }
 
         public DbSet<Establishment> Establishments { get; set; }
-        public DbSet<News> News { get; set; }
         public DbSet<Timetable> Timetables { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<News> News { get; set; }
     }
 }
