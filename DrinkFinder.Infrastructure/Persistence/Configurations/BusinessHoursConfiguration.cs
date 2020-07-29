@@ -1,18 +1,15 @@
 ﻿using DrinkFinder.Infrastructure.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 
 namespace DrinkFinder.Infrastructure.Persistence.Configurations
 {
-    public class TimetableConfiguration : IEntityTypeConfiguration<Timetable>
+    public class BusinessHoursConfiguration : IEntityTypeConfiguration<BusinessHours>
     {
-        public void Configure(EntityTypeBuilder<Timetable> builder)
+        public void Configure(EntityTypeBuilder<BusinessHours> builder)
         {
-            builder.ToTable("Timetable");
+            builder.ToTable("BusinessHours");
             builder.HasKey(t => t.Id);
-
-            builder.Property<Guid>("EstablishmentId");
         }
     }
 }

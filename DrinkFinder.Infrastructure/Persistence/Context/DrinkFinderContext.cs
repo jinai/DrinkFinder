@@ -48,11 +48,11 @@ namespace DrinkFinder.Infrastructure.Persistence.Context
             builder.Entity<Establishment>().HasQueryFilter(e => !e.IsDeleted);
             builder.Entity<News>().HasQueryFilter(e => !e.IsDeleted);
             builder.Entity<Photo>().HasQueryFilter(e => !e.IsDeleted);
-            builder.Entity<Timetable>().HasQueryFilter(e => !e.IsDeleted);
+            builder.Entity<BusinessHours>().HasQueryFilter(e => !e.IsDeleted);
         }
 
         public DbSet<Establishment> Establishments { get; set; }
-        public DbSet<Timetable> Timetables { get; set; }
+        public DbSet<BusinessHours> BusinessHours { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<News> News { get; set; }
     }

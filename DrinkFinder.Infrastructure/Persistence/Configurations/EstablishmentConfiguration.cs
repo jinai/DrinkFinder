@@ -21,9 +21,17 @@ namespace DrinkFinder.Infrastructure.Persistence.Configurations
             builder.OwnsOne(e => e.Socials);
             builder.OwnsOne(e => e.ContactInfo);
 
-            builder.HasOne<Timetable>(e => e.Timetable)
-                .WithOne(t => t.Establishment)
-                .HasForeignKey<Timetable>("EstablishmentId");
+            builder.HasMany<BusinessHours>(e => e.BusinessHours)
+                .WithOne(bh => bh.Establishment)
+                .HasForeignKey("EstablishmentId");
+
+            builder.HasMany<Photo>(e => e.Photos)
+                .WithOne(p => p.Establishment)
+                .HasForeignKey("EstablishmentId");
+
+            builder.HasMany<News>(e => e.News)
+                .WithOne(n => n.Establishment)
+                .HasForeignKey("EstablishmentId");
         }
     }
 }

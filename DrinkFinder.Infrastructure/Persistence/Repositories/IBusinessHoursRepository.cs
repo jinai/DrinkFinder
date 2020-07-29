@@ -4,7 +4,7 @@ using System;
 
 namespace DrinkFinder.Infrastructure.Persistence.Repositories
 {
-    public interface ITimetableRepository : IAsyncRepository<Timetable, Guid>
+    public interface IBusinessHoursRepository : IAsyncRepository<BusinessHours, Guid>
     {
     }
 }

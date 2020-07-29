@@ -17,7 +17,7 @@ namespace DrinkFinder.Infrastructure.Persistence.UnitOfWork
         private IEstablishmentRepository establishmentRepo;
         private INewsRepository newsRepo;
         private IPhotoRepository photoRepo;
-        private ITimetableRepository timetableRepo;
+        private IBusinessHoursRepository businessHoursRepo;
 
         public IEstablishmentRepository EstablishmentRepo
         {
@@ -34,9 +34,9 @@ namespace DrinkFinder.Infrastructure.Persistence.UnitOfWork
             get { return photoRepo ??= new PhotoRepository(_context); }
         }
 
-        public ITimetableRepository TimetableRepo
+        public IBusinessHoursRepository BusinessHoursRepo
         {
-            get { return timetableRepo ??= new TimetableRepository(_context); }
+            get { return businessHoursRepo ??= new BusinessHoursRepository(_context); }
         }
 
 

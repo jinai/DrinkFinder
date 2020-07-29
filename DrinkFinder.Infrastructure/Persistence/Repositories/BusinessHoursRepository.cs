@@ -4,9 +4,9 @@ using System;
 
 namespace DrinkFinder.Infrastructure.Persistence.Repositories
 {
-    public class TimetableRepository : AsyncRepository<Timetable, Guid>, ITimetableRepository
+    public class BusinessHoursRepository : AsyncRepository<BusinessHours, Guid>, IBusinessHoursRepository
     {
-        public TimetableRepository(DrinkFinderContext context) : base(context)
+        public BusinessHoursRepository(DrinkFinderContext context) : base(context)
         {
         }
     }
