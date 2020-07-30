@@ -26,7 +26,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Entities
         public bool IsDeleted { get; set; }
 
         public ICollection<BusinessHours> BusinessHours { get; set; }
-        public ICollection<Photo> Photos { get; set; }
+        public ICollection<Picture> Pictures { get; set; }
         public ICollection<News> News { get; set; }
     }
 }

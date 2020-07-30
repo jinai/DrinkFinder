@@ -4,7 +4,7 @@ using System;
 
 namespace DrinkFinder.Infrastructure.Persistence.Repositories
 {
-    public interface IPhotoRepository : IAsyncRepository<Photo, Guid>
+    public interface IPictureRepository : IAsyncRepository<Picture, Guid>
     {
     }
 }

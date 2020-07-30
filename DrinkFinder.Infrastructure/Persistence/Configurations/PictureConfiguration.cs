@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DrinkFinder.Infrastructure.Persistence.Configurations
 {
-    public class PhotoConfiguration : IEntityTypeConfiguration<Photo>
+    public class PictureConfiguration : IEntityTypeConfiguration<Picture>
     {
-        public void Configure(EntityTypeBuilder<Photo> builder)
+        public void Configure(EntityTypeBuilder<Picture> builder)
         {
-            builder.ToTable("Photo");
+            builder.ToTable("Picture");
             builder.HasKey(p => p.Id);
 
             builder.HasIndex(p => p.Location)

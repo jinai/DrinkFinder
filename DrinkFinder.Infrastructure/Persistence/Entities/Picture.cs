@@ -3,7 +3,7 @@ using System;
 
 namespace DrinkFinder.Infrastructure.Persistence.Entities
 {
-    public class Photo : IEntity<Guid>
+    public class Picture : IEntity<Guid>
     {
         public Guid Id { get; set; }
         public Uri Location { get; set; }

@@ -4,9 +4,9 @@ using System;
 
 namespace DrinkFinder.Infrastructure.Persistence.Repositories
 {
-    public class PhotoRepository : AsyncRepository<Photo, Guid>, IPhotoRepository
+    public class PictureRepository : AsyncRepository<Picture, Guid>, IPictureRepository
     {
-        public PhotoRepository(DrinkFinderContext context) : base(context)
+        public PictureRepository(DrinkFinderContext context) : base(context)
         {
         }
     }

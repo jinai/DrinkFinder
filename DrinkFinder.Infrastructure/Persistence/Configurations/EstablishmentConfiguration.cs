@@ -25,7 +25,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Configurations
                 .WithOne(bh => bh.Establishment)
                 .HasForeignKey("EstablishmentId");
 
-            builder.HasMany<Photo>(e => e.Photos)
+            builder.HasMany<Picture>(e => e.Pictures)
                 .WithOne(p => p.Establishment)
                 .HasForeignKey("EstablishmentId");
 

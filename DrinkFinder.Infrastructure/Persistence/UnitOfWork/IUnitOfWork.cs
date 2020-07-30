@@ -8,7 +8,7 @@ namespace DrinkFinder.Infrastructure.Persistence.UnitOfWork
     {
         IEstablishmentRepository EstablishmentRepo { get; }
         INewsRepository NewsRepo { get; }
-        IPhotoRepository PhotoRepo { get; }
+        IPictureRepository PictureRepo { get; }
         IBusinessHoursRepository BusinessHoursRepo { get; }
 
         Task SaveAsync();
