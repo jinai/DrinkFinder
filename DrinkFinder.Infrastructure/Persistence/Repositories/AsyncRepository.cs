@@ -11,63 +11,70 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
 {
     public class AsyncRepository<TEntity, TId> : IAsyncRepository<TEntity, TId> where TEntity : class, IEntity<TId>
     {
-        internal DrinkFinderContext context;
-        internal DbSet<TEntity> dbSet;
+        private readonly DrinkFinderContext _context;
+        private readonly DbSet<TEntity> _dbSet;
 
         public AsyncRepository(DrinkFinderContext context)
         {
-            this.context = context;
-            this.dbSet = context.Set<TEntity>();
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _dbSet = _context.Set<TEntity>();
         }
 
         public async Task<TEntity> GetById(TId id)
         {
-            return await dbSet.FindAsync(id);
+            return await _dbSet.FindAsync(id);
         }
 
         public async Task<TEntity> FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
-            return await dbSet.FirstOrDefaultAsync(predicate);
+            return await _dbSet.FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicate = null)
+        public async Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
         {
-            IQueryable<TEntity> query = dbSet;
+            IQueryable<TEntity> query = _dbSet;
 
             if (predicate != null)
             {
                 query = query.Where(predicate);
             }
 
-            return await query.ToListAsync();
+            if (orderBy != null)
+            {
+                return await orderBy(query).ToListAsync();
+            }
+            else
+            {
+                return await query.ToListAsync();
+            }
         }
 
         public async Task<TEntity> Add(TEntity entity)
         {
-            var added = await dbSet.AddAsync(entity);
+            var added = await _dbSet.AddAsync(entity);
             return added.Entity;
         }
 
         public Task<TEntity> Update(TEntity entity)
         {
-            var updated = context.Attach<TEntity>(entity);
+            var updated = _context.Attach<TEntity>(entity);
             updated.State = EntityState.Modified;
             return Task.FromResult(updated.Entity);
         }
 
         public async Task<TEntity> Remove(TId id)
         {
-            TEntity entityToDelete = await dbSet.FindAsync(id);
+            TEntity entityToDelete = await _dbSet.FindAsync(id);
             return await Remove(entityToDelete);
         }
 
         public Task<TEntity> Remove(TEntity entity)
         {
-            if (context.Entry(entity).State == EntityState.Detached)
+            if (_context.Entry(entity).State == EntityState.Detached)
             {
-                dbSet.Attach(entity);
+                _dbSet.Attach(entity);
             }
-            return Task.FromResult(dbSet.Remove(entity).Entity);
+            return Task.FromResult(_dbSet.Remove(entity).Entity);
         }
 
         public async Task<int> Count(Expression<Func<TEntity, bool>> predicate = null)
@@ -76,7 +83,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
             {
                 predicate = _ => true;
             }
-            return await dbSet.CountAsync(predicate);
+            return await _dbSet.CountAsync(predicate);
         }
     }
 }

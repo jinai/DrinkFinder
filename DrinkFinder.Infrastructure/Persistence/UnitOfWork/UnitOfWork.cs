@@ -14,29 +14,29 @@ namespace DrinkFinder.Infrastructure.Persistence.UnitOfWork
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        private IEstablishmentRepository establishmentRepo;
-        private INewsRepository newsRepo;
-        private IPictureRepository pictureRepo;
-        private IBusinessHoursRepository businessHoursRepo;
+        private IEstablishmentRepository _establishmentRepo;
+        private INewsRepository _newsRepo;
+        private IPictureRepository _pictureRepo;
+        private IBusinessHoursRepository _businessHoursRepo;
 
         public IEstablishmentRepository EstablishmentRepo
         {
-            get { return establishmentRepo ??= new EstablishmentRepository(_context); }
+            get { return _establishmentRepo ??= new EstablishmentRepository(_context); }
         }
 
         public INewsRepository NewsRepo
         {
-            get { return newsRepo ??= new NewsRepository(_context); }
+            get { return _newsRepo ??= new NewsRepository(_context); }
         }
 
         public IPictureRepository PictureRepo
         {
-            get { return pictureRepo ??= new PictureRepository(_context); }
+            get { return _pictureRepo ??= new PictureRepository(_context); }
         }
 
         public IBusinessHoursRepository BusinessHoursRepo
         {
-            get { return businessHoursRepo ??= new BusinessHoursRepository(_context); }
+            get { return _businessHoursRepo ??= new BusinessHoursRepository(_context); }
         }
 
 
