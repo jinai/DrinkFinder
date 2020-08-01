@@ -13,10 +13,9 @@ namespace DrinkFinder.Infrastructure
         {
             services.AddDbContext<DrinkFinderContext>(options =>
                     options.UseSqlServer(
-                        configuration.GetConnectionString("DefaultConnection"),
+                        configuration.GetConnectionString("DrinkFinderConnection"),
                         b => b.MigrationsAssembly(typeof(DrinkFinderContext).Assembly.FullName)));
 
-            services.AddScoped<DrinkFinderContext>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<DrinkFinderContext>()
