@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrinkFinder.Api", "DrinkFinder.Api\DrinkFinder.Api.csproj", "{D993E3D7-AC56-411D-92BE-0B18008E2926}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrinkFinder.Api", "DrinkFinder.Api\DrinkFinder.Api.csproj", "{D993E3D7-AC56-411D-92BE-0B18008E2926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrinkFinder.Infrastructure", "DrinkFinder.Infrastructure\DrinkFinder.Infrastructure.csproj", "{C4500B4D-9FF6-4D3F-B0E4-169CC14E1377}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrinkFinder.Infrastructure", "DrinkFinder.Infrastructure\DrinkFinder.Infrastructure.csproj", "{C4500B4D-9FF6-4D3F-B0E4-169CC14E1377}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrinkFinder.Common", "DrinkFinder.Common\DrinkFinder.Common.csproj", "{8E3C314F-5B8D-4088-84FF-F9593D9F27C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrinkFinder.Common", "DrinkFinder.Common\DrinkFinder.Common.csproj", "{8E3C314F-5B8D-4088-84FF-F9593D9F27C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1C57450E-FE16-48DA-8290-6AA08EF7FCD3}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

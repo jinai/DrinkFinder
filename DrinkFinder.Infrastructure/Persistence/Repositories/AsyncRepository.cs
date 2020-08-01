@@ -10,29 +10,30 @@ using System.Threading.Tasks;
 namespace DrinkFinder.Infrastructure.Persistence.Repositories
 {
     public class AsyncRepository<TEntity, TId> : IAsyncRepository<TEntity, TId> where TEntity : class, IEntity<TId>
+                                                                                where TId : IEquatable<TId>
     {
         private readonly DrinkFinderContext _context;
-        private readonly DbSet<TEntity> _dbSet;
+        protected DbSet<TEntity> DbSet { get; }
 
         public AsyncRepository(DrinkFinderContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            _dbSet = _context.Set<TEntity>();
+            DbSet = _context.Set<TEntity>();
         }
 
         public async Task<TEntity> GetById(TId id)
         {
-            return await _dbSet.FindAsync(id);
+            return await FirstOrDefault(e => e.Id.Equals(id));
         }
 
-        public async Task<TEntity> FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
+        public virtual async Task<TEntity> FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
-            return await _dbSet.FirstOrDefaultAsync(predicate);
+            return await DbSet.FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
+        public virtual async Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
         {
-            IQueryable<TEntity> query = _dbSet;
+            IQueryable<TEntity> query = DbSet;
 
             if (predicate != null)
             {
@@ -51,7 +52,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
 
         public async Task<TEntity> Add(TEntity entity)
         {
-            var added = await _dbSet.AddAsync(entity);
+            var added = await DbSet.AddAsync(entity);
             return added.Entity;
         }
 
@@ -64,7 +65,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
 
         public async Task<TEntity> Remove(TId id)
         {
-            TEntity entityToDelete = await _dbSet.FindAsync(id);
+            TEntity entityToDelete = await DbSet.FindAsync(id);
             return await Remove(entityToDelete);
         }
 
@@ -72,9 +73,9 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
         {
             if (_context.Entry(entity).State == EntityState.Detached)
             {
-                _dbSet.Attach(entity);
+                DbSet.Attach(entity);
             }
-            return Task.FromResult(_dbSet.Remove(entity).Entity);
+            return Task.FromResult(DbSet.Remove(entity).Entity);
         }
 
         public async Task<int> Count(Expression<Func<TEntity, bool>> predicate = null)
@@ -83,7 +84,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
             {
                 predicate = _ => true;
             }
-            return await _dbSet.CountAsync(predicate);
+            return await DbSet.CountAsync(predicate);
         }
     }
 }

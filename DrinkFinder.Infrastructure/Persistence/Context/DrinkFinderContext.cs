@@ -42,6 +42,11 @@ namespace DrinkFinder.Infrastructure.Persistence.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            if (builder is null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(builder);
 

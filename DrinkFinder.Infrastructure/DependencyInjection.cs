@@ -1,9 +1,12 @@
 ﻿using DrinkFinder.Infrastructure.Persistence.Context;
 using DrinkFinder.Infrastructure.Persistence.Identity;
+using DrinkFinder.Infrastructure.Persistence.Repositories;
+using DrinkFinder.Infrastructure.Persistence.UnitOfWork;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace DrinkFinder.Infrastructure
 {
@@ -16,8 +19,10 @@ namespace DrinkFinder.Infrastructure
                         configuration.GetConnectionString("DrinkFinderConnection"),
                         b => b.MigrationsAssembly(typeof(DrinkFinderContext).Assembly.FullName)));
 
+            services.AddScoped<IEstablishmentRepository, EstablishmentRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<DrinkFinderContext>()
                 .AddDefaultTokenProviders();
 
