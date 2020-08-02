@@ -1,6 +1,7 @@
 ﻿using DrinkFinder.Infrastructure.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace DrinkFinder.Infrastructure.Persistence.Configurations
 {
@@ -8,6 +9,11 @@ namespace DrinkFinder.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Establishment> builder)
         {
+            if (builder is null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
             builder.ToTable("Establishment");
             builder.HasKey(e => e.Id);
 
@@ -23,15 +29,18 @@ namespace DrinkFinder.Infrastructure.Persistence.Configurations
 
             builder.HasMany<BusinessHours>(e => e.BusinessHours)
                 .WithOne(bh => bh.Establishment)
-                .HasForeignKey("EstablishmentId");
+                .HasForeignKey("EstablishmentId")
+                .IsRequired();
 
             builder.HasMany<Picture>(e => e.Pictures)
                 .WithOne(p => p.Establishment)
-                .HasForeignKey("EstablishmentId");
+                .HasForeignKey("EstablishmentId")
+                .IsRequired();
 
             builder.HasMany<News>(e => e.News)
                 .WithOne(n => n.Establishment)
-                .HasForeignKey("EstablishmentId");
+                .HasForeignKey("EstablishmentId")
+                .IsRequired();
         }
     }
 }
