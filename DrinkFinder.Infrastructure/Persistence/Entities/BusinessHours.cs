@@ -10,8 +10,8 @@ namespace DrinkFinder.Infrastructure.Persistence.Entities
         public Day Day { get; set; }
         public TimeSpan? OpeningHour { get; set; }
         public TimeSpan? ClosingHour { get; set; }
-        public DateTime AddedDate { get; set; }
-        public DateTime? ModifiedDate { get; set; }
+        public DateTimeOffset AddedDate { get; set; }
+        public DateTimeOffset? ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
 
         public Establishment Establishment { get; set; }

@@ -6,7 +6,7 @@ namespace DrinkFinder.Api.Models
     {
         public Guid Id { get; set; }
         public Uri Location { get; set; }
-        public DateTime AddedDate { get; set; }
+        public DateTimeOffset AddedDate { get; set; }
 
         public EstablishmentDto Establishment { get; set; }
     }

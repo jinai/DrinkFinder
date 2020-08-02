@@ -16,7 +16,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Identity
         public DateTime DateOfBirth { get; set; }
         [PersonalData]
         public bool IsProfessional { get; set; }
-        public DateTime RegistrationDate { get; set; }
-        public DateTime? LastLogin { get; set; }
+        public DateTimeOffset RegistrationDate { get; set; }
+        public DateTimeOffset? LastLogin { get; set; }
     }
 }

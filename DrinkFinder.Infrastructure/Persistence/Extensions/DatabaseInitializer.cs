@@ -40,7 +40,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 Address = new Address("Rue Truc", "N° 1", "1000", "Bruxelles", "Belgique"),
                 Socials = new Socials(new Uri("https://www.instagram.com/bar1"), new Uri("https://www.facebook.com/bar1"), new Uri("https://www.twitter.com/bar1"), null),
                 ContactInfo = new ContactInfo("bar1pro@email.com", "bar1@email.com", "0460225254"),
-                AddedDate = DateTime.Parse("31/07/2020 14:22:16", culture)
+                AddedDate = DateTimeOffset.Parse("31/07/2020 14:22:16", culture)
             };
             var e2 = new Establishment
             {
@@ -54,7 +54,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 Address = new Address("Rue Bidule", "N° 2", "1000", "Bruxelles", "Belgique"),
                 Socials = new Socials(new Uri("https://www.instagram.com/bar2"), new Uri("https://www.facebook.com/bar2"), new Uri("https://www.twitter.com/bar2"), null),
                 ContactInfo = new ContactInfo("bar2pro@email.com", "bar2@email.com", "0487625954"),
-                AddedDate = DateTime.Parse("31/07/2020 15:22:16", culture)
+                AddedDate = DateTimeOffset.Parse("31/07/2020 15:22:16", culture)
             };
 
             var bh1 = new List<BusinessHours>
@@ -65,7 +65,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                     Day = Day.Monday,
                     OpeningHour = TimeSpan.Parse("09:00", culture),
                     ClosingHour = TimeSpan.Parse("19:00", culture),
-                    AddedDate = DateTime.Now,
+                    AddedDate = DateTimeOffset.Now,
                     Establishment = e1
                 },
                 new BusinessHours
@@ -74,7 +74,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                     Day = Day.Tuesday,
                     OpeningHour = TimeSpan.Parse("09:00", culture),
                     ClosingHour = TimeSpan.Parse("19:00", culture),
-                    AddedDate = DateTime.Now,
+                    AddedDate = DateTimeOffset.Now,
                     Establishment = e1
                 },
                 new BusinessHours
@@ -83,7 +83,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                     Day = Day.Wednesday,
                     OpeningHour = TimeSpan.Parse("09:00", culture),
                     ClosingHour = TimeSpan.Parse("19:00", culture),
-                    AddedDate = DateTime.Now,
+                    AddedDate = DateTimeOffset.Now,
                     Establishment = e1
                 },
                 new BusinessHours
@@ -92,7 +92,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                     Day = Day.Thursday,
                     OpeningHour = TimeSpan.Parse("09:00", culture),
                     ClosingHour = TimeSpan.Parse("19:00", culture),
-                    AddedDate = DateTime.Now,
+                    AddedDate = DateTimeOffset.Now,
                     Establishment = e1
                 },
                 new BusinessHours
@@ -101,7 +101,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                     Day = Day.Friday,
                     OpeningHour = TimeSpan.Parse("09:00", culture),
                     ClosingHour = TimeSpan.Parse("19:00", culture),
-                    AddedDate = DateTime.Now,
+                    AddedDate = DateTimeOffset.Now,
                     Establishment = e1
                 },
                 new BusinessHours
@@ -110,7 +110,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                     Day = Day.Saturday,
                     OpeningHour = TimeSpan.Parse("09:00", culture),
                     ClosingHour = TimeSpan.Parse("19:00", culture),
-                    AddedDate = DateTime.Now,
+                    AddedDate = DateTimeOffset.Now,
                     Establishment = e1
                 },
                 new BusinessHours
@@ -119,7 +119,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                     Day = Day.Sunday,
                     OpeningHour = null, // Closed
                     ClosingHour = null, // Closed
-                    AddedDate = DateTime.Now,
+                    AddedDate = DateTimeOffset.Now,
                     Establishment = e1
                 }
             };
@@ -131,7 +131,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                     Day = Day.Monday,
                     OpeningHour = TimeSpan.Parse("08:00", culture),
                     ClosingHour = TimeSpan.Parse("18:00", culture),
-                    AddedDate = DateTime.Now,
+                    AddedDate = DateTimeOffset.Now,
                     Establishment = e2
                 },
                 new BusinessHours
@@ -140,7 +140,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                     Day = Day.Tuesday,
                     OpeningHour = TimeSpan.Parse("08:00", culture),
                     ClosingHour = TimeSpan.Parse("18:00", culture),
-                    AddedDate = DateTime.Now,
+                    AddedDate = DateTimeOffset.Now,
                     Establishment = e2
                 },
                 new BusinessHours
@@ -149,7 +149,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                     Day = Day.Wednesday,
                     OpeningHour = TimeSpan.Parse("08:00", culture),
                     ClosingHour = TimeSpan.Parse("18:00", culture),
-                    AddedDate = DateTime.Now,
+                    AddedDate = DateTimeOffset.Now,
                     Establishment = e2
                 },
                 new BusinessHours
@@ -158,7 +158,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                     Day = Day.Thursday,
                     OpeningHour = TimeSpan.Parse("08:00", culture),
                     ClosingHour = TimeSpan.Parse("18:00", culture),
-                    AddedDate = DateTime.Now,
+                    AddedDate = DateTimeOffset.Now,
                     Establishment = e2
                 },
                 new BusinessHours
@@ -167,7 +167,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                     Day = Day.Friday,
                     OpeningHour = TimeSpan.Parse("08:00", culture),
                     ClosingHour = TimeSpan.Parse("18:00", culture),
-                    AddedDate = DateTime.Now,
+                    AddedDate = DateTimeOffset.Now,
                     Establishment = e2
                 },
                 new BusinessHours
@@ -176,7 +176,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                     Day = Day.Saturday,
                     OpeningHour = TimeSpan.Parse("08:00", culture),
                     ClosingHour = TimeSpan.Parse("18:00", Properties.Resources.Culture),
-                    AddedDate = DateTime.Now,
+                    AddedDate = DateTimeOffset.Now,
                     Establishment = e2
                 },
                 new BusinessHours
@@ -185,7 +185,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                     Day = Day.Sunday,
                     OpeningHour = null, // Closed
                     ClosingHour = null, // Closed
-                    AddedDate = DateTime.Now,
+                    AddedDate = DateTimeOffset.Now,
                     Establishment = e2
                 }
             };
@@ -196,7 +196,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 Title = "Bar1 News1",
                 Content = Properties.Resources.LoremIpsum,
                 Banner = new Uri("https://via.placeholder.com/500x80.png?text=Banner+Placeholder"),
-                AddedDate = DateTime.Now,
+                AddedDate = DateTimeOffset.Now,
                 Establishment = e1
             };
             var n2 = new News
@@ -205,7 +205,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 Title = "Bar2 News1",
                 Content = Properties.Resources.LoremIpsum,
                 Banner = new Uri("https://via.placeholder.com/500x80.png?text=Banner+Placeholder"),
-                AddedDate = DateTime.Now,
+                AddedDate = DateTimeOffset.Now,
                 Establishment = e2
             };
 
@@ -213,14 +213,14 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
             {
                 Id = Guid.NewGuid(),
                 Location = new Uri("https://loremflickr.com/320/240/bar,nightclub"),
-                AddedDate = DateTime.Now,
+                AddedDate = DateTimeOffset.Now,
                 Establishment = e1
             };
             var p2 = new Picture
             {
                 Id = Guid.NewGuid(),
                 Location = new Uri("https://loremflickr.com/320/240/nightclub,bar"),
-                AddedDate = DateTime.Now,
+                AddedDate = DateTimeOffset.Now,
                 Establishment = e2
             };
 

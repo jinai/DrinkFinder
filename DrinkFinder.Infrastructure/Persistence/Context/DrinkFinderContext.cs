@@ -24,11 +24,11 @@ namespace DrinkFinder.Infrastructure.Persistence.Context
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.AddedDate = DateTime.Now;
+                        entry.Entity.AddedDate = DateTimeOffset.Now;
                         entry.Entity.IsDeleted = false;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.ModifiedDate = DateTime.Now;
+                        entry.Entity.ModifiedDate = DateTimeOffset.Now;
                         break;
                     case EntityState.Deleted:
                         entry.State = EntityState.Modified;

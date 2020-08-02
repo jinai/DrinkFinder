@@ -9,8 +9,8 @@ namespace DrinkFinder.Infrastructure.Persistence.Entities
         public string Title { get; set; }
         public string Content { get; set; }
         public Uri Banner { get; set; }
-        public DateTime AddedDate { get; set; }
-        public DateTime? ModifiedDate { get; set; }
+        public DateTimeOffset AddedDate { get; set; }
+        public DateTimeOffset? ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
 
         public Guid UserId { get; set; }

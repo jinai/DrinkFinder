@@ -20,7 +20,7 @@ namespace DrinkFinder.Api.Models
         public Address Address { get; set; }
         public Socials Socials { get; set; }
         public ContactInfo ContactInfo { get; set; }
-        public DateTime AddedDate { get; set; }
+        public DateTimeOffset AddedDate { get; set; }
 
         public ICollection<BusinessHoursDto> BusinessHours { get; set; }
         public ICollection<PictureDto> Pictures { get; set; }
