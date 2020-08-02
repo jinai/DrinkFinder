@@ -23,6 +23,8 @@ namespace DrinkFinder.Infrastructure.Persistence.Configurations
             builder.HasIndex(e => e.VATNumber)
                 .IsUnique();
 
+            builder.HasIndex(e => e.UserId);
+
             builder.OwnsOne(e => e.Address);
             builder.OwnsOne(e => e.Socials);
             builder.OwnsOne(e => e.ContactInfo);

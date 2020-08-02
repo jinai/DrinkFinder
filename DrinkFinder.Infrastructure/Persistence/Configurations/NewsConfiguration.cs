@@ -16,6 +16,8 @@ namespace DrinkFinder.Infrastructure.Persistence.Configurations
 
             builder.ToTable("News");
             builder.HasKey(n => n.Id);
+
+            builder.HasIndex(n => n.UserId);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using DrinkFinder.Common.Enums;
 using DrinkFinder.Common.Interfaces;
 using DrinkFinder.Common.ValueObjects;
-using DrinkFinder.Infrastructure.Persistence.Identity;
 using System;
 using System.Collections.Generic;
 
@@ -26,7 +25,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Entities
         public DateTime? ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
 
-        public ApplicationUser Manager { get; set; }
+        public Guid UserId { get; set; }
         public ICollection<BusinessHours> BusinessHours { get; set; }
         public ICollection<Picture> Pictures { get; set; }
         public ICollection<News> News { get; set; }

@@ -1,8 +1,6 @@
 ﻿using DrinkFinder.Common.Enums;
-using DrinkFinder.Infrastructure.Persistence.Entities;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
 
 namespace DrinkFinder.Infrastructure.Persistence.Identity
 {
@@ -16,9 +14,9 @@ namespace DrinkFinder.Infrastructure.Persistence.Identity
         public Gender Gender { get; set; }
         [PersonalData]
         public DateTime DateOfBirth { get; set; }
+        [PersonalData]
         public bool IsProfessional { get; set; }
-
-        public ICollection<Establishment> Establishments { get; set; }
-        public ICollection<News> News { get; set; }
+        public DateTime RegistrationDate { get; set; }
+        public DateTime? LastLogin { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using DrinkFinder.Common.Interfaces;
-using DrinkFinder.Infrastructure.Persistence.Identity;
 using System;
 
 namespace DrinkFinder.Infrastructure.Persistence.Entities
@@ -14,7 +13,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Entities
         public DateTime? ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
 
-        public ApplicationUser Publisher { get; set; }
+        public Guid UserId { get; set; }
         public Establishment Establishment { get; set; }
     }
 }
