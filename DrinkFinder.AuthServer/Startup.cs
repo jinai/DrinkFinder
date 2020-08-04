@@ -74,9 +74,9 @@ namespace DrinkFinder.AuthServer
 
                     // register your IdentityServer with Google at https://console.developers.google.com
                     // enable the Google+ API
-                    // set the redirect URI to https://localhost:5001/signin-google
-                    options.ClientId = "copy client ID from Google here";
-                    options.ClientSecret = "copy client secret from Google here";
+                    // set the redirect URI to https://localhost:5000/signin-google
+                    options.ClientId = Configuration["OAuth:Google:ClientId"];
+                    options.ClientSecret = Configuration["OAuth:Google:ClientSecret"];
                 });
         }
 
@@ -86,6 +86,10 @@ namespace DrinkFinder.AuthServer
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
             }
 
             app.UseStaticFiles();
