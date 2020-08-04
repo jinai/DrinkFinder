@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace DrinkFinder.Infrastructure.Persistence.Context
 {
-    public class DrinkFinderContext : DbContext
+    public class DrinkFinderDomainContext : DbContext
     {
         public DbSet<Establishment> Establishments { get; set; }
         public DbSet<BusinessHours> BusinessHours { get; set; }
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<News> News { get; set; }
 
-        public DrinkFinderContext() { }
+        public DrinkFinderDomainContext() { }
 
-        public DrinkFinderContext(DbContextOptions<DrinkFinderContext> options) : base(options) { }
+        public DrinkFinderDomainContext(DbContextOptions<DrinkFinderDomainContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

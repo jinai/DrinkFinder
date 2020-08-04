@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DrinkFinder.Infrastructure.Persistence.Migrations
 {
-    [DbContext(typeof(DrinkFinderContext))]
-    partial class DrinkFinderContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(DrinkFinderDomainContext))]
+    partial class DrinkFinderDomainContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

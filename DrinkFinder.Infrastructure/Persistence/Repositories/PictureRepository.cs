@@ -6,7 +6,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
 {
     public class PictureRepository : AsyncRepository<Picture, Guid>, IPictureRepository
     {
-        public PictureRepository(DrinkFinderContext context) : base(context)
+        public PictureRepository(DrinkFinderDomainContext context) : base(context)
         {
         }
     }

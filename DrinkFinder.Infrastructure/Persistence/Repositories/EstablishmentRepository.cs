@@ -11,7 +11,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
 {
     public class EstablishmentRepository : AsyncRepository<Establishment, Guid>, IEstablishmentRepository
     {
-        public EstablishmentRepository(DrinkFinderContext context) : base(context) { }
+        public EstablishmentRepository(DrinkFinderDomainContext context) : base(context) { }
 
         public override async Task<IEnumerable<Establishment>> GetAll(Expression<Func<Establishment, bool>> predicate = null, Func<IQueryable<Establishment>, IOrderedQueryable<Establishment>> orderBy = null)
         {

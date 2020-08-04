@@ -6,7 +6,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
 {
     public class NewsRepository : AsyncRepository<News, Guid>, INewsRepository
     {
-        public NewsRepository(DrinkFinderContext context) : base(context)
+        public NewsRepository(DrinkFinderDomainContext context) : base(context)
         {
         }
     }

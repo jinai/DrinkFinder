@@ -22,7 +22,7 @@ namespace DrinkFinder.AuthServer
         {
             var services = new ServiceCollection();
             services.AddLogging();
-            services.AddDbContext<AuthServerDbContext>(options =>
+            services.AddDbContext<DrinkFinderAuthContext>(options =>
             {
                 options.UseSqlServer(
                     connectionString,
@@ -31,14 +31,14 @@ namespace DrinkFinder.AuthServer
             });
 
             services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
-                .AddEntityFrameworkStores<AuthServerDbContext>()
+                .AddEntityFrameworkStores<DrinkFinderAuthContext>()
                 .AddDefaultTokenProviders();
 
             using (var serviceProvider = services.BuildServiceProvider())
             {
                 using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
-                    var context = scope.ServiceProvider.GetService<AuthServerDbContext>();
+                    var context = scope.ServiceProvider.GetService<DrinkFinderAuthContext>();
                     context.Database.Migrate();
 
                     var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();

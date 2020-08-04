@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DrinkFinder.Infrastructure.Persistence.Migrations
 {
-    [DbContext(typeof(DrinkFinderContext))]
+    [DbContext(typeof(DrinkFinderDomainContext))]
     [Migration("20200723133416_RenameAuditProps")]
     partial class RenameAuditProps
     {

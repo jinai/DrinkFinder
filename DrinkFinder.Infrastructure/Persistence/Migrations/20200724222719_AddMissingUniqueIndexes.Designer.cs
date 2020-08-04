@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DrinkFinder.Infrastructure.Persistence.Migrations
 {
-    [DbContext(typeof(DrinkFinderContext))]
+    [DbContext(typeof(DrinkFinderDomainContext))]
     [Migration("20200724222719_AddMissingUniqueIndexes")]
     partial class AddMissingUniqueIndexes
     {

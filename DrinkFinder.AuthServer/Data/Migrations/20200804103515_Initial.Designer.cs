@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DrinkFinder.AuthServer.Data.Migrations
 {
-    [DbContext(typeof(AuthServerDbContext))]
+    [DbContext(typeof(DrinkFinderAuthContext))]
     [Migration("20200804103515_Initial")]
     partial class Initial
     {

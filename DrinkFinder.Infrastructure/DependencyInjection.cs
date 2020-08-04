@@ -12,7 +12,7 @@ namespace DrinkFinder.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<DrinkFinderContext>(options =>
+            services.AddDbContext<DrinkFinderDomainContext>(options =>
             {
                 options.UseSqlServer(
                     configuration.GetConnectionString("DrinkFinderDomain"),

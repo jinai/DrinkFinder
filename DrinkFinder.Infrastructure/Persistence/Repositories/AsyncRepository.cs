@@ -12,10 +12,10 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
     public class AsyncRepository<TEntity, TId> : IAsyncRepository<TEntity, TId> where TEntity : class, IEntity<TId>
                                                                                 where TId : IEquatable<TId>
     {
-        private readonly DrinkFinderContext _context;
+        private readonly DrinkFinderDomainContext _context;
         protected DbSet<TEntity> DbSet { get; }
 
-        public AsyncRepository(DrinkFinderContext context)
+        public AsyncRepository(DrinkFinderDomainContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             DbSet = _context.Set<TEntity>();

@@ -23,7 +23,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
 
             using var scope = host.Services.CreateScope();
 
-            var context = scope.ServiceProvider.GetRequiredService<DrinkFinderContext>();
+            var context = scope.ServiceProvider.GetRequiredService<DrinkFinderDomainContext>();
             var uow = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
             context.Database.Migrate();
 

@@ -7,9 +7,9 @@ namespace DrinkFinder.Infrastructure.Persistence.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DrinkFinderContext _context;
+        private readonly DrinkFinderDomainContext _context;
 
-        public UnitOfWork(DrinkFinderContext context)
+        public UnitOfWork(DrinkFinderDomainContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }

@@ -32,7 +32,7 @@ namespace DrinkFinder.AuthServer
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<AuthServerDbContext>(options =>
+            services.AddDbContext<DrinkFinderAuthContext>(options =>
             {
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DrinkFinderAuth"),
@@ -46,7 +46,7 @@ namespace DrinkFinder.AuthServer
                 //options.SignIn.RequireConfirmedAccount = false;
                 //options.SignIn.RequireConfirmedEmail = true;
             })
-                .AddEntityFrameworkStores<AuthServerDbContext>()
+                .AddEntityFrameworkStores<DrinkFinderAuthContext>()
                 .AddDefaultTokenProviders();
 
             var builder = services.AddIdentityServer(options =>

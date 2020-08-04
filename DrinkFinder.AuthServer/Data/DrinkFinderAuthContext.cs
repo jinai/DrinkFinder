@@ -7,11 +7,11 @@ using System;
 
 namespace DrinkFinder.AuthServer.Data
 {
-    public class AuthServerDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
+    public class DrinkFinderAuthContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
-        public AuthServerDbContext() { }
+        public DrinkFinderAuthContext() { }
 
-        public AuthServerDbContext(DbContextOptions<AuthServerDbContext> options) : base(options) { }
+        public DrinkFinderAuthContext(DbContextOptions<DrinkFinderAuthContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
