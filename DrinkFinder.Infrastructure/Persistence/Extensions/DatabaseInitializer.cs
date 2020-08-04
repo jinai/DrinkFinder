@@ -2,6 +2,7 @@
 using DrinkFinder.Common.ValueObjects;
 using DrinkFinder.Infrastructure.Persistence.Context;
 using DrinkFinder.Infrastructure.Persistence.Entities;
+using DrinkFinder.Infrastructure.Persistence.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,10 +24,23 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
             using var scope = host.Services.CreateScope();
 
             var context = scope.ServiceProvider.GetRequiredService<DrinkFinderContext>();
-            context.Database.EnsureDeleted();
+            var uow = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
             context.Database.Migrate();
 
+            var control = uow.EstablishmentRepo.FirstOrDefault(e => e.ShortCode == "shortcode1").Result;
+            if (control != null)
+            {
+                // If an establishment with that ShortCode exists we can assume we've already
+                // seeded the database
+                return host;
+            }
+
             var culture = CultureInfo.CurrentCulture;
+
+            // Known user IDs
+            // Ideally we'd get them from claims or a UserManager but here we can't
+            var alice = Guid.Parse("9c59fbb6-c669-447e-9b2b-0a64d2a5f8f6");
+            var bob = Guid.Parse("ba7c7c61-52dd-4d23-a703-a1d31702bf33");
 
             var e1 = new Establishment
             {
@@ -40,7 +54,8 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 Address = new Address("Rue Truc", "N° 1", "1000", "Bruxelles", "Belgique"),
                 Socials = new Socials(new Uri("https://www.instagram.com/bar1"), new Uri("https://www.facebook.com/bar1"), new Uri("https://www.twitter.com/bar1"), null),
                 ContactInfo = new ContactInfo("bar1pro@email.com", "bar1@email.com", "0460225254"),
-                AddedDate = DateTimeOffset.Parse("31/07/2020 14:22:16", culture)
+                AddedDate = DateTimeOffset.Parse("31/07/2020 14:22:16", culture),
+                UserId = alice
             };
             var e2 = new Establishment
             {
@@ -54,7 +69,8 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 Address = new Address("Rue Bidule", "N° 2", "1000", "Bruxelles", "Belgique"),
                 Socials = new Socials(new Uri("https://www.instagram.com/bar2"), new Uri("https://www.facebook.com/bar2"), new Uri("https://www.twitter.com/bar2"), null),
                 ContactInfo = new ContactInfo("bar2pro@email.com", "bar2@email.com", "0487625954"),
-                AddedDate = DateTimeOffset.Parse("31/07/2020 15:22:16", culture)
+                AddedDate = DateTimeOffset.Parse("31/07/2020 15:22:16", culture),
+                UserId = bob
             };
 
             var bh1 = new List<BusinessHours>

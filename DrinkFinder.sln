@@ -12,7 +12,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1C57450E-FE16-48DA-8290-6AA08EF7FCD3}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		DrinkFinder.sln.startup.json = DrinkFinder.sln.startup.json
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrinkFinder.AuthServer", "DrinkFinder.AuthServer\DrinkFinder.AuthServer.csproj", "{0921CE23-250F-41FF-A423-84719C3CA162}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +35,10 @@ Global
 		{8E3C314F-5B8D-4088-84FF-F9593D9F27C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E3C314F-5B8D-4088-84FF-F9593D9F27C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E3C314F-5B8D-4088-84FF-F9593D9F27C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0921CE23-250F-41FF-A423-84719C3CA162}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0921CE23-250F-41FF-A423-84719C3CA162}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0921CE23-250F-41FF-A423-84719C3CA162}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0921CE23-250F-41FF-A423-84719C3CA162}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

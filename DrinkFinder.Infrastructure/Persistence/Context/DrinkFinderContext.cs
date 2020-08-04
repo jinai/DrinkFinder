@@ -1,8 +1,6 @@
-﻿using DrinkFinder.Common.Interfaces;
+﻿using DrinkFinder.Common.Enums;
+using DrinkFinder.Common.Interfaces;
 using DrinkFinder.Infrastructure.Persistence.Entities;
-using DrinkFinder.Infrastructure.Persistence.Identity;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Reflection;
@@ -11,10 +9,48 @@ using System.Threading.Tasks;
 
 namespace DrinkFinder.Infrastructure.Persistence.Context
 {
-    public class DrinkFinderContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
+    public class DrinkFinderContext : DbContext
     {
-        public DrinkFinderContext(DbContextOptions<DrinkFinderContext> options) : base(options)
+        public DbSet<Establishment> Establishments { get; set; }
+        public DbSet<BusinessHours> BusinessHours { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
+        public DbSet<News> News { get; set; }
+
+        public DrinkFinderContext() { }
+
+        public DrinkFinderContext(DbContextOptions<DrinkFinderContext> options) : base(options) { }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (optionsBuilder is null)
+            {
+                throw new ArgumentNullException(nameof(optionsBuilder));
+            }
+
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(
+                    @"Server=(localdb)\mssqllocaldb;Database=DrinkFinder;Trusted_Connection=True;MultipleActiveResultSets=true",
+                    b => b.MigrationsHistoryTable("__EFMigrationsHistory", nameof(Schema.Domain)));
+                optionsBuilder.EnableSensitiveDataLogging();
+            }
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            if (builder is null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            builder.HasDefaultSchema(nameof(Schema.Domain));
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            base.OnModelCreating(builder);
+
+            builder.Entity<Establishment>().HasQueryFilter(e => !e.IsDeleted);
+            builder.Entity<News>().HasQueryFilter(e => !e.IsDeleted);
+            builder.Entity<Picture>().HasQueryFilter(e => !e.IsDeleted);
+            builder.Entity<BusinessHours>().HasQueryFilter(e => !e.IsDeleted);
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -39,26 +75,5 @@ namespace DrinkFinder.Infrastructure.Persistence.Context
 
             return base.SaveChangesAsync(cancellationToken);
         }
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            if (builder is null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
-
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            base.OnModelCreating(builder);
-
-            builder.Entity<Establishment>().HasQueryFilter(e => !e.IsDeleted);
-            builder.Entity<News>().HasQueryFilter(e => !e.IsDeleted);
-            builder.Entity<Picture>().HasQueryFilter(e => !e.IsDeleted);
-            builder.Entity<BusinessHours>().HasQueryFilter(e => !e.IsDeleted);
-        }
-
-        public DbSet<Establishment> Establishments { get; set; }
-        public DbSet<BusinessHours> BusinessHours { get; set; }
-        public DbSet<Picture> Pictures { get; set; }
-        public DbSet<News> News { get; set; }
     }
 }
