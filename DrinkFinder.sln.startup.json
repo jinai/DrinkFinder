@@ -6,16 +6,20 @@
     "Version": 3,
     "ListAllProjects": true,
     "MultiProjectConfigurations": {
-        "Api + AuthServer": {
+        "AuthServer + Api + Client": {
             "Projects": {
-                "DrinkFinder.Api": {
-                    "ProfileName": "IIS Express"
-                },
                 "DrinkFinder.AuthServer": {
                     "ProfileName": "SelfHost",
                     "CommandLineArguments": "/seed",
                     "WorkingDirectory": ""
+                },
+                "DrinkFinder.Api": {
+                    "ProfileName": "Api"
+                },
+                "DrinkFinder.MvcClient": {
+                    "ProfileName": "MvcClient"
                 }
+
             }
         }
     }

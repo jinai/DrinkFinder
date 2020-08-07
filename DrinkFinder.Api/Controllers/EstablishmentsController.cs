@@ -1,5 +1,6 @@
 ﻿using DrinkFinder.Api.Models;
 using DrinkFinder.Api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ namespace DrinkFinder.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
+    [Authorize(Policy = "Admin")]
     public class EstablishmentsController : ControllerBase
     {
         private readonly IEstablishmentService _establishmentService;
@@ -33,9 +36,9 @@ namespace DrinkFinder.Api.Controllers
                 var establishment = await _establishmentService.GetById(establishmentId);
                 return Ok(establishment);
             }
-            catch (KeyNotFoundException e)
+            catch (Exception exc)
             {
-                return NotFound(e);
+                return NotFound(exc);
             }
         }
     }

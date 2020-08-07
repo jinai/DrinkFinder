@@ -1,4 +1,4 @@
-﻿using DrinkFinder.Common.Enums;
+﻿using DrinkFinder.Common.Constants;
 using DrinkFinder.Infrastructure.Persistence.Context;
 using DrinkFinder.Infrastructure.Persistence.Repositories;
 using DrinkFinder.Infrastructure.Persistence.UnitOfWork;
@@ -16,7 +16,7 @@ namespace DrinkFinder.Infrastructure
             {
                 options.UseSqlServer(
                     configuration.GetConnectionString("DrinkFinderDomain"),
-                    b => b.MigrationsHistoryTable("__EFMigrationsHistory", nameof(Schema.Domain)));
+                    b => b.MigrationsHistoryTable("__EFMigrationsHistory", Schemas.Domain));
                 options.EnableSensitiveDataLogging();
             });
 

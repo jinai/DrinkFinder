@@ -1,5 +1,5 @@
 ﻿using DrinkFinder.AuthServer.Models;
-using DrinkFinder.Common.Enums;
+using DrinkFinder.Common.Constants;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -7,11 +7,11 @@ using System;
 
 namespace DrinkFinder.AuthServer.Data
 {
-    public class DrinkFinderAuthContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
+    public class DrinkFinderIdentityContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
-        public DrinkFinderAuthContext() { }
+        public DrinkFinderIdentityContext() { }
 
-        public DrinkFinderAuthContext(DbContextOptions<DrinkFinderAuthContext> options) : base(options) { }
+        public DrinkFinderIdentityContext(DbContextOptions<DrinkFinderIdentityContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -24,14 +24,13 @@ namespace DrinkFinder.AuthServer.Data
             {
                 optionsBuilder.UseSqlServer(
                     @"Server=(localdb)\mssqllocaldb;Database=DrinkFinder;Trusted_Connection=True;MultipleActiveResultSets=true",
-                    b => b.MigrationsHistoryTable("__EFMigrationsHistory", nameof(Schema.Auth)));
-                optionsBuilder.EnableSensitiveDataLogging();
+                    b => b.MigrationsHistoryTable("__EFMigrationsHistory", Schemas.Identity));
             }
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.HasDefaultSchema(nameof(Schema.Auth));
+            builder.HasDefaultSchema(Schemas.Identity);
             base.OnModelCreating(builder);
         }
     }

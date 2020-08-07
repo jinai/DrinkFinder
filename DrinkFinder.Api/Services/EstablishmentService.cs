@@ -35,7 +35,7 @@ namespace DrinkFinder.Api.Services
 
             if (establishment == null)
             {
-                throw new KeyNotFoundException(nameof(establishmentId)); // TODO: Throw a ServiceException here
+                throw new Exception($"The establishment with ID = {establishmentId} doesn't exist."); // TODO: Return a ServiceResult or a custom exception
             }
             return _mapper.Map<EstablishmentDto>(establishment);
         }

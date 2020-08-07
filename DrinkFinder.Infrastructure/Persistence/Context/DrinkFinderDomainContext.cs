@@ -1,4 +1,4 @@
-﻿using DrinkFinder.Common.Enums;
+﻿using DrinkFinder.Common.Constants;
 using DrinkFinder.Common.Interfaces;
 using DrinkFinder.Infrastructure.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +31,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Context
             {
                 optionsBuilder.UseSqlServer(
                     @"Server=(localdb)\mssqllocaldb;Database=DrinkFinder;Trusted_Connection=True;MultipleActiveResultSets=true",
-                    b => b.MigrationsHistoryTable("__EFMigrationsHistory", nameof(Schema.Domain)));
+                    b => b.MigrationsHistoryTable("__EFMigrationsHistory", Schemas.Domain));
                 optionsBuilder.EnableSensitiveDataLogging();
             }
         }
@@ -43,7 +43,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Context
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.HasDefaultSchema(nameof(Schema.Domain));
+            builder.HasDefaultSchema(Schemas.Domain);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(builder);
 

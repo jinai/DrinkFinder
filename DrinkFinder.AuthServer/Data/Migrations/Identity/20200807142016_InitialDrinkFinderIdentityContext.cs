@@ -1,18 +1,18 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DrinkFinder.AuthServer.Data.Migrations
+namespace DrinkFinder.AuthServer.Data.Migrations.Identity
 {
-    public partial class Initial : Migration
+    public partial class InitialDrinkFinderIdentityContext : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "Auth");
+                name: "Identity");
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
-                schema: "Auth",
+                schema: "Identity",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -27,7 +27,7 @@ namespace DrinkFinder.AuthServer.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
-                schema: "Auth",
+                schema: "Identity",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -60,7 +60,7 @@ namespace DrinkFinder.AuthServer.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
-                schema: "Auth",
+                schema: "Identity",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -75,7 +75,7 @@ namespace DrinkFinder.AuthServer.Data.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
-                        principalSchema: "Auth",
+                        principalSchema: "Identity",
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -83,7 +83,7 @@ namespace DrinkFinder.AuthServer.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
-                schema: "Auth",
+                schema: "Identity",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -98,7 +98,7 @@ namespace DrinkFinder.AuthServer.Data.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetUserClaims_AspNetUsers_UserId",
                         column: x => x.UserId,
-                        principalSchema: "Auth",
+                        principalSchema: "Identity",
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -106,7 +106,7 @@ namespace DrinkFinder.AuthServer.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserLogins",
-                schema: "Auth",
+                schema: "Identity",
                 columns: table => new
                 {
                     LoginProvider = table.Column<string>(nullable: false),
@@ -120,7 +120,7 @@ namespace DrinkFinder.AuthServer.Data.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetUserLogins_AspNetUsers_UserId",
                         column: x => x.UserId,
-                        principalSchema: "Auth",
+                        principalSchema: "Identity",
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -128,7 +128,7 @@ namespace DrinkFinder.AuthServer.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserRoles",
-                schema: "Auth",
+                schema: "Identity",
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
@@ -140,14 +140,14 @@ namespace DrinkFinder.AuthServer.Data.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
                         column: x => x.RoleId,
-                        principalSchema: "Auth",
+                        principalSchema: "Identity",
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
-                        principalSchema: "Auth",
+                        principalSchema: "Identity",
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -155,7 +155,7 @@ namespace DrinkFinder.AuthServer.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserTokens",
-                schema: "Auth",
+                schema: "Identity",
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
@@ -169,7 +169,7 @@ namespace DrinkFinder.AuthServer.Data.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                         column: x => x.UserId,
-                        principalSchema: "Auth",
+                        principalSchema: "Identity",
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -177,13 +177,13 @@ namespace DrinkFinder.AuthServer.Data.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
-                schema: "Auth",
+                schema: "Identity",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
-                schema: "Auth",
+                schema: "Identity",
                 table: "AspNetRoles",
                 column: "NormalizedName",
                 unique: true,
@@ -191,31 +191,31 @@ namespace DrinkFinder.AuthServer.Data.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
-                schema: "Auth",
+                schema: "Identity",
                 table: "AspNetUserClaims",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserLogins_UserId",
-                schema: "Auth",
+                schema: "Identity",
                 table: "AspNetUserLogins",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserRoles_RoleId",
-                schema: "Auth",
+                schema: "Identity",
                 table: "AspNetUserRoles",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
-                schema: "Auth",
+                schema: "Identity",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
-                schema: "Auth",
+                schema: "Identity",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true,
@@ -226,31 +226,31 @@ namespace DrinkFinder.AuthServer.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims",
-                schema: "Auth");
+                schema: "Identity");
 
             migrationBuilder.DropTable(
                 name: "AspNetUserClaims",
-                schema: "Auth");
+                schema: "Identity");
 
             migrationBuilder.DropTable(
                 name: "AspNetUserLogins",
-                schema: "Auth");
+                schema: "Identity");
 
             migrationBuilder.DropTable(
                 name: "AspNetUserRoles",
-                schema: "Auth");
+                schema: "Identity");
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens",
-                schema: "Auth");
+                schema: "Identity");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles",
-                schema: "Auth");
+                schema: "Identity");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers",
-                schema: "Auth");
+                schema: "Identity");
         }
     }
 }

@@ -1,18 +1,12 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
-
-
-using DrinkFinder.AuthServer.Data;
+﻿using DrinkFinder.AuthServer.Data;
 using DrinkFinder.AuthServer.Models;
-using DrinkFinder.Common.Enums;
-using IdentityModel;
+using DrinkFinder.Common.Constants;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System;
 using System.Linq;
-using System.Security.Claims;
 
 namespace DrinkFinder.AuthServer
 {
@@ -22,24 +16,82 @@ namespace DrinkFinder.AuthServer
         {
             var services = new ServiceCollection();
             services.AddLogging();
-            services.AddDbContext<DrinkFinderAuthContext>(options =>
+            services.AddDbContext<DrinkFinderIdentityContext>(options =>
             {
                 options.UseSqlServer(
                     connectionString,
-                    b => b.MigrationsHistoryTable("__EFMigrationsHistory", nameof(Schema.Auth)));
+                    b => b.MigrationsHistoryTable("__EFMigrationsHistory", Schemas.Identity));
                 options.EnableSensitiveDataLogging();
             });
 
             services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
-                .AddEntityFrameworkStores<DrinkFinderAuthContext>()
+                .AddEntityFrameworkStores<DrinkFinderIdentityContext>()
                 .AddDefaultTokenProviders();
 
             using (var serviceProvider = services.BuildServiceProvider())
             {
                 using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
-                    var context = scope.ServiceProvider.GetService<DrinkFinderAuthContext>();
+                    var context = scope.ServiceProvider.GetService<DrinkFinderIdentityContext>();
                     context.Database.Migrate();
+
+                    var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+                    var admin = roleMgr.FindByNameAsync(UserRoles.Admin).Result;
+                    if (admin == null)
+                    {
+                        admin = new IdentityRole<Guid>
+                        {
+                            Name = UserRoles.Admin
+                        };
+                        var result = roleMgr.CreateAsync(admin).Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+                        Log.Debug($"Role {UserRoles.Admin} created");
+                    }
+                    else
+                    {
+                        Log.Debug($"Role {UserRoles.Admin} already exists");
+                    }
+
+                    var manager = roleMgr.FindByNameAsync(UserRoles.Manager).Result;
+                    if (manager == null)
+                    {
+                        manager = new IdentityRole<Guid>
+                        {
+                            Name = UserRoles.Manager
+                        };
+                        var result = roleMgr.CreateAsync(manager).Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+                        Log.Debug($"Role {UserRoles.Manager} created");
+                    }
+                    else
+                    {
+                        Log.Debug($"Role {UserRoles.Manager} already exists");
+                    }
+
+                    var member = roleMgr.FindByNameAsync(UserRoles.Member).Result;
+                    if (member == null)
+                    {
+                        member = new IdentityRole<Guid>
+                        {
+                            Name = UserRoles.Member
+                        };
+                        var result = roleMgr.CreateAsync(member).Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+                        Log.Debug($"Role {UserRoles.Member} created");
+                    }
+                    else
+                    {
+                        Log.Debug($"Role {UserRoles.Member} already exists");
+                    }
 
                     var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
                     var alice = userMgr.FindByNameAsync("alice").Result;
@@ -61,21 +113,17 @@ namespace DrinkFinder.AuthServer
                             throw new Exception(result.Errors.First().Description);
                         }
 
-                        result = userMgr.AddClaimsAsync(alice, new Claim[]{
-                            new Claim(JwtClaimTypes.Name, "Alice Smith"),
-                            new Claim(JwtClaimTypes.GivenName, "Alice"),
-                            new Claim(JwtClaimTypes.FamilyName, "Smith"),
-                            new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
-                        }).Result;
+                        result = userMgr.AddToRoleAsync(alice, UserRoles.Admin).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
                         }
-                        Log.Debug("alice created");
+
+                        Log.Debug("User Alice created");
                     }
                     else
                     {
-                        Log.Debug("alice already exists");
+                        Log.Debug("User Alice already exists");
                     }
 
                     var bob = userMgr.FindByNameAsync("bob").Result;
@@ -97,22 +145,49 @@ namespace DrinkFinder.AuthServer
                             throw new Exception(result.Errors.First().Description);
                         }
 
-                        result = userMgr.AddClaimsAsync(bob, new Claim[]{
-                            new Claim(JwtClaimTypes.Name, "Bob Smith"),
-                            new Claim(JwtClaimTypes.GivenName, "Bob"),
-                            new Claim(JwtClaimTypes.FamilyName, "Smith"),
-                            new Claim(JwtClaimTypes.WebSite, "http://bob.com"),
-                            new Claim("location", "somewhere")
-                        }).Result;
+                        result = userMgr.AddToRoleAsync(bob, UserRoles.Manager).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
                         }
-                        Log.Debug("bob created");
+
+                        Log.Debug("User Bob created");
                     }
                     else
                     {
-                        Log.Debug("bob already exists");
+                        Log.Debug("User Bob already exists");
+                    }
+
+                    var charlie = userMgr.FindByNameAsync("charlie").Result;
+                    if (charlie == null)
+                    {
+                        charlie = new ApplicationUser
+                        {
+                            Id = Guid.Parse("497991f4-da7f-45ae-b885-04b74b6a3a90"),
+                            UserName = "charlie",
+                            Email = "CharlieSmith@email.com",
+                            EmailConfirmed = true,
+                            FirstName = "Charlie",
+                            LastName = "Smith",
+                            RegistrationDate = DateTimeOffset.Now
+                        };
+                        var result = userMgr.CreateAsync(charlie, "Pass123$").Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+
+                        result = userMgr.AddToRoleAsync(charlie, UserRoles.Member).Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+
+                        Log.Debug("User Charlie created");
+                    }
+                    else
+                    {
+                        Log.Debug("User Charlie already exists");
                     }
                 }
             }

@@ -1,11 +1,9 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
-
-
-using DrinkFinder.AuthServer.Data;
+﻿using DrinkFinder.AuthServer.Data;
 using DrinkFinder.AuthServer.Models;
-using DrinkFinder.Common.Enums;
+using DrinkFinder.Common.Constants;
 using IdentityServer4;
+using IdentityServer4.EntityFramework.DbContexts;
+using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -14,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Linq;
+using System.Reflection;
 
 namespace DrinkFinder.AuthServer
 {
@@ -32,49 +32,48 @@ namespace DrinkFinder.AuthServer
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<DrinkFinderAuthContext>(options =>
+            services.AddDbContext<DrinkFinderIdentityContext>(options =>
             {
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DrinkFinderAuth"),
-                    b => b.MigrationsHistoryTable("__EFMigrationsHistory", nameof(Schema.Auth)));
-                options.EnableSensitiveDataLogging();
+                    Configuration.GetConnectionString("DrinkFinderIdentity"),
+                    sql => sql.MigrationsHistoryTable("__EFMigrationsHistory", Schemas.Identity));
             });
 
             services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>
             {
                 options.User.RequireUniqueEmail = true;
-                //options.SignIn.RequireConfirmedAccount = false;
-                //options.SignIn.RequireConfirmedEmail = true;
             })
-                .AddEntityFrameworkStores<DrinkFinderAuthContext>()
+                .AddEntityFrameworkStores<DrinkFinderIdentityContext>()
                 .AddDefaultTokenProviders();
 
+            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             var builder = services.AddIdentityServer(options =>
             {
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
-
-                // see https://identityserver4.readthedocs.io/en/latest/topics/resources.html
                 options.EmitStaticAudienceClaim = true;
             })
-                .AddInMemoryIdentityResources(Config.IdentityResources)
-                .AddInMemoryApiScopes(Config.ApiScopes)
-                .AddInMemoryClients(Config.Clients)
+                .AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = b => b.UseSqlServer(Configuration.GetConnectionString("DrinkFinderIdentityServer"),
+                        sql => sql.MigrationsAssembly(migrationsAssembly));
+                })
+                .AddOperationalStore(options =>
+                {
+                    options.ConfigureDbContext = b => b.UseSqlServer(Configuration.GetConnectionString("DrinkFinderIdentityServer"),
+                        sql => sql.MigrationsAssembly(migrationsAssembly));
+                })
                 .AddAspNetIdentity<ApplicationUser>();
 
-            // not recommended for production - you need to store your key material somewhere secure
+            // Development only
             builder.AddDeveloperSigningCredential();
 
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-
-                    // register your IdentityServer with Google at https://console.developers.google.com
-                    // enable the Google+ API
-                    // set the redirect URI to https://localhost:5000/signin-google
                     options.ClientId = Configuration["OAuth:Google:ClientId"];
                     options.ClientSecret = Configuration["OAuth:Google:ClientSecret"];
                 });
@@ -84,6 +83,7 @@ namespace DrinkFinder.AuthServer
         {
             if (Environment.IsDevelopment())
             {
+                InitializeDatabase(app);
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
@@ -101,6 +101,52 @@ namespace DrinkFinder.AuthServer
             {
                 endpoints.MapDefaultControllerRoute();
             });
+        }
+
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+
+                var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+                context.Database.Migrate();
+                if (!context.Clients.Any())
+                {
+                    foreach (var client in Config.GetClients())
+                    {
+                        context.Clients.Add(client.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.IdentityResources.Any())
+                {
+                    foreach (var resource in Config.GetIdentityResources())
+                    {
+                        context.IdentityResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.ApiResources.Any())
+                {
+                    foreach (var resource in Config.GetApiResources())
+                    {
+                        context.ApiResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.ApiScopes.Any())
+                {
+                    foreach (var scope in Config.GetApiScopes())
+                    {
+                        context.ApiScopes.Add(scope.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+            }
         }
     }
 }

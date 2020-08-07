@@ -47,11 +47,11 @@ namespace DrinkFinder.AuthServer
 
                 if (seed)
                 {
-                    Log.Information("Seeding database...");
+                    Log.Information("Seeding Identity database...");
                     var config = host.Services.GetRequiredService<IConfiguration>();
-                    var connectionString = config.GetConnectionString("DrinkFinderAuth");
+                    var connectionString = config.GetConnectionString("DrinkFinderIdentity");
                     SeedData.EnsureSeedData(connectionString);
-                    Log.Information("Done seeding database.");
+                    Log.Information("Done seeding Identity database.");
                     //return 0;
                 }
 

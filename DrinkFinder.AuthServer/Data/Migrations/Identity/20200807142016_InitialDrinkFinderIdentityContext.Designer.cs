@@ -4,18 +4,20 @@ using DrinkFinder.AuthServer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DrinkFinder.AuthServer.Data.Migrations
+namespace DrinkFinder.AuthServer.Data.Migrations.Identity
 {
-    [DbContext(typeof(DrinkFinderAuthContext))]
-    partial class DrinkFinderAuthContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(DrinkFinderIdentityContext))]
+    [Migration("20200807142016_InitialDrinkFinderIdentityContext")]
+    partial class InitialDrinkFinderIdentityContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("Auth")
+                .HasDefaultSchema("Identity")
                 .HasAnnotation("ProductVersion", "3.1.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
