@@ -1,4 +1,5 @@
 using AutoMapper;
+using DrinkFinder.Api.Filters;
 using DrinkFinder.Api.Services;
 using DrinkFinder.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -9,9 +10,11 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 
 namespace DrinkFinder.Api
@@ -25,7 +28,6 @@ namespace DrinkFinder.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
@@ -47,7 +49,7 @@ namespace DrinkFinder.Api
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
                     {
-                        options.Authority = "https://localhost:5000";
+                        options.Authority = Configuration["AuthServer:BaseEndpoint"];
                         options.RequireHttpsMetadata = true;
                         options.Audience = "drinkfinder.api";
 
@@ -64,9 +66,52 @@ namespace DrinkFinder.Api
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddInfrastructure(Configuration);
             services.AddScoped<IEstablishmentService, EstablishmentService>();
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "DrinkFinder API",
+                    Description = "DrinkFinder API for domain entities, written in .NET Core 3.1",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Gauthier L.",
+                        Url = new Uri("https://github.com/jinai/DrinkFinder")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Use under GPLv3",
+                        Url = new Uri("https://github.com/jinai/DrinkFinder/blob/dev/LICENSE.txt")
+                    }
+                });
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        AuthorizationCode = new OpenApiOAuthFlow
+                        {
+                            AuthorizationUrl = new Uri(Configuration["AuthServer:AuthorizeEndpoint"]),
+                            TokenUrl = new Uri(Configuration["AuthServer:TokenEndpoint"]),
+                            Scopes = new Dictionary<string, string>
+                            {
+                                { "openid", "Standard OpenId scope" },
+                                { "profile", "Standard OpenId scope" },
+                                { "email", "Standard OpenId scope" },
+                                { "roles", "Your roles" },
+                                { "establishment.read", "Read-only access to your establishments" },
+                                { "establishment.write", "Write access to your establishments" },
+                                { "news.read", "Read-only access to your news" },
+                                { "news.write", "Write access to your news" }
+                            }
+                        }
+                    }
+                });
+                options.OperationFilter<AuthorizeCheckOperationFilter>();
+            });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -84,6 +129,15 @@ namespace DrinkFinder.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "DrinkFinder API v1");
+                options.OAuthClientId("DrinkFinder.Swagger");
+                options.OAuthAppName("Swagger UI");
+                options.OAuthUsePkce();
             });
         }
     }

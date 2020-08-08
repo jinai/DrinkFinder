@@ -84,7 +84,7 @@ namespace DrinkFinder.AuthServer
                     FrontChannelLogoutUri = "https://localhost:5002/signout-oidc",
                     PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
 
-                    AllowedScopes = new List<string>
+                    AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
@@ -95,7 +95,31 @@ namespace DrinkFinder.AuthServer
                         "news.read",
                         "news.write"
                     }
-                }
+                },
+                new Client
+                {
+                    ClientId = "DrinkFinder.Swagger",
+                    ClientName = "DrinkFinder Swagger Client",
+                    ClientSecrets = { new Secret("3A3F1BF9-F0D1-431B-A794-D93F30F3024E".Sha256()) },
+
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+                    RequireClientSecret = false,
+
+                    RedirectUris = { "https://localhost:5001/swagger/oauth2-redirect.html" },
+                    AllowedCorsOrigins = { "https://localhost:5001" },
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "roles",
+                        "establishment.read",
+                        "establishment.write",
+                        "news.read",
+                        "news.write"
+                    }
+                },
             };
         }
     }
