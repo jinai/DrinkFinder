@@ -78,7 +78,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 new BusinessHours
                 {
                     Id = Guid.NewGuid(),
-                    Day = Day.Monday,
+                    Day = IsoDay.Monday,
                     OpeningHour = TimeSpan.Parse("09:00", culture),
                     ClosingHour = TimeSpan.Parse("19:00", culture),
                     AddedDate = DateTimeOffset.Now,
@@ -87,7 +87,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 new BusinessHours
                 {
                     Id = Guid.NewGuid(),
-                    Day = Day.Tuesday,
+                    Day = IsoDay.Tuesday,
                     OpeningHour = TimeSpan.Parse("09:00", culture),
                     ClosingHour = TimeSpan.Parse("19:00", culture),
                     AddedDate = DateTimeOffset.Now,
@@ -96,7 +96,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 new BusinessHours
                 {
                     Id = Guid.NewGuid(),
-                    Day = Day.Wednesday,
+                    Day = IsoDay.Wednesday,
                     OpeningHour = TimeSpan.Parse("09:00", culture),
                     ClosingHour = TimeSpan.Parse("19:00", culture),
                     AddedDate = DateTimeOffset.Now,
@@ -105,7 +105,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 new BusinessHours
                 {
                     Id = Guid.NewGuid(),
-                    Day = Day.Thursday,
+                    Day = IsoDay.Thursday,
                     OpeningHour = TimeSpan.Parse("09:00", culture),
                     ClosingHour = TimeSpan.Parse("19:00", culture),
                     AddedDate = DateTimeOffset.Now,
@@ -114,7 +114,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 new BusinessHours
                 {
                     Id = Guid.NewGuid(),
-                    Day = Day.Friday,
+                    Day = IsoDay.Friday,
                     OpeningHour = TimeSpan.Parse("09:00", culture),
                     ClosingHour = TimeSpan.Parse("19:00", culture),
                     AddedDate = DateTimeOffset.Now,
@@ -123,7 +123,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 new BusinessHours
                 {
                     Id = Guid.NewGuid(),
-                    Day = Day.Saturday,
+                    Day = IsoDay.Saturday,
                     OpeningHour = TimeSpan.Parse("09:00", culture),
                     ClosingHour = TimeSpan.Parse("19:00", culture),
                     AddedDate = DateTimeOffset.Now,
@@ -132,7 +132,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 new BusinessHours
                 {
                     Id = Guid.NewGuid(),
-                    Day = Day.Sunday,
+                    Day = IsoDay.Sunday,
                     OpeningHour = null, // Closed
                     ClosingHour = null, // Closed
                     AddedDate = DateTimeOffset.Now,
@@ -144,7 +144,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 new BusinessHours
                 {
                     Id = Guid.NewGuid(),
-                    Day = Day.Monday,
+                    Day = IsoDay.Monday,
                     OpeningHour = TimeSpan.Parse("08:00", culture),
                     ClosingHour = TimeSpan.Parse("18:00", culture),
                     AddedDate = DateTimeOffset.Now,
@@ -153,7 +153,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 new BusinessHours
                 {
                     Id = Guid.NewGuid(),
-                    Day = Day.Tuesday,
+                    Day = IsoDay.Tuesday,
                     OpeningHour = TimeSpan.Parse("08:00", culture),
                     ClosingHour = TimeSpan.Parse("18:00", culture),
                     AddedDate = DateTimeOffset.Now,
@@ -162,7 +162,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 new BusinessHours
                 {
                     Id = Guid.NewGuid(),
-                    Day = Day.Wednesday,
+                    Day = IsoDay.Wednesday,
                     OpeningHour = TimeSpan.Parse("08:00", culture),
                     ClosingHour = TimeSpan.Parse("18:00", culture),
                     AddedDate = DateTimeOffset.Now,
@@ -171,7 +171,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 new BusinessHours
                 {
                     Id = Guid.NewGuid(),
-                    Day = Day.Thursday,
+                    Day = IsoDay.Thursday,
                     OpeningHour = TimeSpan.Parse("08:00", culture),
                     ClosingHour = TimeSpan.Parse("18:00", culture),
                     AddedDate = DateTimeOffset.Now,
@@ -180,7 +180,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 new BusinessHours
                 {
                     Id = Guid.NewGuid(),
-                    Day = Day.Friday,
+                    Day = IsoDay.Friday,
                     OpeningHour = TimeSpan.Parse("08:00", culture),
                     ClosingHour = TimeSpan.Parse("18:00", culture),
                     AddedDate = DateTimeOffset.Now,
@@ -189,7 +189,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 new BusinessHours
                 {
                     Id = Guid.NewGuid(),
-                    Day = Day.Saturday,
+                    Day = IsoDay.Saturday,
                     OpeningHour = TimeSpan.Parse("08:00", culture),
                     ClosingHour = TimeSpan.Parse("18:00", Properties.Resources.Culture),
                     AddedDate = DateTimeOffset.Now,
@@ -198,7 +198,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Extensions
                 new BusinessHours
                 {
                     Id = Guid.NewGuid(),
-                    Day = Day.Sunday,
+                    Day = IsoDay.Sunday,
                     OpeningHour = null, // Closed
                     ClosingHour = null, // Closed
                     AddedDate = DateTimeOffset.Now,

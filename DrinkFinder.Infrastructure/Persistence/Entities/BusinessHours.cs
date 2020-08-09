@@ -7,7 +7,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Entities
     public class BusinessHours : IEntity<Guid>
     {
         public Guid Id { get; set; }
-        public Day Day { get; set; }
+        public IsoDay Day { get; set; }
         public TimeSpan? OpeningHour { get; set; }
         public TimeSpan? ClosingHour { get; set; }
         public DateTimeOffset AddedDate { get; set; }
