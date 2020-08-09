@@ -109,7 +109,8 @@ namespace DrinkFinder.Api
                     }
                 });
                 options.OperationFilter<AuthorizeCheckOperationFilter>();
-            });
+            })
+                .AddSwaggerGenNewtonsoftSupport();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
