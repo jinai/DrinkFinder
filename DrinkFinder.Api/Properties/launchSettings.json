@@ -8,17 +8,9 @@
         }
     },
     "profiles": {
-        "IIS Express": {
-            "commandName": "IISExpress",
-            "launchBrowser": true,
-            "launchUrl": "api/establishments",
-            "environmentVariables": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "applicationUrl": "https://localhost:5001"
-        },
         "Api": {
             "commandName": "Project",
+            "commandLineArgs": "/seed",
             "launchBrowser": true,
             "launchUrl": "swagger",
             "environmentVariables": {

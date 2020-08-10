@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using DrinkFinder.Api.Models;
-using DrinkFinder.Infrastructure.Persistence.UnitOfWork;
+using DrinkFinder.Api.ResourceParameters;
+using DrinkFinder.Common.Enums;
+using DrinkFinder.Infrastructure.Persistence.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +22,9 @@ namespace DrinkFinder.Api.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<IEnumerable<EstablishmentDto>> GetAllOrdered()
+        public async Task<IEnumerable<EstablishmentDto>> GetAllApproved()
         {
-            var establishments = await _unitOfWork.EstablishmentRepo.GetAll(orderBy: q => q.OrderBy(e => e.AddedDate));
+            var establishments = await _unitOfWork.EstablishmentRepo.GetWhere(e => e.Status == EstablishmentStatus.Approved).Include(e => e.BusinessHours).OrderBy(e => e.AddedDate).ToListAsync();
             foreach (var establishment in establishments)
             {
                 establishment.BusinessHours = establishment.BusinessHours.OrderBy(bh => bh.Day).ToList();

@@ -1,4 +1,5 @@
 ﻿using DrinkFinder.Api.Models;
+using DrinkFinder.Api.ResourceParameters;
 using DrinkFinder.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@ namespace DrinkFinder.Api.Controllers
         [HttpGet()]
         public async Task<ActionResult<IEnumerable<EstablishmentDto>>> GetAll()
         {
-            var establishments = await _establishmentService.GetAllOrdered();
+            var establishments = await _establishmentService.GetAllApproved();
             return Ok(establishments);
         }
 

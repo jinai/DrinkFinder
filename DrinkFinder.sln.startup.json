@@ -10,16 +10,15 @@
             "Projects": {
                 "DrinkFinder.AuthServer": {
                     "ProfileName": "SelfHost",
-                    "CommandLineArguments": "/seed",
-                    "WorkingDirectory": ""
+                    "CommandLineArguments": "/seed"
                 },
                 "DrinkFinder.Api": {
-                    "ProfileName": "Api"
+                    "ProfileName": "Api",
+                    "CommandLineArguments": "/seed"
                 },
                 "DrinkFinder.MvcClient": {
                     "ProfileName": "MvcClient"
                 }
-
             }
         }
     }

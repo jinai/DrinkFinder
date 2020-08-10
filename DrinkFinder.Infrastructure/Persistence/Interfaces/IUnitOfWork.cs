@@ -1,8 +1,7 @@
-﻿using DrinkFinder.Infrastructure.Persistence.Repositories;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
-namespace DrinkFinder.Infrastructure.Persistence.UnitOfWork
+namespace DrinkFinder.Infrastructure.Persistence.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

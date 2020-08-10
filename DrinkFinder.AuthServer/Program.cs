@@ -52,7 +52,6 @@ namespace DrinkFinder.AuthServer
                     var connectionString = config.GetConnectionString("DrinkFinderIdentity");
                     SeedData.EnsureSeedData(connectionString);
                     Log.Information("Done seeding Identity database.");
-                    //return 0;
                 }
 
                 Log.Information("Starting host...");

@@ -1,5 +1,5 @@
 ﻿using DrinkFinder.Common.Enums;
-using DrinkFinder.Common.Interfaces;
+using DrinkFinder.Infrastructure.Persistence.Interfaces;
 using System;
 
 namespace DrinkFinder.Infrastructure.Persistence.Entities

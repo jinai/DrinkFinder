@@ -1,6 +1,6 @@
 ﻿using DrinkFinder.Common.Enums;
-using DrinkFinder.Common.Interfaces;
 using DrinkFinder.Common.ValueObjects;
+using DrinkFinder.Infrastructure.Persistence.Interfaces;
 using System;
 using System.Collections.Generic;
 

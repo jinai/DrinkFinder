@@ -1,7 +1,7 @@
 ﻿using DrinkFinder.Common.Constants;
-using DrinkFinder.Infrastructure.Persistence.Context;
+using DrinkFinder.Infrastructure.Persistence;
+using DrinkFinder.Infrastructure.Persistence.Interfaces;
 using DrinkFinder.Infrastructure.Persistence.Repositories;
-using DrinkFinder.Infrastructure.Persistence.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

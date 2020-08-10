@@ -1,13 +1,13 @@
 ﻿using DrinkFinder.Common.Constants;
-using DrinkFinder.Common.Interfaces;
 using DrinkFinder.Infrastructure.Persistence.Entities;
+using DrinkFinder.Infrastructure.Persistence.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DrinkFinder.Infrastructure.Persistence.Context
+namespace DrinkFinder.Infrastructure.Persistence
 {
     public class DrinkFinderDomainContext : DbContext
     {

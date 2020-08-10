@@ -1,9 +1,9 @@
-﻿using DrinkFinder.Infrastructure.Persistence.Context;
+﻿using DrinkFinder.Infrastructure.Persistence.Interfaces;
 using DrinkFinder.Infrastructure.Persistence.Repositories;
 using System;
 using System.Threading.Tasks;
 
-namespace DrinkFinder.Infrastructure.Persistence.UnitOfWork
+namespace DrinkFinder.Infrastructure.Persistence
 {
     public class UnitOfWork : IUnitOfWork
     {

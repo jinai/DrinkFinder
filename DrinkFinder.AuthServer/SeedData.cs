@@ -32,7 +32,7 @@ namespace DrinkFinder.AuthServer
             {
                 using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
-                    var context = scope.ServiceProvider.GetService<DrinkFinderIdentityContext>();
+                    var context = scope.ServiceProvider.GetRequiredService<DrinkFinderIdentityContext>();
                     context.Database.Migrate();
 
                     var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();

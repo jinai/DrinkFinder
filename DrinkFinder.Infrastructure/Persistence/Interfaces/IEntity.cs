@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DrinkFinder.Common.Interfaces
+namespace DrinkFinder.Infrastructure.Persistence.Interfaces
 {
     public interface IEntity<TId>
     {
