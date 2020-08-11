@@ -12,7 +12,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
 
         public IQueryable<Establishment> GetAllOpenOn(IsoDay day)
         {
-            return GetWhere(e => e.BusinessHours.Any(bh => bh.Day == day && bh.OpeningHour != null));
+            return GetWhere(e => e.Status == EstablishmentStatus.Approved && e.BusinessHours.Any(bh => bh.Day == day && bh.OpeningHour != null));
         }
 
         public IQueryable<Establishment> GetAllByUserId(Guid userId)

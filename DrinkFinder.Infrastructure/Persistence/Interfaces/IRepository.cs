@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace DrinkFinder.Infrastructure.Persistence.Interfaces
 {
@@ -9,7 +8,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Interfaces
     {
         IQueryable<TEntity> GetAll();
         IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> predicate);
-        Task<TEntity> GetById(TId id);
+        IQueryable<TEntity> GetById(TId id);
         void Add(TEntity entity);
         void Update(TEntity entity);
         void Remove(TEntity entity);

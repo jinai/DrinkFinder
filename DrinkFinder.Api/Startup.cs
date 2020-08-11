@@ -2,6 +2,8 @@ using AutoMapper;
 using DrinkFinder.Api.Filters;
 using DrinkFinder.Api.Services;
 using DrinkFinder.Infrastructure;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +17,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Security.Claims;
 
 namespace DrinkFinder.Api
@@ -30,7 +34,11 @@ namespace DrinkFinder.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // Keep the property name for validation error messages
+            ValidatorOptions.Global.DisplayNameResolver = ValidatorOptions.Global.PropertyNameResolver;
+
             services.AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>())
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -109,8 +117,12 @@ namespace DrinkFinder.Api
                     }
                 });
                 options.OperationFilter<AuthorizeCheckOperationFilter>();
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
             })
-                .AddSwaggerGenNewtonsoftSupport();
+                .AddSwaggerGenNewtonsoftSupport(); // Needed to display enums as strings
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

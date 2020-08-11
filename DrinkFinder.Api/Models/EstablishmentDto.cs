@@ -12,7 +12,6 @@ namespace DrinkFinder.Api.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public EstablishmentType Type { get; set; }
-        public EstablishmentStatus Status { get; set; }
         public string VATNumber { get; set; }
         public Uri Logo { get; set; }
         public Uri Banner { get; set; }
@@ -23,7 +22,6 @@ namespace DrinkFinder.Api.Models
         public DateTimeOffset AddedDate { get; set; }
 
         public ICollection<BusinessHoursDto> BusinessHours { get; set; }
-        public ICollection<PictureDto> Pictures { get; set; }
-        public ICollection<NewsDto> News { get; set; }
+        public ICollection<Uri> Pictures { get; set; }
     }
 }

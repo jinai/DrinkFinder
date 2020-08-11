@@ -8,7 +8,7 @@ namespace DrinkFinder.Api.Services
 {
     public interface IEstablishmentService
     {
-        Task<IEnumerable<EstablishmentDto>> GetAllApproved();
-        Task<EstablishmentDto> GetById(Guid establishmentId);
+        Task<IEnumerable<EstablishmentDto>> GetAll(EstablishmentParameters establishmentParameters);
+        Task<EstablishmentDto> GetById(Guid establishmentId, EstablishmentParameters establishmentParameters);
     }
 }

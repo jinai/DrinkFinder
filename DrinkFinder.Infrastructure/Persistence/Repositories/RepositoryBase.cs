@@ -29,9 +29,9 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
             return Set.Where(predicate).AsNoTracking();
         }
 
-        public Task<TEntity> GetById(TId id)
+        public IQueryable<TEntity> GetById(TId id)
         {
-            return Set.FirstOrDefaultAsync(entity => entity.Id.Equals(id));
+            return GetWhere(entity => entity.Id.Equals(id));
         }
 
         public void Add(TEntity entity)
