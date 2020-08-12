@@ -1,6 +1,7 @@
 ﻿using DrinkFinder.AuthServer.Data;
 using DrinkFinder.AuthServer.Models;
 using DrinkFinder.Common.Constants;
+using DrinkFinder.Common.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +36,7 @@ namespace DrinkFinder.AuthServer
                     var context = scope.ServiceProvider.GetRequiredService<DrinkFinderIdentityContext>();
                     context.Database.Migrate();
 
+                    // Seeding roles
                     var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
                     var admin = roleMgr.FindByNameAsync(UserRoles.Admin).Result;
                     if (admin == null)
@@ -93,7 +95,80 @@ namespace DrinkFinder.AuthServer
                         Log.Debug($"Role {UserRoles.Member} already exists");
                     }
 
+
+                    // Seeding users
                     var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+                    // Admins
+                    var gauthier = userMgr.FindByNameAsync("gauthier").Result;
+                    if (gauthier == null)
+                    {
+                        gauthier = new ApplicationUser
+                        {
+                            Id = Guid.Parse("53bb86b4-78dc-4227-b0c3-41468094aab0"),
+                            UserName = "gauthier",
+                            Email = "GauthierL@email.com",
+                            EmailConfirmed = true,
+                            FirstName = "Gauthier",
+                            LastName = "L.",
+                            Gender = Gender.Male,
+                            IsProfessional = true,
+                            RegistrationDate = DateTimeOffset.Now
+                        };
+                        var result = userMgr.CreateAsync(gauthier, "Pass123$").Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+
+                        result = userMgr.AddToRoleAsync(gauthier, UserRoles.Admin).Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+
+                        Log.Debug("User Gauthier created");
+                    }
+                    else
+                    {
+                        Log.Debug("User Gauthier already exists");
+                    }
+
+                    // Managers
+                    var tony = userMgr.FindByNameAsync("tony").Result;
+                    if (tony == null)
+                    {
+                        tony = new ApplicationUser
+                        {
+                            Id = Guid.Parse("0ec2fdc1-b2dd-4f8a-801f-ad2dc34bd746"),
+                            UserName = "tony",
+                            Email = "TonyStark@email.com",
+                            EmailConfirmed = true,
+                            FirstName = "Tony",
+                            LastName = "Stark",
+                            Gender = Gender.Male,
+                            IsProfessional = true,
+                            RegistrationDate = DateTimeOffset.Now
+                        };
+                        var result = userMgr.CreateAsync(tony, "Pass123$").Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+
+                        result = userMgr.AddToRoleAsync(tony, UserRoles.Manager).Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+
+                        Log.Debug("User Tony created");
+                    }
+                    else
+                    {
+                        Log.Debug("User Tony already exists");
+                    }
+
                     var alice = userMgr.FindByNameAsync("alice").Result;
                     if (alice == null)
                     {
@@ -105,6 +180,8 @@ namespace DrinkFinder.AuthServer
                             EmailConfirmed = true,
                             FirstName = "Alice",
                             LastName = "Smith",
+                            Gender = Gender.Female,
+                            IsProfessional = true,
                             RegistrationDate = DateTimeOffset.Now
                         };
                         var result = userMgr.CreateAsync(alice, "Pass123$").Result;
@@ -113,7 +190,7 @@ namespace DrinkFinder.AuthServer
                             throw new Exception(result.Errors.First().Description);
                         }
 
-                        result = userMgr.AddToRoleAsync(alice, UserRoles.Admin).Result;
+                        result = userMgr.AddToRoleAsync(alice, UserRoles.Manager).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
@@ -126,6 +203,75 @@ namespace DrinkFinder.AuthServer
                         Log.Debug("User Alice already exists");
                     }
 
+                    var john = userMgr.FindByNameAsync("john").Result;
+                    if (john == null)
+                    {
+                        john = new ApplicationUser
+                        {
+                            Id = Guid.Parse("e5a49b11-1b6d-441b-ab1d-d9349c93c9e4"),
+                            UserName = "john",
+                            Email = "JohnDoe@email.com",
+                            EmailConfirmed = true,
+                            FirstName = "John",
+                            LastName = "Doe",
+                            Gender = Gender.Male,
+                            IsProfessional = true,
+                            RegistrationDate = DateTimeOffset.Now
+                        };
+                        var result = userMgr.CreateAsync(john, "Pass123$").Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+
+                        result = userMgr.AddToRoleAsync(john, UserRoles.Manager).Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+
+                        Log.Debug("User John created");
+                    }
+                    else
+                    {
+                        Log.Debug("User John already exists");
+                    }
+
+                    var jane = userMgr.FindByNameAsync("jane").Result;
+                    if (jane == null)
+                    {
+                        jane = new ApplicationUser
+                        {
+                            Id = Guid.Parse("19c567cc-4b13-4904-b3ba-11303d02b019"),
+                            UserName = "jane",
+                            Email = "JaneDoe@email.com",
+                            EmailConfirmed = true,
+                            FirstName = "Jane",
+                            LastName = "Doe",
+                            Gender = Gender.Female,
+                            IsProfessional = true,
+                            RegistrationDate = DateTimeOffset.Now
+                        };
+                        var result = userMgr.CreateAsync(jane, "Pass123$").Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+
+                        result = userMgr.AddToRoleAsync(jane, UserRoles.Manager).Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+
+                        Log.Debug("User Jane created");
+                    }
+                    else
+                    {
+                        Log.Debug("User Jane already exists");
+                    }
+
+                    // Members
                     var bob = userMgr.FindByNameAsync("bob").Result;
                     if (bob == null)
                     {
@@ -137,6 +283,8 @@ namespace DrinkFinder.AuthServer
                             EmailConfirmed = true,
                             FirstName = "Bob",
                             LastName = "Smith",
+                            Gender = Gender.Male,
+                            IsProfessional = true,
                             RegistrationDate = DateTimeOffset.Now
                         };
                         var result = userMgr.CreateAsync(bob, "Pass123$").Result;
@@ -145,7 +293,7 @@ namespace DrinkFinder.AuthServer
                             throw new Exception(result.Errors.First().Description);
                         }
 
-                        result = userMgr.AddToRoleAsync(bob, UserRoles.Manager).Result;
+                        result = userMgr.AddToRoleAsync(bob, UserRoles.Member).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
@@ -169,6 +317,8 @@ namespace DrinkFinder.AuthServer
                             EmailConfirmed = true,
                             FirstName = "Charlie",
                             LastName = "Smith",
+                            Gender = Gender.Male,
+                            IsProfessional = false,
                             RegistrationDate = DateTimeOffset.Now
                         };
                         var result = userMgr.CreateAsync(charlie, "Pass123$").Result;

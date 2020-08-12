@@ -1,0 +1,423 @@
+[
+    {
+        "userId": "0ec2fdc1-b2dd-4f8a-801f-ad2dc34bd746",
+        "shortCode": "poechenellekelder",
+        "name": "Poechenellekelder",
+        "description": "Estaminet dans la plus pure tradition belge, juste à côté du fameux Manneken Pis. Le choix de bières est impressionnant et les conseils des serveurs pertinents.",
+        "type": "Bar",
+        "status": "Approved",
+        "vatNumber": "BE0148584865",
+        "logo": null,
+        "banner": null,
+        "website": "http://www.poechenellekelder.be/",
+        "address": {
+            "street": "Rue du Chene",
+            "boxNumber": "5",
+            "postalCode": "1000",
+            "city": "Bruxelles",
+            "country": "Belgique"
+        },
+        "socials": {
+            "instagram": "https://www.instagram.com/Poechenellekelder",
+            "facebook": "https://www.facebook.com/Poechenellekelder",
+            "twitter": "https://www.twitter.com/Poechenellekelder",
+            "linkedIn": null
+        },
+        "contactInfo": {
+            "professionalEmail": "Poechenellekelderpro@email.com",
+            "publicEmail": "Poechenellekelder@email.com",
+            "phoneNumber": "+32 2 511 92 62"
+        },
+        "businessHours": [
+            {
+                "day": "Monday",
+                "openingHour": null,
+                "closingHour": null
+            },
+            {
+                "day": "Tuesday",
+                "openingHour": "09:00:00",
+                "closingHour": "19:00:00"
+            },
+            {
+                "day": "Wednesday",
+                "openingHour": "09:00:00",
+                "closingHour": "19:00:00"
+            },
+            {
+                "day": "Thursday",
+                "openingHour": "09:00:00",
+                "closingHour": "19:00:00"
+            },
+            {
+                "day": "Friday",
+                "openingHour": "09:00:00",
+                "closingHour": "19:00:00"
+            },
+            {
+                "day": "Saturday",
+                "openingHour": "09:00:00",
+                "closingHour": "19:00:00"
+            },
+            {
+                "day": "Sunday",
+                "openingHour": "19:00:00",
+                "closingHour": "03:00:00"
+            }
+        ],
+        "pictures": [
+            {
+                "location": "https://media-cdn.tripadvisor.com/media/photo-o/0f/b6/74/74/cervejas-em-media-de.jpg",
+            },
+            {
+                "location": "https://media-cdn.tripadvisor.com/media/photo-o/0d/8d/e9/ee/pessoas-locais-com-trajes.jpg",
+            }
+        ]
+    },
+    {
+        "userId": "9c59fbb6-c669-447e-9b2b-0a64d2a5f8f6",
+        "shortCode": "delirium",
+        "name": "Delirium Café",
+        "description": "Pas étonnant que les amateurs de bière du monde entier adorent ce lieu. Vous pourrez y déguster plus de 2000 bières du monde entier. Le Delirium Café détient le record du monde Guinness World Records pour le nombre de bières offertes à la dégustation : 2004, record obtenu en 2004.",
+        "type": "Bar",
+        "status": "Approved",
+        "vatNumber": "BE0245583865",
+        "logo": "https://www.deliriumvillage.com/files/uploads/2018/08/delirium-brussels.png",
+        "banner": null,
+        "website": "https://www.deliriumvillage.com/",
+        "address": {
+            "street": "Impasse de la Fidélité",
+            "boxNumber": "4",
+            "postalCode": "1000",
+            "city": "Bruxelles",
+            "country": "Belgique"
+        },
+        "socials": {
+            "instagram": "https://www.instagram.com/deliriumvillage/",
+            "facebook": "https://www.facebook.com/LittleDeliriumOfficial/",
+            "twitter": "https://twitter.com/deliriumvillage",
+            "linkedIn": null
+        },
+        "contactInfo": {
+            "professionalEmail": "bookingpro@deliriumvillage.com",
+            "publicEmail": "booking@deliriumvillage.com",
+            "phoneNumber": "02 514 44 34"
+        },
+        "businessHours": [
+            {
+                "day": "Monday",
+                "openingHour": null,
+                "closingHour": null
+            },
+            {
+                "day": "Tuesday",
+                "openingHour": null,
+                "closingHour": null
+            },
+            {
+                "day": "Wednesday",
+                "openingHour": null,
+                "closingHour": null
+            },
+            {
+                "day": "Thursday",
+                "openingHour": "20:00:00",
+                "closingHour": "01:00:00"
+            },
+            {
+                "day": "Friday",
+                "openingHour": "20:00:00",
+                "closingHour": "01:00:00"
+            },
+            {
+                "day": "Saturday",
+                "openingHour": "20:00:00",
+                "closingHour": "01:00:00"
+            },
+            {
+                "day": "Sunday",
+                "openingHour": null,
+                "closingHour": null
+            }
+        ],
+
+        "pictures": [
+            {
+                "location": "https://media-cdn.tripadvisor.com/media/photo-m/1280/1a/04/fa/56/img-20191112-195945-largejpg.jpg",
+            },
+            {
+                "location": "https://media-cdn.tripadvisor.com/media/photo-m/1280/1a/04/fa/55/img-20191112-195903-largejpg.jpg",
+            }
+        ]
+    },
+    {
+        "userId": "e5a49b11-1b6d-441b-ab1d-d9349c93c9e4",
+        "shortCode": "lafleurenpapierdore",
+        "name": "La Fleur en Papier Doré",
+        "description": "La Fleur en Papier Doré est plus qu’un café. Il occupe depuis des décennies une place particulière dans la vie culturelle bruxelloise. Les visiteurs belges et de toutes nationalités prennent plaisir à y retrouver l’ambiance conviviale d’il y a 70 ans. Soigneusement restauré il n’a pas bougé.",
+        "type": "Bar",
+        "status": "Approved",
+        "vatNumber": "BE0645583469",
+        "logo": "https://lafleurenpapierdore.be/wp-content/themes/goudblommeke/assets/images/logo_blommeke_wit.png",
+        "banner": null,
+        "website": "https://lafleurenpapierdore.be/",
+        "address": {
+            "street": "Rue des Alexiens",
+            "boxNumber": "53-55",
+            "postalCode": "1000",
+            "city": "Bruxelles",
+            "country": "Belgique"
+        },
+        "socials": {
+            "instagram": "https://twitter.com/Goudgeblomd",
+            "facebook": "http://www.facebook.com/Goudblommeke/",
+            "twitter": null,
+            "linkedIn": null
+        },
+        "contactInfo": {
+            "professionalEmail": "cafepro@lafleurenpapierdore.be",
+            "publicEmail": "cafe@lafleurenpapierdore.be",
+            "phoneNumber": "02 511 16 59"
+        },
+        "businessHours": [
+            {
+                "day": "Monday",
+                "openingHour": null,
+                "closingHour": null
+            },
+            {
+                "day": "Tuesday",
+                "openingHour": "11:30:00",
+                "closingHour": "23:00:00"
+            },
+            {
+                "day": "Wednesday",
+                "openingHour": "11:30:00",
+                "closingHour": "23:00:00"
+            },
+            {
+                "day": "Thursday",
+                "openingHour": "11:30:00",
+                "closingHour": "23:00:00"
+            },
+            {
+                "day": "Friday",
+                "openingHour": "11:30:00",
+                "closingHour": "23:00:00"
+            },
+            {
+                "day": "Saturday",
+                "openingHour": "11:30:00",
+                "closingHour": "23:00:00"
+            },
+            {
+                "day": "Sunday",
+                "openingHour": "11:00:00",
+                "closingHour": "19:00:00"
+            }
+        ],
+        "pictures": [
+            {
+                "location": "https://media-cdn.tripadvisor.com/media/photo-o/11/4b/cd/ec/room-1.jpg",
+            },
+            {
+                "location": "https://media-cdn.tripadvisor.com/media/photo-m/1280/18/e8/10/51/a-brussels-institution.jpg",
+            }
+        ]
+    },
+    {
+        "userId": "19c567cc-4b13-4904-b3ba-11303d02b019",
+        "shortCode": "mortsubite",
+        "name": "A La Mort Subite",
+        "description": "A la Mort Subite est un café typiquement bruxellois situé rue Montagne-aux-Herbes Potagères 7 tenu originellement par Théophile Vossen, l'inventeur de la bière Mort Subite. L’établissement est toujours exploité par la famille Vossen. La bière elle par contre est produite par la brasserie Mort Subite filiale d'Alken-Maes, elle-même filiale de Heineken. Le café est classé depuis le 17 septembre 1998.",
+        "type": "Bar",
+        "status": "Approved",
+        "vatNumber": "BE0462113344",
+        "logo": null,
+        "banner": null,
+        "website": "https://www.alamortsubite.com/fr/",
+        "address": {
+            "street": "Rue Montagne aux Herbes Potagères",
+            "boxNumber": "7",
+            "postalCode": "1000",
+            "city": "Bruxelles",
+            "country": "Belgique"
+        },
+        "socials": {
+            "instagram": null,
+            "facebook": null,
+            "twitter": null,
+            "linkedIn": null
+        },
+        "contactInfo": {
+            "professionalEmail": "cafepro@alamortsubite.com",
+            "publicEmail": "cafe@alamortsubite.com",
+            "phoneNumber": "+32-(0)2-513.13.18"
+        },
+        "businessHours": [
+            {
+                "day": "Monday",
+                "openingHour": "11:00:00",
+                "closingHour": "01:00:00"
+            },
+            {
+                "day": "Tuesday",
+                "openingHour": "11:00:00",
+                "closingHour": "01:00:00"
+            },
+            {
+                "day": "Wednesday",
+                "openingHour": "11:00:00",
+                "closingHour": "01:00:00"
+            },
+            {
+                "day": "Thursday",
+                "openingHour": "11:00:00",
+                "closingHour": "01:00:00"
+            },
+            {
+                "day": "Friday",
+                "openingHour": "11:00:00",
+                "closingHour": "01:00:00"
+            },
+            {
+                "day": "Saturday",
+                "openingHour": "11:00:00",
+                "closingHour": "01:00:00"
+            },
+            {
+                "day": "Sunday",
+                "openingHour": "12:00:00",
+                "closingHour": "00:00:00"
+            }
+        ],
+        "pictures": [
+            {
+                "location": "https://www.alamortsubite.com/album/mort_subite_01.jpg",
+            },
+            {
+                "location": "https://www.alamortsubite.com/album/mort_subite_05.jpg",
+            }
+        ]
+    },
+    {
+        "userId": "0ec2fdc1-b2dd-4f8a-801f-ad2dc34bd746",
+        "shortCode": "fuse",
+        "name": "Fuse",
+        "description": "Fuse is one of Belgium's longest-running electronic music institutions and has been so since its opening on April 16th 1994. It started off as a heaven for high quality techno with a reputation for bringing in the best and most innovative DJs on the scene.",
+        "type": "NightClub",
+        "status": "Approved",
+        "vatNumber": "BE0162113344",
+        "logo": "https://fuse.be/wp-content/uploads/2020/06/LOGO_FUSE_2019-WHITE-small.png",
+        "banner": "https://fuse.be/wp-content/uploads/2020/05/Djesper-3.jpg",
+        "website": "https://fuse.be/",
+        "address": {
+            "street": "Rue Blaes",
+            "boxNumber": "208",
+            "postalCode": "1000",
+            "city": "Bruxelles",
+            "country": "Belgique"
+        },
+        "socials": {
+            "instagram": "https://www.instagram.com/fusebrussels/",
+            "facebook": "https://www.facebook.com/fusebrussels/",
+            "twitter": null,
+            "linkedIn": "https://www.linkedin.com/company/fuse-club-brussels/"
+        },
+        "contactInfo": {
+            "professionalEmail": "infopro@fuse.be",
+            "publicEmail": "info@fuse.be",
+            "phoneNumber": "02 511 97 89"
+        },
+        "businessHours": [
+            {
+                "day": "Monday",
+                "openingHour": null,
+                "closingHour": null
+            },
+            {
+                "day": "Tuesday",
+                "openingHour": null,
+                "closingHour": null
+            },
+            {
+                "day": "Wednesday",
+                "openingHour": null,
+                "closingHour": null
+            },
+            {
+                "day": "Thursday",
+                "openingHour": null,
+                "closingHour": null
+            },
+            {
+                "day": "Friday",
+                "openingHour": "23:00:00",
+                "closingHour": "06:00:00"
+            },
+            {
+                "day": "Saturday",
+                "openingHour": "23:00:00",
+                "closingHour": "06:00:00"
+            },
+            {
+                "day": "Sunday",
+                "openingHour": null,
+                "closingHour": null
+            }
+        ],
+        "pictures": [
+            {
+                "location": "https://media-cdn.tripadvisor.com/media/photo-o/0d/e0/e3/c2/fuse-brussels-iconic.jpg",
+            },
+            {
+                "location": "https://cdn.theculturetrip.com/wp-content/uploads/2017/03/fuse-by-styn-be-20.jpg",
+            }
+        ]
+    },
+    {
+        "userId": "53bb86b4-78dc-4227-b0c3-41468094aab0",
+        "shortCode": "abconcerts",
+        "name": "Ancienne Belgique",
+        "description": "L'Ancienne Belgique (AB) est un ensemble de deux salles de concert (la principale et Le Club) situé au centre de Bruxelles, boulevard Anspach. Elle accueille des groupes de musique aux styles variés. L'Ancienne Belgique est une institution culturelle de la Communauté flamande.",
+        "type": "MusicVenue",
+        "status": "Approved",
+        "vatNumber": "BE0430973770",
+        "logo": "https://www.places-concert.com/images/visuels/lieux_ancienne_belgique_06092018165408.png",
+        "banner": null,
+        "website": "https://www.abconcerts.be/fr/",
+        "address": {
+            "street": "Boulevard Anspach",
+            "boxNumber": "110",
+            "postalCode": "1000",
+            "city": "Bruxelles",
+            "country": "Belgique"
+        },
+        "socials": {
+            "instagram": "http://instagram.com/abconcerts",
+            "facebook": "https://www.facebook.com/AncienneBelgiqueAB/",
+            "twitter": "https://twitter.com/abconcerts",
+            "linkedIn": "https://www.linkedin.com/company/ancienne-belgique/"
+        },
+        "contactInfo": {
+            "professionalEmail": "infopro@abconcerts.be",
+            "publicEmail": "info@abconcerts.be",
+            "phoneNumber": "+32 [0] 2 548 24 84"
+        },
+        "businessHours": [],
+        "pictures": [
+            {
+                "location": "https://media-cdn.tripadvisor.com/media/photo-o/15/2b/64/f0/img-20181018-212056-largejpg.jpg",
+            },
+            {
+                "location": "https://media-cdn.tripadvisor.com/media/photo-p/17/2b/38/ad/photo0jpg.jpg",
+            },
+            {
+                "location": "https://media-cdn.tripadvisor.com/media/photo-o/15/2b/64/ef/img-20181018-210902-largejpg.jpg",
+            },
+            {
+                "location": "https://media-cdn.tripadvisor.com/media/photo-o/12/c6/18/fb/ancienne-belgique.jpg",
+            }
+        ]
+    }
+]
