@@ -1,0 +1,13 @@
+﻿#map {
+    height: 600px;
+    width: 100%;
+    background-color: grey;
+}
+
+.popup .logo {
+    float: left;
+    margin-right: 20px;
+    max-width: 120px !important;
+    width: 100%;
+    background: #555;
+}

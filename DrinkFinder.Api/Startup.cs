@@ -43,7 +43,7 @@ namespace DrinkFinder.Api
                 {
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                     options.SerializerSettings.Converters.Add(new StringEnumConverter());
-                    options.SerializerSettings.NullValueHandling = NullValueHandling.Include;
+                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 });
 
             services.AddApiVersioning(options =>
@@ -117,7 +117,10 @@ namespace DrinkFinder.Api
                     }
                 });
                 options.OperationFilter<AuthorizeCheckOperationFilter>();
-
+                options.CustomSchemaIds(type =>
+                {
+                    return type.Name.EndsWith("dto", StringComparison.OrdinalIgnoreCase) ? type.Name.Replace("dto", string.Empty, StringComparison.OrdinalIgnoreCase) : type.Name;
+                });
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);

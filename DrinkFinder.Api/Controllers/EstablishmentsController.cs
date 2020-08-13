@@ -14,7 +14,7 @@ namespace DrinkFinder.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [ApiVersion("1.0")]
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = "Member")]
     public class EstablishmentsController : ControllerBase
     {
         private readonly IEstablishmentService _establishmentService;
@@ -25,6 +25,7 @@ namespace DrinkFinder.Api.Controllers
         }
 
         [HttpGet()]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<EstablishmentDto>>> GetAll([CustomizeValidator(Skip = true)][FromQuery] EstablishmentParameters establishmentParameters,
                                                                               [FromQuery(Name = "Includes")] List<string> includes)
         {
@@ -51,6 +52,7 @@ namespace DrinkFinder.Api.Controllers
         }
 
         [HttpGet("{EstablishmentId}")]
+        [AllowAnonymous]
         public async Task<ActionResult<EstablishmentDto>> GetById([FromRoute(Name = "EstablishmentId")] Guid establishmentId, [FromQuery(Name = "Includes")] List<string> includes)
         {
             // Create an EstablishmentParameters instance containing only the requested Includes

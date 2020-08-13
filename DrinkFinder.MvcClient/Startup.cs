@@ -1,4 +1,6 @@
 using DrinkFinder.MvcClient.Services;
+using Geocoding;
+using Geocoding.Google;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -7,6 +9,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Polly;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -26,7 +30,11 @@ namespace DrinkFinder.MvcClient
         {
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                });
 
             services.AddAuthentication(options =>
             {
@@ -47,7 +55,7 @@ namespace DrinkFinder.MvcClient
                 })
                 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
                 {
-                    options.Authority = Configuration["BaseUrls:AuthServer"];
+                    options.Authority = Configuration["Endpoints:AuthServer"];
 
                     options.ClientId = "DrinkFinder.MVC";
                     options.ClientSecret = "3CAEA85E-763B-43C3-B487-C5DBA4364A93";
@@ -95,10 +103,12 @@ namespace DrinkFinder.MvcClient
             // registers a typed HTTP client with token management support
             services.AddHttpClient<IEstablishmentService, EstablishmentService>(client =>
             {
-                client.BaseAddress = new Uri(Configuration["BaseUrls:Api"]);
+                client.BaseAddress = new Uri(Configuration["Endpoints:Api"]);
             })
                 .AddUserAccessTokenHandler();
 
+            services.AddScoped<IGeocoder>(sp => new GoogleGeocoder { ApiKey = Configuration["ApiKeys:GoogleGeocoding"] });
+            services.AddScoped<IGeocodingService, GeocodingService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

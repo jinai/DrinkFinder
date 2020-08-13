@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DrinkFinder.MvcClient.Controllers
 {
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = "Member")]
     public class EstablishmentsController : Controller
     {
         private readonly IEstablishmentService _establishmentService;
@@ -15,6 +15,7 @@ namespace DrinkFinder.MvcClient.Controllers
             _establishmentService = establishmentService;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var establishments = await _establishmentService.GetAll();

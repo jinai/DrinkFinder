@@ -1,4 +1,5 @@
-﻿using DrinkFinder.MvcClient.Models;
+﻿using DrinkFinder.Common.Enums;
+using DrinkFinder.MvcClient.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,5 +10,6 @@ namespace DrinkFinder.MvcClient.Services
     {
         Task<IEnumerable<EstablishmentModel>> GetAll();
         Task<EstablishmentModel> GetById(Guid establishmentId);
+        Task<IEnumerable<EstablishmentModel>> GetAllOpenOn(IsoDay day);
     }
 }

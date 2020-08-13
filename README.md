@@ -1,18 +1,5 @@
 # Projet Web 2020
 
-## Démarrer l'application
-
-### Migrations
-Dans le Package Manager Console :
-
-    Update-Database -Project DrinkFinder.Infrastructure -Context DrinkFinderDomainContext
-    Update-Database -Project DrinkFinder.AuthServer -Context DrinkFinderIdentityContext
-    Update-Database -Project DrinkFinder.AuthServer -Context PersistedGrantDbContext
-    Update-Database -Project DrinkFinder.AuthServer -Context ConfigurationDbContext
-    
-### Startup projects
-![alt text](https://i.imgur.com/Dg5ITwS.png "Startup projects")
-
 ## Scope du projet
 Mettre en place un site web public avec authentification et rôles utilisant un backend composé d’une API en .NET Core 3.1 et un frontend au choix.
 
@@ -42,3 +29,30 @@ Les news seront accessibles pour tout le monde, avec une animation au choix. Les
 - Pagination.
 - Usage de scripts.
 - Usage d'appels AJAX.
+
+---
+
+# Démarrer l'application
+
+## Migrations
+Dans le Package Manager Console :
+
+    Update-Database -Project DrinkFinder.Infrastructure -Context DrinkFinderDomainContext
+    Update-Database -Project DrinkFinder.AuthServer -Context DrinkFinderIdentityContext
+    Update-Database -Project DrinkFinder.AuthServer -Context PersistedGrantDbContext
+    Update-Database -Project DrinkFinder.AuthServer -Context ConfigurationDbContext
+    
+## Startup projects
+![alt text](https://i.imgur.com/Dg5ITwS.png "Startup projects")
+
+## Utilisateurs
+
+| Account | Password   | Role    | ID                                   |
+| ------- | ---------- | ------- | ------------------------------------ |
+| admin   | `Pass123$` | Admin   | 53bb86b4-78dc-4227-b0c3-41468094aab0 |
+| tony    | `Pass123$` | Manager | 0ec2fdc1-b2dd-4f8a-801f-ad2dc34bd746 |
+| alice   | `Pass123$` | Manager | 9c59fbb6-c669-447e-9b2b-0a64d2a5f8f6 |
+| john    | `Pass123$` | Manager | e5a49b11-1b6d-441b-ab1d-d9349c93c9e4 |
+| jane    | `Pass123$` | Manager | 19c567cc-4b13-4904-b3ba-11303d02b019 |
+| bob     | `Pass123$` | Member  | ba7c7c61-52dd-4d23-a703-a1d31702bf33 |
+| charlie | `Pass123$` | Member  | 497991f4-da7f-45ae-b885-04b74b6a3a90 |

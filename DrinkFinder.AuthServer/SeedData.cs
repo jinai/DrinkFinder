@@ -100,38 +100,38 @@ namespace DrinkFinder.AuthServer
                     var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
                     // Admins
-                    var gauthier = userMgr.FindByNameAsync("gauthier").Result;
-                    if (gauthier == null)
+                    var adminUser = userMgr.FindByNameAsync("admin").Result;
+                    if (adminUser == null)
                     {
-                        gauthier = new ApplicationUser
+                        adminUser = new ApplicationUser
                         {
                             Id = Guid.Parse("53bb86b4-78dc-4227-b0c3-41468094aab0"),
-                            UserName = "gauthier",
-                            Email = "GauthierL@email.com",
+                            UserName = "admin",
+                            Email = "Admin@DrinkFinder.com",
                             EmailConfirmed = true,
-                            FirstName = "Gauthier",
-                            LastName = "L.",
+                            FirstName = "Admin",
+                            LastName = "Nimda",
                             Gender = Gender.Male,
                             IsProfessional = true,
                             RegistrationDate = DateTimeOffset.Now
                         };
-                        var result = userMgr.CreateAsync(gauthier, "Pass123$").Result;
+                        var result = userMgr.CreateAsync(adminUser, "Pass123$").Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
                         }
 
-                        result = userMgr.AddToRoleAsync(gauthier, UserRoles.Admin).Result;
+                        result = userMgr.AddToRoleAsync(adminUser, UserRoles.Admin).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
                         }
 
-                        Log.Debug("User Gauthier created");
+                        Log.Debug("User Admin created");
                     }
                     else
                     {
-                        Log.Debug("User Gauthier already exists");
+                        Log.Debug("User Admin already exists");
                     }
 
                     // Managers
