@@ -10,6 +10,7 @@ namespace DrinkFinder.Api.Models
         public string Content { get; set; }
         public Uri Banner { get; set; }
 
+        public Guid UserId { get; set; }
         public Guid EstablishmentId { get; set; }
     }
 }

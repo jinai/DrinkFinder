@@ -14,6 +14,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Entities
         public bool IsDeleted { get; set; }
 
         public Guid UserId { get; set; }
+        public Guid EstablishmentId { get; set; }
         public Establishment Establishment { get; set; }
     }
 }

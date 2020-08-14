@@ -11,10 +11,7 @@ namespace DrinkFinder.Api.Mappings
             CreateMap<News, NewsDto>()
                 .ForMember(
                     dest => dest.PublicationDate,
-                    opt => opt.MapFrom(src => src.AddedDate))
-                .ForMember(
-                    dest => dest.EstablishmentId,
-                    opt => opt.MapFrom(src => src.Establishment.Id));
+                    opt => opt.MapFrom(src => src.AddedDate));
         }
     }
 }

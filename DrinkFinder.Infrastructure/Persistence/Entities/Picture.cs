@@ -11,6 +11,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Entities
         public DateTimeOffset? ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
 
+        public Guid EstablishmentId { get; set; }
         public Establishment Establishment { get; set; }
     }
 }
