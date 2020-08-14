@@ -21,6 +21,7 @@ namespace DrinkFinder.Infrastructure
             });
 
             services.AddScoped<IEstablishmentRepository, EstablishmentRepository>();
+            services.AddScoped<INewsRepository, NewsRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;

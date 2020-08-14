@@ -74,6 +74,7 @@ namespace DrinkFinder.Api
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddInfrastructure(Configuration);
             services.AddScoped<IEstablishmentService, EstablishmentService>();
+            services.AddScoped<INewsService, NewsService>();
 
             services.AddSwaggerGen(options =>
             {

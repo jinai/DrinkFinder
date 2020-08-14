@@ -21,7 +21,7 @@
             "instagram": "https://www.instagram.com/Poechenellekelder",
             "facebook": "https://www.facebook.com/Poechenellekelder",
             "twitter": "https://www.twitter.com/Poechenellekelder",
-            "linkedIn": null
+            "linkedIn": "https://www.linkedin.com/company/poechenellekelder/about/"
         },
         "contactInfo": {
             "professionalEmail": "Poechenellekelderpro@email.com",
@@ -67,10 +67,24 @@
         ],
         "pictures": [
             {
-                "location": "https://media-cdn.tripadvisor.com/media/photo-o/0f/b6/74/74/cervejas-em-media-de.jpg",
+                "location": "https://media-cdn.tripadvisor.com/media/photo-o/0f/b6/74/74/cervejas-em-media-de.jpg"
             },
             {
-                "location": "https://media-cdn.tripadvisor.com/media/photo-o/0d/8d/e9/ee/pessoas-locais-com-trajes.jpg",
+                "location": "https://media-cdn.tripadvisor.com/media/photo-o/0d/8d/e9/ee/pessoas-locais-com-trajes.jpg"
+            }
+        ],
+        "news": [
+            {
+                "title": "Poechenellekelder",
+                "content": "Ça fait du bien de vous retrouver sur la terrasse du Poech !! 🤩🌳☀️🍻",
+                "banner": "https://i.imgur.com/eLmJkpf.jpg",
+                "addedDate": "2020-06-26T04:56:00.0000000+02:00"
+            },
+            {
+                "title": "Poechenellekelder",
+                "content": "Vous avez chaud ? Mangez frais !\\nSamedi, venez manger une tartine de fromage blanc ! Le goût authentique depuis 1991 😋",
+                "banner": "https://i.imgur.com/ENctdar.png",
+                "addedDate": "2020-08-13T03:39:00.0000000+02:00"
             }
         ]
     },
@@ -140,13 +154,32 @@
                 "closingHour": null
             }
         ],
-
         "pictures": [
             {
-                "location": "https://media-cdn.tripadvisor.com/media/photo-m/1280/1a/04/fa/56/img-20191112-195945-largejpg.jpg",
+                "location": "https://media-cdn.tripadvisor.com/media/photo-m/1280/1a/04/fa/56/img-20191112-195945-largejpg.jpg"
             },
             {
-                "location": "https://media-cdn.tripadvisor.com/media/photo-m/1280/1a/04/fa/55/img-20191112-195903-largejpg.jpg",
+                "location": "https://media-cdn.tripadvisor.com/media/photo-m/1280/1a/04/fa/55/img-20191112-195903-largejpg.jpg"
+            }
+        ],
+        "news": [
+            {
+                "title": "Halloween Party",
+                "content": "Join us this Halloween to spend an unforgettable night in the Floris bar at the Delirium Village. Dance to the death with our DJ and enjoy the show!\\n\\nEntrance is free\\nMore information soon\\nStay tuned!",
+                "banner": "https://www.deliriumvillage.com/files/uploads/2019/10/71643075_2644345025604909_3631102842531479552_n.jpg",
+                "addedDate": "2019-10-29T16:30:00.0000000+02:00"
+            },
+            {
+                "title": "Re-opening",
+                "content": "We're happy to announce that the Delirium Village re-opens its doors on Monday June 8 at 16:00 pm!\\n\\nLooking forward to seeing you at the Delirium Village and the Little Delirium!\\n\\nDrink safely 🍻",
+                "banner": "https://i.imgur.com/esT0E1t.png",
+                "addedDate": "2020-06-05T12:34:00.0000000+02:00"
+            },
+            {
+                "title": "Delirium Café",
+                "content": "Taste more than 2004 different beers in the Delirium Café downstairs tonight! 🤩\\n\\n#GuinnessWorldRecord #deliriumvillage",
+                "banner": "https://i.imgur.com/2HgjG4l.png",
+                "addedDate": "2020-07-03T10:11:00.0000000+02:00"
             }
         ]
     },
@@ -218,12 +251,13 @@
         ],
         "pictures": [
             {
-                "location": "https://media-cdn.tripadvisor.com/media/photo-o/11/4b/cd/ec/room-1.jpg",
+                "location": "https://media-cdn.tripadvisor.com/media/photo-o/11/4b/cd/ec/room-1.jpg"
             },
             {
-                "location": "https://media-cdn.tripadvisor.com/media/photo-m/1280/18/e8/10/51/a-brussels-institution.jpg",
+                "location": "https://media-cdn.tripadvisor.com/media/photo-m/1280/18/e8/10/51/a-brussels-institution.jpg"
             }
-        ]
+        ],
+        "news": []
     },
     {
         "userId": "19c567cc-4b13-4904-b3ba-11303d02b019",
@@ -293,12 +327,13 @@
         ],
         "pictures": [
             {
-                "location": "https://www.alamortsubite.com/album/mort_subite_01.jpg",
+                "location": "https://www.alamortsubite.com/album/mort_subite_01.jpg"
             },
             {
-                "location": "https://www.alamortsubite.com/album/mort_subite_05.jpg",
+                "location": "https://www.alamortsubite.com/album/mort_subite_05.jpg"
             }
-        ]
+        ],
+        "news": []
     },
     {
         "userId": "0ec2fdc1-b2dd-4f8a-801f-ad2dc34bd746",
@@ -368,10 +403,22 @@
         ],
         "pictures": [
             {
-                "location": "https://media-cdn.tripadvisor.com/media/photo-o/0d/e0/e3/c2/fuse-brussels-iconic.jpg",
+                "location": "https://media-cdn.tripadvisor.com/media/photo-o/0d/e0/e3/c2/fuse-brussels-iconic.jpg"
             },
             {
-                "location": "https://cdn.theculturetrip.com/wp-content/uploads/2017/03/fuse-by-styn-be-20.jpg",
+                "location": "https://cdn.theculturetrip.com/wp-content/uploads/2017/03/fuse-by-styn-be-20.jpg"
+            }
+        ],
+        "news": [
+            {
+                "title": "COVID-19",
+                "content": "In response to the spread of the Corona/COVID-19 virus, Fuse Brussels is closed until further notice. We keep on monitoring the situation and communicate updates online when needed.\\n\\nSee you soon our dancefloor.",
+                "addedDate": "2020-06-10T20:00:00.0000000+02:00"
+            },
+            {
+                "title": "Plein Air by Fuse",
+                "content": "As night clubs remain closed until September 1 – due to the COVID-19 measures by the government – nightlife is nonexistent. But that doesn’t stop us. We present you ‘Plein Air by Fuse‘ at Tour & Taxis — DJ-scored liveliness and a relaxing kick-back-with-cocktails atmosphere in the heated city of Brussels. We will open our doors on Thursday July 9. Hope to see you there!\\n\\nMore details can be found on fuse.be/pleinair — Reservations: fuse.be/pleinair/reservations ",
+                "addedDate": "2020-07-01T20:00:00.0000000+02:00"
             }
         ]
     },
@@ -407,16 +454,28 @@
         "businessHours": [],
         "pictures": [
             {
-                "location": "https://media-cdn.tripadvisor.com/media/photo-o/15/2b/64/f0/img-20181018-212056-largejpg.jpg",
+                "location": "https://media-cdn.tripadvisor.com/media/photo-o/15/2b/64/f0/img-20181018-212056-largejpg.jpg"
             },
             {
-                "location": "https://media-cdn.tripadvisor.com/media/photo-p/17/2b/38/ad/photo0jpg.jpg",
+                "location": "https://media-cdn.tripadvisor.com/media/photo-p/17/2b/38/ad/photo0jpg.jpg"
             },
             {
-                "location": "https://media-cdn.tripadvisor.com/media/photo-o/15/2b/64/ef/img-20181018-210902-largejpg.jpg",
+                "location": "https://media-cdn.tripadvisor.com/media/photo-o/15/2b/64/ef/img-20181018-210902-largejpg.jpg"
             },
             {
-                "location": "https://media-cdn.tripadvisor.com/media/photo-o/12/c6/18/fb/ancienne-belgique.jpg",
+                "location": "https://media-cdn.tripadvisor.com/media/photo-o/12/c6/18/fb/ancienne-belgique.jpg"
+            }
+        ],
+        "news": [
+            {
+                "title": "Revivez le Plan B de Zwangere Guy",
+                "content": "Quand Zwangere Guy fit paraître son second opus magistral fin 2019, nous étions impatients de l’accueillir une nouvelle fois à l’AB. Son précédent passage, proprement phénoménal, nous collait encore à la peau et l’été festivalier de 2019 avait définitivement propulsé ZG sur toutes les lèvres. L’album BRUTAAL se profilait ainsi comme un aperçu de cette année triomphale et laissait augurer du meilleur pour la suite.\\n\\n‘What the fuck is up?’ Si vous pensiez que le coronavirus parviendrait à museler le boss du rap bruxellois, détrompez-vous. Regardez ici l'explosif Plan B de Zwangere Guy (https://youtu.be/doaNODkMil8), un film de concert en ligne rendu possible par ZG, Kunstmest Management, Muntpunt et AB",
+                "addedDate": "2020-07-10T10:00:00.0000000+02:00"
+            },
+            {
+                "title": "Découvrez le making-of du plan B de Zwangere Guy à l’AB",
+                "content": "Quand Zwangere Guy fait quelque chose, il le fait bien. Les réactions à son « Ceci n'est pas un livestream » (https://youtu.be/doaNODkMil8), son concert vidéo du mois passé à l’AB, ont été toutes plus enthousiastes les unes que les autres. Le vendredi 10 juillet, le Bruxellois a réalisé une performance de choc dans une AB entièrement vide. Il fallait le faire ! Filmé et retransmis en direct sur Facebook, le show a même épaté ceux qui y ont travaillé. Chapeau à notre équipe de production, qui a mis tout cela en place.\\n\\nLa réalisatrice Fien Troch, qui s’est fait connaître avec le film « Home », a suivi Zwangere Guy durant les répétitions et enregistrements. Résultat : un coup d’œil en coulisses qui vaut presque autant le détour que le concert lui-même. Préparez le pop-corn !",
+                "addedDate": "2020-08-05T10:30:00.0000000+02:00"
             }
         ]
     }

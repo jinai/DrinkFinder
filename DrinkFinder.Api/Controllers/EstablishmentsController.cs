@@ -24,7 +24,7 @@ namespace DrinkFinder.Api.Controllers
             _establishmentService = establishmentService ?? throw new ArgumentNullException(nameof(establishmentService));
         }
 
-        [HttpGet()]
+        [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<EstablishmentDto>>> GetAll([CustomizeValidator(Skip = true)][FromQuery] EstablishmentParameters establishmentParameters,
                                                                               [FromQuery(Name = "Includes")] List<string> includes)

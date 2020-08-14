@@ -22,7 +22,7 @@ namespace DrinkFinder.Api
             }
 
             // Check if seed file exists first
-            var seedFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "establishments_seed.json");
+            var seedFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "entities_seed.json");
             if (!File.Exists(seedFile))
             {
                 return;
@@ -71,6 +71,13 @@ namespace DrinkFinder.Api
                 {
                     if (pic.Id == default) { pic.Id = Guid.NewGuid(); }
                     if (pic.AddedDate == default) { pic.AddedDate = DateTimeOffset.Now; }
+                }
+
+                foreach (var news in estab.News)
+                {
+                    if (news.Id == default) { news.Id = Guid.NewGuid(); }
+                    if (news.AddedDate == default) { news.AddedDate = DateTimeOffset.Now; }
+                    if (news.UserId == default) { news.UserId = estab.UserId; }
                 }
             }
 
