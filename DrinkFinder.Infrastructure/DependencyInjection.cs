@@ -1,7 +1,6 @@
 ﻿using DrinkFinder.Common.Constants;
 using DrinkFinder.Infrastructure.Persistence;
 using DrinkFinder.Infrastructure.Persistence.Interfaces;
-using DrinkFinder.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,8 +19,7 @@ namespace DrinkFinder.Infrastructure
                 options.EnableSensitiveDataLogging();
             });
 
-            services.AddScoped<IEstablishmentRepository, EstablishmentRepository>();
-            services.AddScoped<INewsRepository, NewsRepository>();
+            services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;

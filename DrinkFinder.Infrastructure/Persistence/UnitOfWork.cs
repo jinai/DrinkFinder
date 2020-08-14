@@ -1,5 +1,5 @@
-﻿using DrinkFinder.Infrastructure.Persistence.Interfaces;
-using DrinkFinder.Infrastructure.Persistence.Repositories;
+﻿using DrinkFinder.Infrastructure.Persistence.Entities;
+using DrinkFinder.Infrastructure.Persistence.Interfaces;
 using System;
 using System.Threading.Tasks;
 
@@ -14,29 +14,29 @@ namespace DrinkFinder.Infrastructure.Persistence
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        private IEstablishmentRepository _establishmentRepo;
-        private INewsRepository _newsRepo;
-        private IPictureRepository _pictureRepo;
-        private IBusinessHoursRepository _businessHoursRepo;
+        private IRepository<Establishment, Guid> _establishmentRepo;
+        private IRepository<News, Guid> _newsRepo;
+        private IRepository<Picture, Guid> _pictureRepo;
+        private IRepository<BusinessHours, Guid> _businessHoursRepo;
 
-        public IEstablishmentRepository EstablishmentRepo
+        public IRepository<Establishment, Guid> EstablishmentRepo
         {
-            get { return _establishmentRepo ??= new EstablishmentRepository(_context); }
+            get { return _establishmentRepo ??= new Repository<Establishment, Guid>(_context); }
         }
 
-        public INewsRepository NewsRepo
+        public IRepository<News, Guid> NewsRepo
         {
-            get { return _newsRepo ??= new NewsRepository(_context); }
+            get { return _newsRepo ??= new Repository<News, Guid>(_context); }
         }
 
-        public IPictureRepository PictureRepo
+        public IRepository<Picture, Guid> PictureRepo
         {
-            get { return _pictureRepo ??= new PictureRepository(_context); }
+            get { return _pictureRepo ??= new Repository<Picture, Guid>(_context); }
         }
 
-        public IBusinessHoursRepository BusinessHoursRepo
+        public IRepository<BusinessHours, Guid> BusinessHoursRepo
         {
-            get { return _businessHoursRepo ??= new BusinessHoursRepository(_context); }
+            get { return _businessHoursRepo ??= new Repository<BusinessHours, Guid>(_context); }
         }
 
 
@@ -46,7 +46,7 @@ namespace DrinkFinder.Infrastructure.Persistence
         }
 
         #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
+        private bool disposedValue; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
         {

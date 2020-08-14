@@ -3,30 +3,29 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
-namespace DrinkFinder.Infrastructure.Persistence.Repositories
+namespace DrinkFinder.Infrastructure.Persistence
 {
-    public abstract class RepositoryBase<TEntity, TId> : IRepository<TEntity, TId> where TEntity : class, IEntity<TId>, new()
-                                                                                   where TId : IEquatable<TId>
+    public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity : class, IEntity<TId>, new()
+                                                                      where TId : IEquatable<TId>
     {
         private readonly DrinkFinderDomainContext _context;
-        protected DbSet<TEntity> Set { get; }
+        private protected readonly DbSet<TEntity> _set;
 
-        public RepositoryBase(DrinkFinderDomainContext context)
+        public Repository(DrinkFinderDomainContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            Set = _context.Set<TEntity>();
+            _set = _context.Set<TEntity>();
         }
 
         public IQueryable<TEntity> GetAll()
         {
-            return Set.AsNoTracking();
+            return _set.AsNoTracking();
         }
 
         public IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> predicate)
         {
-            return Set.Where(predicate).AsNoTracking();
+            return _set.Where(predicate).AsNoTracking();
         }
 
         public IQueryable<TEntity> GetById(TId id)
@@ -36,7 +35,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
 
         public void Add(TEntity entity)
         {
-            Set.Add(entity);
+            _set.Add(entity);
         }
 
         public void Update(TEntity entity)
@@ -48,9 +47,9 @@ namespace DrinkFinder.Infrastructure.Persistence.Repositories
         {
             if (_context.Entry(entity).State == EntityState.Detached)
             {
-                Set.Attach(entity);
+                _set.Attach(entity);
             }
-            Set.Remove(entity);
+            _set.Remove(entity);
         }
 
         public void Remove(TId id)
