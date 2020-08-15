@@ -12,7 +12,7 @@ namespace DrinkFinder.MvcClient.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public EstablishmentType Type { get; set; }
-        public string VATNumber { get; set; }
+        public string VatNumber { get; set; }
         public Uri Logo { get; set; }
         public Uri Banner { get; set; }
         public Uri Website { get; set; }

@@ -20,7 +20,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Configurations
             builder.HasIndex(e => e.ShortCode)
                .IsUnique();
 
-            builder.HasIndex(e => e.VATNumber)
+            builder.HasIndex(e => e.VatNumber)
                 .IsUnique();
 
             builder.HasIndex(e => e.UserId);
