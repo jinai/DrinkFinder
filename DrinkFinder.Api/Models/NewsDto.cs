@@ -8,7 +8,7 @@ namespace DrinkFinder.Api.Models
         public DateTimeOffset PublicationDate { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public Uri Banner { get; set; }
+        public string Banner { get; set; }
 
         public Guid UserId { get; set; }
         public Guid EstablishmentId { get; set; }

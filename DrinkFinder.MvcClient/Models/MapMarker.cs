@@ -12,7 +12,7 @@ namespace DrinkFinder.MvcClient.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public EstablishmentType Type { get; set; }
-        public Uri Logo { get; set; }
+        public string Logo { get; set; }
         public string FormattedAddress { get; set; }
         public IEnumerable<BusinessHoursModel> BusinessHours { get; set; }
     }

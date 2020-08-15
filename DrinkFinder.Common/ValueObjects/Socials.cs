@@ -5,14 +5,14 @@ namespace DrinkFinder.Common.ValueObjects
 {
     public class Socials : ValueObject
     {
-        public Uri Instagram { get; private set; }
-        public Uri Facebook { get; private set; }
-        public Uri Twitter { get; private set; }
-        public Uri LinkedIn { get; private set; }
+        public string Instagram { get; private set; }
+        public string Facebook { get; private set; }
+        public string Twitter { get; private set; }
+        public string LinkedIn { get; private set; }
 
         private Socials() { }
 
-        public Socials(Uri instagram, Uri facebook, Uri twitter, Uri linkedIn)
+        public Socials(string instagram, string facebook, string twitter, string linkedIn)
         {
             Instagram = instagram;
             Facebook = facebook;

@@ -15,9 +15,9 @@ namespace DrinkFinder.Infrastructure.Persistence.Entities
         public EstablishmentType Type { get; set; }
         public EstablishmentStatus Status { get; set; }
         public string VatNumber { get; set; }
-        public Uri Logo { get; set; }
-        public Uri Banner { get; set; }
-        public Uri Website { get; set; }
+        public string Logo { get; set; }
+        public string Banner { get; set; }
+        public string Website { get; set; }
         public Address Address { get; set; }
         public Socials Socials { get; set; }
         public ContactInfo ContactInfo { get; set; }

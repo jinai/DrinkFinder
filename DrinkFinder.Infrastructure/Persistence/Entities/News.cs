@@ -8,7 +8,7 @@ namespace DrinkFinder.Infrastructure.Persistence.Entities
         public Guid Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public Uri Banner { get; set; }
+        public string Banner { get; set; }
         public DateTimeOffset AddedDate { get; set; }
         public DateTimeOffset? ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
