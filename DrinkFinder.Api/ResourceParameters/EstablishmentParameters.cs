@@ -8,6 +8,7 @@ namespace DrinkFinder.Api.ResourceParameters
     {
         public Guid UserId { get; set; }
         public string ShortCode { get; set; }
+        public EstablishmentType? Type { get; set; }
         public EstablishmentStatus? Status { get; set; }
         public IsoDay? Day { get; set; }
         internal List<string> Includes { get; set; }

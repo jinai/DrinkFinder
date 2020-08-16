@@ -12,8 +12,9 @@ namespace DrinkFinder.Api.Validators
         public EstablishmentParametersValidator()
         {
             Include(new BaseParametersValidator());
-            RuleForEach(ep => ep.Includes).Must(include => validIncludes.Contains(include))
-                                          .WithMessage($"Supported values are: [{validIncludesString}]. Supplied value: {{PropertyValue}}");
+
+            RuleForEach(estabParam => estabParam.Includes)
+                .Must(include => validIncludes.Contains(include)).WithMessage($"Invalid value: '{{PropertyValue}}'. Supported values: {validIncludesString}.");
         }
     }
 }
