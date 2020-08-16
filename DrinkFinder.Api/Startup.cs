@@ -57,7 +57,7 @@ namespace DrinkFinder.Api
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
                     {
-                        options.Authority = Configuration["AuthServer:BaseEndpoint"];
+                        options.Authority = Configuration["Oidc:Authority"];
                         options.RequireHttpsMetadata = true;
                         options.Audience = "drinkfinder.api";
 
@@ -101,8 +101,8 @@ namespace DrinkFinder.Api
                     {
                         AuthorizationCode = new OpenApiOAuthFlow
                         {
-                            AuthorizationUrl = new Uri(Configuration["AuthServer:AuthorizeEndpoint"]),
-                            TokenUrl = new Uri(Configuration["AuthServer:TokenEndpoint"]),
+                            AuthorizationUrl = new Uri(Configuration["Oidc:Endpoints:Authorize"]),
+                            TokenUrl = new Uri(Configuration["Oidc:Endpoints:Token"]),
                             Scopes = new Dictionary<string, string>
                             {
                                 { "openid", "Standard OpenId scope" },

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace DrinkFinder.Api.Helpers
+namespace DrinkFinder.Infrastructure.Persistence.Helpers
 {
     public static class QueryableExtensions
     {

@@ -45,7 +45,7 @@ namespace DrinkFinder.Api
             context.Database.Migrate();
 
             // If an establishment with that ShortCode exists we can assume we've already seeded the database
-            var control = uow.EstablishmentRepo.GetWhere(e => e.ShortCode == "delirium").FirstOrDefaultAsync().Result;
+            var control = uow.EstablishmentRepo.GetWhere(e => e.ShortCode == "delirium").SingleOrDefaultAsync().Result;
             if (control != null)
             {
                 return;
@@ -82,7 +82,7 @@ namespace DrinkFinder.Api
             }
 
             context.Establishments.AddRange(establishments);
-            context.SaveChanges();
+            context.SaveChangesAsync().GetAwaiter().GetResult();
         }
     }
 }

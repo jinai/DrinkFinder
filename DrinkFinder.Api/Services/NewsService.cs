@@ -21,14 +21,14 @@ namespace DrinkFinder.Api.Services
 
         public async Task<IEnumerable<NewsDto>> GetAll()
         {
-            var news = _unitOfWork.NewsRepo.GetAll();
-            return _mapper.Map<IEnumerable<NewsDto>>(await news.ToListAsync());
+            var news = await _unitOfWork.NewsRepo.GetAll().ToListAsync();
+            return _mapper.Map<IEnumerable<NewsDto>>(news);
         }
 
         public async Task<NewsDto> GetById(Guid newsId)
         {
-            var news = _unitOfWork.NewsRepo.GetById(newsId);
-            return _mapper.Map<NewsDto>(await news.FirstOrDefaultAsync());
+            var news = await _unitOfWork.NewsRepo.GetById(newsId).SingleOrDefaultAsync();
+            return _mapper.Map<NewsDto>(news);
         }
     }
 }

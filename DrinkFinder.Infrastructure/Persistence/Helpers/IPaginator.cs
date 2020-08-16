@@ -1,4 +1,4 @@
-﻿namespace DrinkFinder.Api.Helpers
+﻿namespace DrinkFinder.Infrastructure.Persistence.Helpers
 {
     public interface IPaginator
     {

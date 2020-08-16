@@ -8,10 +8,11 @@ namespace DrinkFinder.Api.Validators
         public BaseParametersValidator()
         {
             RuleFor(baseParam => baseParam.PageIndex)
-                .GreaterThanOrEqualTo(BaseParameters.minPageIndex).WithMessage("Must be greater than or equal to {ComparisonValue}");
+                .GreaterThanOrEqualTo(BaseParameters.MinPageIndex).WithMessage("Must be greater than or equal to {ComparisonValue}.");
+
             RuleFor(baseParam => baseParam.PageSize)
-                .GreaterThanOrEqualTo(BaseParameters.minPageSize).WithMessage("Must be greater than or equal to {ComparisonValue}")
-                .LessThanOrEqualTo(BaseParameters.maxPageSize).WithMessage("Must be less than or equal to {ComparisonValue}");
+                .GreaterThanOrEqualTo(BaseParameters.MinPageSize).WithMessage("Must be greater than or equal to {ComparisonValue}.")
+                .LessThanOrEqualTo(BaseParameters.MaxPageSize).WithMessage("Must be less than or equal to {ComparisonValue}.");
         }
     }
 }

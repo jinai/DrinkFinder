@@ -1,12 +1,18 @@
 ﻿using DrinkFinder.Common.ValueObjects;
+using System;
 
 namespace DrinkFinder.Common.Extensions
 {
     public static class AddressExtensions
     {
-        public static string GetFormatted(this Address a)
+        public static string GetFormatted(this Address address)
         {
-            var formatted = $"{a.Street} {a.BoxNumber}, {a.PostalCode} {a.City} {a.Country}";
+            if (address is null)
+            {
+                throw new ArgumentNullException(nameof(address));
+            }
+
+            var formatted = $"{address.Street} {address.BoxNumber}, {address.PostalCode} {address.City} {address.Country}";
             return formatted;
         }
     }

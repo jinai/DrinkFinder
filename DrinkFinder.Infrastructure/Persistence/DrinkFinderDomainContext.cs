@@ -60,11 +60,19 @@ namespace DrinkFinder.Infrastructure.Persistence
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.AddedDate = DateTimeOffset.Now;
+                        // Only overwrite if it wasn't explicitly set
+                        if (entry.Entity.AddedDate == default)
+                        {
+                            entry.Entity.AddedDate = DateTimeOffset.Now;
+                        }
                         entry.Entity.IsDeleted = false;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.ModifiedDate = DateTimeOffset.Now;
+                        // Only overwrite if it wasn't explicitly set
+                        if (entry.Entity.ModifiedDate == default)
+                        {
+                            entry.Entity.ModifiedDate = DateTimeOffset.Now;
+                        }
                         break;
                     case EntityState.Deleted:
                         entry.State = EntityState.Modified;

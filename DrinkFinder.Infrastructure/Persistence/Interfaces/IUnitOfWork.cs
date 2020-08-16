@@ -11,6 +11,6 @@ namespace DrinkFinder.Infrastructure.Persistence.Interfaces
         IRepository<Picture, Guid> PictureRepo { get; }
         IRepository<BusinessHours, Guid> BusinessHoursRepo { get; }
 
-        Task SaveAsync();
+        Task<int> SaveAsync();
     }
 }
