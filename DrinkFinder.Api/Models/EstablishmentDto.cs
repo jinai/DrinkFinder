@@ -21,6 +21,7 @@ namespace DrinkFinder.Api.Models
         public ContactInfo ContactInfo { get; set; }
         public DateTimeOffset AddedDate { get; set; }
 
+        public Guid UserId { get; set; }
         public ICollection<BusinessHoursDto> BusinessHours { get; set; }
         public ICollection<string> Pictures { get; set; }
     }

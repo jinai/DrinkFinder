@@ -13,6 +13,7 @@ namespace DrinkFinder.Api.Mappings
                 .ForMember(
                     dest => dest.Pictures,
                     opt => opt.MapFrom(src => src.Pictures.Select(p => p.Location)));
+
             CreateMap<CreateEstablishmentDto, Establishment>();
         }
     }

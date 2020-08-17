@@ -16,7 +16,7 @@ namespace DrinkFinder.Api.Validators
                     .When(contactInfo => contactInfo.PublicEmail != null);
 
             RuleFor(contactInfo => contactInfo.PhoneNumber)
-                .MaximumLength(25).WithMessage("Must be shorter than or equal to {MaxLength} characters.");
+                .MaximumLength(25).WithMessage("Must be at most {MaxLength} characters long.");
             // TODO: Validate contactInfo.PhoneNumber using an external API
         }
     }

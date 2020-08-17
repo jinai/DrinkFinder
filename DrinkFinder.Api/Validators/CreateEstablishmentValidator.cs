@@ -21,8 +21,8 @@ namespace DrinkFinder.Api.Validators
             When(createEstab => createEstab.ShortCode != null, () =>
             {
                 RuleFor(createEstab => createEstab.ShortCode)
-                    .MinimumLength(ShortCodeService.MinSize).WithMessage("Must be longer than or equal to {MinLength} characters.")
-                    .MaximumLength(ShortCodeService.MaxSize).WithMessage("Must be shorter than or equal to {MaxLength} characters.")
+                    .MinimumLength(ShortCodeService.MinSize).WithMessage("Must be at least {MinLength} characters long.")
+                    .MaximumLength(ShortCodeService.MaxSize).WithMessage("Must be at most {MaxLength} characters long.")
                     .Must(ShortCodeService.IsValid).WithMessage($"Invalid value : '{{PropertyValue}}'. Allowed characters: {ShortCodeService.AllowedCharacters}")
 
                     .DependentRules(() =>
@@ -34,11 +34,11 @@ namespace DrinkFinder.Api.Validators
 
             RuleFor(createEstab => createEstab.Name)
                 .NotEmpty().WithMessage("Cannot be null or empty.")
-                .MaximumLength(50).WithMessage("Must be shorter than or equal to {MaxLength} characters.");
+                .MaximumLength(50).WithMessage("Must be at most {MaxLength} characters long.");
 
             RuleFor(createEstab => createEstab.Description)
                 .NotEmpty().WithMessage("Cannot be null or empty.")
-                .MaximumLength(2000).WithMessage("Must be shorter than or equal to {MaxLength} characters.");
+                .MaximumLength(2000).WithMessage("Must be at most {MaxLength} characters long.");
 
             RuleFor(createEstab => createEstab.VatNumber)
                 .NotEmpty().WithMessage("Cannot be null or empty.")

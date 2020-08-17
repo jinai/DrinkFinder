@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DrinkFinder.Api.Models;
+using DrinkFinder.Infrastructure.Persistence.Entities;
 using DrinkFinder.Infrastructure.Persistence.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -29,6 +30,22 @@ namespace DrinkFinder.Api.Services
         {
             var news = await _unitOfWork.NewsRepo.GetById(newsId).SingleOrDefaultAsync();
             return _mapper.Map<NewsDto>(news);
+        }
+
+        public async Task<NewsDto> Create(CreateNewsDto createNewsDto, Guid userId)
+        {
+            var newsEntity = _mapper.Map<News>(createNewsDto);
+            newsEntity.UserId = userId;
+            _unitOfWork.NewsRepo.Add(newsEntity);
+            await _unitOfWork.SaveAsync();
+
+            return _mapper.Map<NewsDto>(newsEntity);
+        }
+
+        public Task<int> Delete(Guid newsId)
+        {
+            _unitOfWork.NewsRepo.Remove(newsId);
+            return _unitOfWork.SaveAsync();
         }
     }
 }

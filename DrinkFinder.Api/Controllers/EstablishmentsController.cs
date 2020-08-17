@@ -18,7 +18,7 @@ namespace DrinkFinder.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [ApiVersion("1.0")]
-    [Authorize(Policy = "Member")]
+    [Authorize(Policy = "Manager")]
     public class EstablishmentsController : ControllerBase
     {
         private readonly IEstablishmentService _establishmentService;
@@ -60,7 +60,7 @@ namespace DrinkFinder.Api.Controllers
             return Ok(establishments);
         }
 
-        [HttpGet("{EstablishmentId}", Name = "GetById")]
+        [HttpGet("{EstablishmentId}")]
         [AllowAnonymous]
         public async Task<ActionResult<EstablishmentDto>> GetById([FromRoute(Name = "EstablishmentId")] Guid establishmentId,
                                                                   [FromQuery(Name = "Includes")] List<string> includes,
@@ -139,22 +139,32 @@ namespace DrinkFinder.Api.Controllers
             var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
             var establishmentToReturn = await _establishmentService.Create(createEstablishment, currentUserId);
-            return CreatedAtRoute("GetById", new { establishmentId = establishmentToReturn.Id }, establishmentToReturn);
+            return CreatedAtAction(nameof(GetById), new { establishmentId = establishmentToReturn.Id }, establishmentToReturn);
         }
 
         [HttpDelete("{EstablishmentId}")]
         public async Task<ActionResult> DeleteEstablishment([FromRoute(Name = "EstablishmentId")] Guid establishmentId)
         {
+            // Check if the establishment exists
+            var establishmentToDelete = await _establishmentService.GetById(establishmentId);
+
+            if (establishmentToDelete == null)
+            {
+                return NotFound();
+            }
+
+            // Check if the establishment is owned by the current user
+            var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            if (establishmentToDelete.UserId != currentUserId)
+            {
+                return Forbid();
+            }
+
             try
             {
-                if (await _establishmentService.Delete(establishmentId))
-                {
-                    return NoContent();
-                }
-                else
-                {
-                    return NotFound();
-                }
+                await _establishmentService.Delete(establishmentToDelete.Id);
+                return NoContent();
             }
             catch (DbUpdateException ex)
             {

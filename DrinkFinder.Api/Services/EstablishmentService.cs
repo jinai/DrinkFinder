@@ -111,11 +111,10 @@ namespace DrinkFinder.Api.Services
             return _mapper.Map<EstablishmentDto>(establishmentEntity);
         }
 
-        public async Task<bool> Delete(Guid establishmentId)
+        public Task<int> Delete(Guid establishmentId)
         {
             _unitOfWork.EstablishmentRepo.Remove(establishmentId);
-            var result = await _unitOfWork.SaveAsync();
-            return result > 0;
+            return _unitOfWork.SaveAsync();
         }
     }
 }

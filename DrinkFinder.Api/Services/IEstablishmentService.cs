@@ -12,6 +12,6 @@ namespace DrinkFinder.Api.Services
         Task<EstablishmentDto> GetById(Guid establishmentId);
         Task<EstablishmentDto> GetById(Guid establishmentId, EstablishmentParameters establishmentParameters);
         Task<EstablishmentDto> Create(CreateEstablishmentDto createEstablishmentDto, Guid userId);
-        Task<bool> Delete(Guid establishmentId);
+        Task<int> Delete(Guid establishmentId);
     }
 }

@@ -12,6 +12,8 @@ namespace DrinkFinder.Api.Mappings
                 .ForMember(
                     dest => dest.PublicationDate,
                     opt => opt.MapFrom(src => src.AddedDate));
+
+            CreateMap<CreateNewsDto, News>();
         }
     }
 }

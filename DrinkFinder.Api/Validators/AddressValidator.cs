@@ -9,24 +9,24 @@ namespace DrinkFinder.Api.Validators
         {
             RuleFor(address => address.Street)
                 .NotEmpty().WithMessage("Cannot be null or empty.")
-                .MaximumLength(100).WithMessage("Must be shorter than or equal to {MaxLength} characters.");
+                .MaximumLength(100).WithMessage("Must be at most {MaxLength} characters long.");
 
             RuleFor(address => address.BoxNumber)
                 .NotEmpty().WithMessage("Cannot be null or empty.")
-                .MaximumLength(20).WithMessage("Must be shorter than or equal to {MaxLength} characters.");
+                .MaximumLength(20).WithMessage("Must be at most {MaxLength} characters long.");
 
             RuleFor(address => address.PostalCode)
                 .NotEmpty().WithMessage("Cannot be null or empty.")
-                .MaximumLength(20).WithMessage("Must be shorter than or equal to {MaxLength} characters.");
+                .MaximumLength(20).WithMessage("Must be at most {MaxLength} characters long.");
 
             RuleFor(address => address.City)
                 .NotEmpty().WithMessage("Cannot be null or empty.")
-                .MaximumLength(100).WithMessage("Must be shorter than or equal to {MaxLength} characters.");
+                .MaximumLength(100).WithMessage("Must be at most {MaxLength} characters long.");
 
             // TODO: Restrict countries with a list of possible values
             RuleFor(address => address.Country)
                 .NotEmpty().WithMessage("Cannot be null or empty.")
-                .MaximumLength(20).WithMessage("Must be shorter than or equal to {MaxLength} characters.");
+                .MaximumLength(20).WithMessage("Must be at most {MaxLength} characters long.");
         }
     }
 }
