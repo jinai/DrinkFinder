@@ -2,6 +2,7 @@
 using DrinkFinder.Infrastructure.Persistence.Entities;
 using DrinkFinder.Infrastructure.Persistence.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Reflection;
 using System.Threading;
@@ -75,8 +76,9 @@ namespace DrinkFinder.Infrastructure.Persistence
                         }
                         break;
                     case EntityState.Deleted:
-                        entry.State = EntityState.Modified;
+                        entry.State = EntityState.Unchanged;
                         entry.Entity.IsDeleted = true;
+                        entry.Entity.ModifiedDate = DateTimeOffset.Now;
                         break;
                 }
             }

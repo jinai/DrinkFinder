@@ -1,5 +1,6 @@
 ﻿using DrinkFinder.Infrastructure.Persistence.Entities;
 using DrinkFinder.Infrastructure.Persistence.Interfaces;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@ namespace DrinkFinder.Infrastructure.Persistence
         public UnitOfWork(DrinkFinderDomainContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            _context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
         }
 
         private IRepository<Establishment, Guid> _establishmentRepo;
