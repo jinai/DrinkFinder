@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DrinkFinder.Api.Exceptions;
 using DrinkFinder.Api.Models;
 using DrinkFinder.Infrastructure.Persistence.Entities;
 using DrinkFinder.Infrastructure.Persistence.Interfaces;
@@ -13,11 +14,13 @@ namespace DrinkFinder.Api.Services
     public class NewsService : INewsService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IEstablishmentService _establishmentService;
         private readonly IMapper _mapper;
 
-        public NewsService(IUnitOfWork unitOfWork, IMapper mapper)
+        public NewsService(IUnitOfWork unitOfWork, IEstablishmentService establishmentService, IMapper mapper)
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+            _establishmentService = establishmentService ?? throw new ArgumentNullException(nameof(establishmentService));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -35,6 +38,19 @@ namespace DrinkFinder.Api.Services
 
         public async Task<NewsDto> Create(CreateNewsDto createNewsDto, Guid userId)
         {
+            if (createNewsDto is null)
+            {
+                throw new ArgumentNullException(nameof(createNewsDto));
+            }
+
+            // Check if the establishment for which the news is going to be published is owned by the user
+            var targetEstablishment = await _establishmentService.GetById(createNewsDto.EstablishmentId);
+
+            if (targetEstablishment.UserId != userId)
+            {
+                throw new UserIdMismatchException("Cannot publish news for an establishment you don't own.");
+            }
+
             var newsEntity = _mapper.Map<News>(createNewsDto);
             newsEntity.UserId = userId;
             _unitOfWork.NewsRepo.Add(newsEntity);
@@ -43,10 +59,30 @@ namespace DrinkFinder.Api.Services
             return _mapper.Map<NewsDto>(newsEntity);
         }
 
-        public Task<int> Delete(Guid newsId)
+        public async Task<int> Delete(NewsDto newsToDelete, Guid userId)
         {
-            _unitOfWork.NewsRepo.Remove(newsId);
-            return _unitOfWork.SaveAsync();
+            if (newsToDelete is null)
+            {
+                throw new ArgumentNullException(nameof(newsToDelete));
+            }
+
+            // Check if the news to delete was published by the user
+            if (newsToDelete.UserId != userId)
+            {
+                throw new UserIdMismatchException("Cannot delete news you didn't publish.");
+            }
+
+            _unitOfWork.NewsRepo.Remove(newsToDelete.Id);
+
+            try
+            {
+                int result = await _unitOfWork.SaveAsync();
+                return result;
+            }
+            catch (DbUpdateException)
+            {
+                throw new NewsServiceException($"Could not delete news (Id: {newsToDelete.Id}).");
+            }
         }
     }
 }

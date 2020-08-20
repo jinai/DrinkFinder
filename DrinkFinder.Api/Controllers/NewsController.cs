@@ -1,9 +1,9 @@
-﻿using DrinkFinder.Api.Models;
+﻿using DrinkFinder.Api.Exceptions;
+using DrinkFinder.Api.Models;
 using DrinkFinder.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -49,30 +49,29 @@ namespace DrinkFinder.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<NewsDto>> CreateNews(CreateNewsDto createNews)
+        public async Task<ActionResult<NewsDto>> CreateNews(CreateNewsDto createNewsDto)
         {
-            if (createNews is null)
+            if (createNewsDto is null)
             {
-                throw new ArgumentNullException(nameof(createNews));
+                throw new ArgumentNullException(nameof(createNewsDto));
             }
 
-            // Check if the establishment is owned by the current user
             var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var targetEstablishment = await _establishmentService.GetById(createNews.EstablishmentId);
 
-            if (targetEstablishment.UserId != currentUserId)
+            try
             {
-                return Forbid();
+                var newsToReturn = await _newsService.Create(createNewsDto, currentUserId);
+                return CreatedAtAction(nameof(GetById), new { newsId = newsToReturn.Id }, newsToReturn);
             }
-
-            var newsToReturn = await _newsService.Create(createNews, currentUserId);
-            return CreatedAtAction(nameof(GetById), new { newsId = newsToReturn.Id }, newsToReturn);
+            catch (UserIdMismatchException ex)
+            {
+                return new JsonResult(new { ex.Message }) { StatusCode = StatusCodes.Status403Forbidden };
+            }
         }
 
         [HttpDelete("{NewsId}")]
         public async Task<ActionResult> DeleteNews([FromRoute(Name = "NewsId")] Guid newsId)
         {
-            // Check if the news exists
             var newsToDelete = await _newsService.GetById(newsId);
 
             if (newsToDelete == null)
@@ -80,22 +79,20 @@ namespace DrinkFinder.Api.Controllers
                 return NotFound();
             }
 
-            // Check if the news was published by the current user
             var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
-            if (newsToDelete.UserId != currentUserId)
-            {
-                return Forbid();
-            }
 
             try
             {
-                await _newsService.Delete(newsToDelete.Id);
+                await _newsService.Delete(newsToDelete, currentUserId);
                 return NoContent();
             }
-            catch (DbUpdateException ex)
+            catch (UserIdMismatchException ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                return new JsonResult(new { ex.Message }) { StatusCode = StatusCodes.Status403Forbidden };
+            }
+            catch (NewsServiceException ex)
+            {
+                return new JsonResult(new { ex.Message }) { StatusCode = StatusCodes.Status500InternalServerError };
             }
         }
     }

@@ -1,6 +1,5 @@
 ﻿using DrinkFinder.Common.Enums;
 using DrinkFinder.Common.ValueObjects;
-using System;
 
 namespace DrinkFinder.Api.Models
 {

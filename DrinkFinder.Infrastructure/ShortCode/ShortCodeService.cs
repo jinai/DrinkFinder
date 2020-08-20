@@ -56,9 +56,10 @@ namespace DrinkFinder.Infrastructure.ShortCode
             catch (TimeoutException)
             {
                 // If we're here there are 2 options:
-                // 1) We ran out of valid short codes. Given the current maxSize this is unlikely.
-                // 2) We ran out of time to find a short code that's not already taken. This is more likely and means we should probably change the implementation.
-                throw;
+                //   1) We ran out of valid short codes. Given the current MaxSize this is unlikely.
+                //   2) We ran out of time to find a short code that's not already taken. Although more likely,
+                //      it shouldn't happen before a very long time, at which point we should change the implementation.
+                throw new ShortCodeServiceException("Timed out while trying to generate a short code.");
             }
 
             return shortCode;
@@ -77,7 +78,7 @@ namespace DrinkFinder.Infrastructure.ShortCode
                     buffer[i] = AllowedCharacters[random.Next(AllowedCharacters.Length)];
                 }
 
-                var candidate = new String(buffer);
+                var candidate = new string(buffer);
                 var available = await IsAvailable(candidate);
                 if (available)
                 {

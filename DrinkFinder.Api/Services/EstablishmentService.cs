@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using DrinkFinder.Api.Exceptions;
 using DrinkFinder.Api.Models;
 using DrinkFinder.Api.ResourceParameters;
+using DrinkFinder.Common.Enums;
 using DrinkFinder.Infrastructure.Persistence.Entities;
 using DrinkFinder.Infrastructure.Persistence.Helpers;
 using DrinkFinder.Infrastructure.Persistence.Interfaces;
+using DrinkFinder.Infrastructure.ShortCode;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,11 +18,13 @@ namespace DrinkFinder.Api.Services
     public class EstablishmentService : IEstablishmentService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IShortCodeService _shortCodeService;
         private readonly IMapper _mapper;
 
-        public EstablishmentService(IUnitOfWork unitOfWork, IMapper mapper)
+        public EstablishmentService(IUnitOfWork unitOfWork, IShortCodeService shortCodeService, IMapper mapper)
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+            _shortCodeService = shortCodeService ?? throw new ArgumentNullException(nameof(shortCodeService));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -103,18 +108,57 @@ namespace DrinkFinder.Api.Services
 
         public async Task<EstablishmentDto> Create(CreateEstablishmentDto createEstablishmentDto, Guid userId)
         {
+            if (createEstablishmentDto is null)
+            {
+                throw new ArgumentNullException(nameof(createEstablishmentDto));
+            }
+
+            if (createEstablishmentDto.ShortCode == null)
+            {
+                try
+                {
+                    createEstablishmentDto.ShortCode = await _shortCodeService.NewShortCode();
+                }
+                catch (ShortCodeServiceException ex)
+                {
+                    throw new EstablishmentServiceException("Could not generate a short code.", ex);
+                }
+            }
+
             var establishmentEntity = _mapper.Map<Establishment>(createEstablishmentDto);
             establishmentEntity.UserId = userId;
+            establishmentEntity.Status = EstablishmentStatus.Pending; // Explicitly set it as Pending in case the default changes
+
             _unitOfWork.EstablishmentRepo.Add(establishmentEntity);
             await _unitOfWork.SaveAsync();
 
             return _mapper.Map<EstablishmentDto>(establishmentEntity);
         }
 
-        public Task<int> Delete(Guid establishmentId)
+        public async Task<int> Delete(EstablishmentDto establishmentToDelete, Guid userId)
         {
-            _unitOfWork.EstablishmentRepo.Remove(establishmentId);
-            return _unitOfWork.SaveAsync();
+            if (establishmentToDelete is null)
+            {
+                throw new ArgumentNullException(nameof(establishmentToDelete));
+            }
+
+            // Check if the establishment to delete is owned by the user
+            if (establishmentToDelete.UserId != userId)
+            {
+                throw new UserIdMismatchException("Cannot delete an establishment you don't own.");
+            }
+
+            _unitOfWork.EstablishmentRepo.Remove(establishmentToDelete.Id);
+
+            try
+            {
+                int result = await _unitOfWork.SaveAsync();
+                return result;
+            }
+            catch (DbUpdateException)
+            {
+                throw new EstablishmentServiceException($"Could not delete establishment (Id: {establishmentToDelete.Id}).");
+            }
         }
     }
 }

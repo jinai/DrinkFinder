@@ -10,6 +10,6 @@ namespace DrinkFinder.Api.Services
         Task<IEnumerable<NewsDto>> GetAll();
         Task<NewsDto> GetById(Guid newsId);
         Task<NewsDto> Create(CreateNewsDto createNewsDto, Guid userId);
-        Task<int> Delete(Guid newsId);
+        Task<int> Delete(NewsDto newsToDelete, Guid userId);
     }
 }

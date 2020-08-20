@@ -1,13 +1,12 @@
-﻿using DrinkFinder.Api.Models;
+﻿using DrinkFinder.Api.Exceptions;
+using DrinkFinder.Api.Models;
 using DrinkFinder.Api.ResourceParameters;
 using DrinkFinder.Api.Services;
 using DrinkFinder.Api.Validators;
-using DrinkFinder.Infrastructure.ShortCode;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -94,13 +93,12 @@ namespace DrinkFinder.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<EstablishmentDto>> CreateEstablishment([CustomizeValidator(Skip = true)] CreateEstablishmentDto createEstablishment,
-                                                                              [FromServices] CreateEstablishmentValidator validator,
-                                                                              [FromServices] IShortCodeService shortCodeService)
+        public async Task<ActionResult<EstablishmentDto>> CreateEstablishment([CustomizeValidator(Skip = true)] CreateEstablishmentDto createEstablishmentDto,
+                                                                              [FromServices] CreateEstablishmentValidator validator)
         {
-            if (createEstablishment is null)
+            if (createEstablishmentDto is null)
             {
-                throw new ArgumentNullException(nameof(createEstablishment));
+                throw new ArgumentNullException(nameof(createEstablishmentDto));
             }
 
             if (validator is null)
@@ -108,13 +106,8 @@ namespace DrinkFinder.Api.Controllers
                 throw new ArgumentNullException(nameof(validator));
             }
 
-            if (shortCodeService is null)
-            {
-                throw new ArgumentNullException(nameof(shortCodeService));
-            }
-
             // Manual validation because ASP.NET’s validation pipeline is not asynchronous
-            var validationResult = await validator.ValidateAsync(createEstablishment);
+            var validationResult = await validator.ValidateAsync(createEstablishmentDto);
             validationResult.AddToModelState(ModelState, null);
 
             if (!ModelState.IsValid)
@@ -122,30 +115,22 @@ namespace DrinkFinder.Api.Controllers
                 return ValidationProblem(ModelState);
             }
 
-            // ShortCode not specified so we try to generate one
-            if (createEstablishment.ShortCode == null)
-            {
-                try
-                {
-                    createEstablishment.ShortCode = await shortCodeService.NewShortCode();
-                }
-                catch (TimeoutException ex)
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError, ex);
-                }
-            }
-
-            // Don't forget the current UserId
             var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            var establishmentToReturn = await _establishmentService.Create(createEstablishment, currentUserId);
-            return CreatedAtAction(nameof(GetById), new { establishmentId = establishmentToReturn.Id }, establishmentToReturn);
+            try
+            {
+                var establishmentToReturn = await _establishmentService.Create(createEstablishmentDto, currentUserId);
+                return CreatedAtAction(nameof(GetById), new { establishmentId = establishmentToReturn.Id }, establishmentToReturn);
+            }
+            catch (EstablishmentServiceException ex)
+            {
+                return new JsonResult(new { ex.Message }) { StatusCode = StatusCodes.Status500InternalServerError };
+            }
         }
 
         [HttpDelete("{EstablishmentId}")]
         public async Task<ActionResult> DeleteEstablishment([FromRoute(Name = "EstablishmentId")] Guid establishmentId)
         {
-            // Check if the establishment exists
             var establishmentToDelete = await _establishmentService.GetById(establishmentId);
 
             if (establishmentToDelete == null)
@@ -153,22 +138,20 @@ namespace DrinkFinder.Api.Controllers
                 return NotFound();
             }
 
-            // Check if the establishment is owned by the current user
             var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
-            if (establishmentToDelete.UserId != currentUserId)
-            {
-                return Forbid();
-            }
 
             try
             {
-                await _establishmentService.Delete(establishmentToDelete.Id);
+                await _establishmentService.Delete(establishmentToDelete, currentUserId);
                 return NoContent();
             }
-            catch (DbUpdateException ex)
+            catch (UserIdMismatchException ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                return new JsonResult(new { ex.Message }) { StatusCode = StatusCodes.Status403Forbidden };
+            }
+            catch (EstablishmentServiceException ex)
+            {
+                return new JsonResult(new { ex.Message }) { StatusCode = StatusCodes.Status500InternalServerError };
             }
         }
     }
