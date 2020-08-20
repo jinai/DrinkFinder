@@ -1,6 +1,5 @@
 ﻿using DrinkFinder.AuthServer.Data;
 using DrinkFinder.AuthServer.Models;
-using DrinkFinder.Common.Constants;
 using DrinkFinder.Common.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,8 +10,12 @@ using System.Linq;
 
 namespace DrinkFinder.AuthServer
 {
-    public class SeedData
+    public static class SeedData
     {
+        public const string Member = "Member";
+        public const string Manager = "Manager";
+        public const string Admin = "Admin";
+
         public static void EnsureSeedData(string connectionString)
         {
             var services = new ServiceCollection();
@@ -36,61 +39,61 @@ namespace DrinkFinder.AuthServer
 
                     // Seeding roles
                     var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
-                    var admin = roleMgr.FindByNameAsync(UserRoles.Admin).Result;
+                    var admin = roleMgr.FindByNameAsync(Admin).Result;
                     if (admin == null)
                     {
                         admin = new IdentityRole<Guid>
                         {
-                            Name = UserRoles.Admin
+                            Name = Admin
                         };
                         var result = roleMgr.CreateAsync(admin).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
                         }
-                        Log.Debug($"Role {UserRoles.Admin} created");
+                        Log.Debug($"Role {Admin} created");
                     }
                     else
                     {
-                        Log.Debug($"Role {UserRoles.Admin} already exists");
+                        Log.Debug($"Role {Admin} already exists");
                     }
 
-                    var manager = roleMgr.FindByNameAsync(UserRoles.Manager).Result;
+                    var manager = roleMgr.FindByNameAsync(Manager).Result;
                     if (manager == null)
                     {
                         manager = new IdentityRole<Guid>
                         {
-                            Name = UserRoles.Manager
+                            Name = Manager
                         };
                         var result = roleMgr.CreateAsync(manager).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
                         }
-                        Log.Debug($"Role {UserRoles.Manager} created");
+                        Log.Debug($"Role {Manager} created");
                     }
                     else
                     {
-                        Log.Debug($"Role {UserRoles.Manager} already exists");
+                        Log.Debug($"Role {Manager} already exists");
                     }
 
-                    var member = roleMgr.FindByNameAsync(UserRoles.Member).Result;
+                    var member = roleMgr.FindByNameAsync(Member).Result;
                     if (member == null)
                     {
                         member = new IdentityRole<Guid>
                         {
-                            Name = UserRoles.Member
+                            Name = Member
                         };
                         var result = roleMgr.CreateAsync(member).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
                         }
-                        Log.Debug($"Role {UserRoles.Member} created");
+                        Log.Debug($"Role {Member} created");
                     }
                     else
                     {
-                        Log.Debug($"Role {UserRoles.Member} already exists");
+                        Log.Debug($"Role {Member} already exists");
                     }
 
 
@@ -119,7 +122,7 @@ namespace DrinkFinder.AuthServer
                             throw new Exception(result.Errors.First().Description);
                         }
 
-                        result = userMgr.AddToRoleAsync(adminUser, UserRoles.Admin).Result;
+                        result = userMgr.AddToRoleAsync(adminUser, Admin).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
@@ -154,7 +157,7 @@ namespace DrinkFinder.AuthServer
                             throw new Exception(result.Errors.First().Description);
                         }
 
-                        result = userMgr.AddToRoleAsync(tony, UserRoles.Manager).Result;
+                        result = userMgr.AddToRoleAsync(tony, Manager).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
@@ -188,7 +191,7 @@ namespace DrinkFinder.AuthServer
                             throw new Exception(result.Errors.First().Description);
                         }
 
-                        result = userMgr.AddToRoleAsync(alice, UserRoles.Manager).Result;
+                        result = userMgr.AddToRoleAsync(alice, Manager).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
@@ -222,7 +225,7 @@ namespace DrinkFinder.AuthServer
                             throw new Exception(result.Errors.First().Description);
                         }
 
-                        result = userMgr.AddToRoleAsync(john, UserRoles.Manager).Result;
+                        result = userMgr.AddToRoleAsync(john, Manager).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
@@ -256,7 +259,7 @@ namespace DrinkFinder.AuthServer
                             throw new Exception(result.Errors.First().Description);
                         }
 
-                        result = userMgr.AddToRoleAsync(jane, UserRoles.Manager).Result;
+                        result = userMgr.AddToRoleAsync(jane, Manager).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
@@ -291,7 +294,7 @@ namespace DrinkFinder.AuthServer
                             throw new Exception(result.Errors.First().Description);
                         }
 
-                        result = userMgr.AddToRoleAsync(bob, UserRoles.Member).Result;
+                        result = userMgr.AddToRoleAsync(bob, Member).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
@@ -325,7 +328,7 @@ namespace DrinkFinder.AuthServer
                             throw new Exception(result.Errors.First().Description);
                         }
 
-                        result = userMgr.AddToRoleAsync(charlie, UserRoles.Member).Result;
+                        result = userMgr.AddToRoleAsync(charlie, Member).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
