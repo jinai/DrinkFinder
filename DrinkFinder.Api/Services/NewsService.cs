@@ -5,6 +5,7 @@ using DrinkFinder.Infrastructure.Persistence.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DrinkFinder.Api.Services
@@ -22,7 +23,7 @@ namespace DrinkFinder.Api.Services
 
         public async Task<IEnumerable<NewsDto>> GetAll()
         {
-            var news = await _unitOfWork.NewsRepo.GetAll().ToListAsync();
+            var news = await _unitOfWork.NewsRepo.GetAll().OrderBy(n => n.AddedDate).ToListAsync();
             return _mapper.Map<IEnumerable<NewsDto>>(news);
         }
 
