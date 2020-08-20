@@ -4,14 +4,16 @@ using DrinkFinder.AuthServer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DrinkFinder.AuthServer.Data.Migrations.Identity
 {
     [DbContext(typeof(DrinkFinderIdentityContext))]
-    partial class DrinkFinderIdentityContextModelSnapshot : ModelSnapshot
+    [Migration("20200820130614_GoBackToDefaultSchema")]
+    partial class GoBackToDefaultSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

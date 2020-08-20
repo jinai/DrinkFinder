@@ -1,6 +1,5 @@
 ﻿using DrinkFinder.AuthServer.Data;
 using DrinkFinder.AuthServer.Models;
-using DrinkFinder.Common.Constants;
 using IdentityServer4;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
@@ -34,9 +33,7 @@ namespace DrinkFinder.AuthServer
 
             services.AddDbContext<DrinkFinderIdentityContext>(options =>
             {
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DrinkFinderIdentity"),
-                    sql => sql.MigrationsHistoryTable("__EFMigrationsHistory", Schemas.Identity));
+                options.UseSqlServer(Configuration.GetConnectionString("DrinkFinderIdentity"));
             });
 
             services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>

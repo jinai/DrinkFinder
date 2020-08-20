@@ -1,5 +1,4 @@
-﻿using DrinkFinder.Common.Constants;
-using DrinkFinder.Infrastructure.Persistence;
+﻿using DrinkFinder.Infrastructure.Persistence;
 using DrinkFinder.Infrastructure.Persistence.Interfaces;
 using DrinkFinder.Infrastructure.ShortCode;
 using DrinkFinder.Infrastructure.Vat;
@@ -16,9 +15,7 @@ namespace DrinkFinder.Infrastructure
         {
             services.AddDbContext<DrinkFinderDomainContext>(options =>
             {
-                options.UseSqlServer(
-                    configuration.GetConnectionString("DrinkFinderDomain"),
-                    b => b.MigrationsHistoryTable("__EFMigrationsHistory", Schemas.Domain));
+                options.UseSqlServer(configuration.GetConnectionString("DrinkFinderDomain"));
                 options.EnableSensitiveDataLogging();
             });
 

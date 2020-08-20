@@ -37,10 +37,10 @@ Les news seront accessibles pour tout le monde, avec une animation au choix. Les
 ## Migrations
 Dans le Package Manager Console :
 
-    Update-Database -Project DrinkFinder.Infrastructure -Context DrinkFinderDomainContext
-    Update-Database -Project DrinkFinder.AuthServer -Context DrinkFinderIdentityContext
-    Update-Database -Project DrinkFinder.AuthServer -Context PersistedGrantDbContext
-    Update-Database -Project DrinkFinder.AuthServer -Context ConfigurationDbContext
+    Update-Database -Project DrinkFinder.Infrastructure -StartupProject DrinkFinder.Api -Context DrinkFinderDomainContext
+    Update-Database -Project DrinkFinder.AuthServer -StartupProject DrinkFinder.AuthServer -Context DrinkFinderIdentityContext
+    Update-Database -Project DrinkFinder.AuthServer -StartupProject DrinkFinder.AuthServer -Context PersistedGrantDbContext
+    Update-Database -Project DrinkFinder.AuthServer -StartupProject DrinkFinder.AuthServer -Context ConfigurationDbContext
     
 ## Startup projects
 ![alt text](https://i.imgur.com/Dg5ITwS.png "Startup projects")

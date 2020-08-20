@@ -1,5 +1,4 @@
-﻿using DrinkFinder.Common.Constants;
-using DrinkFinder.Infrastructure.Persistence;
+﻿using DrinkFinder.Infrastructure.Persistence;
 using DrinkFinder.Infrastructure.Persistence.Entities;
 using DrinkFinder.Infrastructure.Persistence.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -31,9 +30,7 @@ namespace DrinkFinder.Api
             var services = new ServiceCollection();
             services.AddDbContext<DrinkFinderDomainContext>(options =>
             {
-                options.UseSqlServer(
-                    connectionString,
-                    b => b.MigrationsHistoryTable("__EFMigrationsHistory", Schemas.Domain));
+                options.UseSqlServer(connectionString);
                 options.EnableSensitiveDataLogging();
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();

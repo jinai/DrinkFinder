@@ -1,5 +1,4 @@
-﻿using DrinkFinder.Common.Constants;
-using DrinkFinder.Infrastructure.Persistence.Entities;
+﻿using DrinkFinder.Infrastructure.Persistence.Entities;
 using DrinkFinder.Infrastructure.Persistence.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -17,25 +16,7 @@ namespace DrinkFinder.Infrastructure.Persistence
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<News> News { get; set; }
 
-        public DrinkFinderDomainContext() { }
-
         public DrinkFinderDomainContext(DbContextOptions<DrinkFinderDomainContext> options) : base(options) { }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (optionsBuilder is null)
-            {
-                throw new ArgumentNullException(nameof(optionsBuilder));
-            }
-
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(
-                    @"Server=(localdb)\mssqllocaldb;Database=DrinkFinder;Trusted_Connection=True;MultipleActiveResultSets=true",
-                    b => b.MigrationsHistoryTable("__EFMigrationsHistory", Schemas.Domain));
-                optionsBuilder.EnableSensitiveDataLogging();
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -44,7 +25,6 @@ namespace DrinkFinder.Infrastructure.Persistence
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.HasDefaultSchema(Schemas.Domain);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(builder);
 

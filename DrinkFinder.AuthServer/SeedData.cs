@@ -19,9 +19,7 @@ namespace DrinkFinder.AuthServer
             services.AddLogging();
             services.AddDbContext<DrinkFinderIdentityContext>(options =>
             {
-                options.UseSqlServer(
-                    connectionString,
-                    b => b.MigrationsHistoryTable("__EFMigrationsHistory", Schemas.Identity));
+                options.UseSqlServer(connectionString);
                 options.EnableSensitiveDataLogging();
             });
 
