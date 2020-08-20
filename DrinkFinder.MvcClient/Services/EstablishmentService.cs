@@ -19,7 +19,7 @@ namespace DrinkFinder.MvcClient.Services
 
         public async Task<IEnumerable<EstablishmentModel>> GetAll()
         {
-            var response = await _client.GetAsync("establishments?includes=BusinessHours");
+            var response = await _client.GetAsync("establishments?includes=BusinessHours&status=approved");
 
             if (!response.IsSuccessStatusCode)
             {
