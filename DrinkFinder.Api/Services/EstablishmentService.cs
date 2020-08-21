@@ -84,12 +84,7 @@ namespace DrinkFinder.Api.Services
             return _mapper.Map<IEnumerable<EstablishmentDto>>(result);
         }
 
-        public Task<EstablishmentDto> GetById(Guid establishmentId)
-        {
-            return GetById(establishmentId, null);
-        }
-
-        public async Task<EstablishmentDto> GetById(Guid establishmentId, EstablishmentParameters parameters)
+        public async Task<EstablishmentDto> GetById(Guid establishmentId, EstablishmentParameters parameters = default)
         {
             var establishments = _unitOfWork.EstablishmentRepo.GetById(establishmentId);
 

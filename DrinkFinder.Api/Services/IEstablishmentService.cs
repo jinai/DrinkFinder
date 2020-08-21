@@ -9,8 +9,7 @@ namespace DrinkFinder.Api.Services
     public interface IEstablishmentService
     {
         Task<IEnumerable<EstablishmentDto>> GetAll(EstablishmentParameters establishmentParameters);
-        Task<EstablishmentDto> GetById(Guid establishmentId);
-        Task<EstablishmentDto> GetById(Guid establishmentId, EstablishmentParameters establishmentParameters);
+        Task<EstablishmentDto> GetById(Guid establishmentId, EstablishmentParameters establishmentParameters = default);
         Task<EstablishmentDto> Create(CreateEstablishmentDto createEstablishmentDto, Guid userId);
         Task<int> Delete(EstablishmentDto establishmentToDelete, Guid userId);
     }
