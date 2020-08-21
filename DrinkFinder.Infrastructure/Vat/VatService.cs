@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using DrinkFinder.Infrastructure.Persistence.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
@@ -10,11 +12,13 @@ namespace DrinkFinder.Infrastructure.Vat
     {
         private readonly HttpClient _client;
         private readonly string _apiKey;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public VatService(HttpClient client, IConfiguration configuration)
+        public VatService(HttpClient client, IConfiguration configuration, IUnitOfWork unitOfWork)
         {
             _client = client;
             _apiKey = configuration?["ApiKeys:vatlayer"] ?? throw new ArgumentNullException(nameof(configuration));
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<VatResponse> Validate(string vatNumber)
@@ -25,12 +29,18 @@ namespace DrinkFinder.Infrastructure.Vat
 
             if (!response.IsSuccessStatusCode)
             {
-                return new VatResponse { IsValid = false }; // Kind of a hack for now
+                return new VatResponse { IsValid = false, IsFormatValid = false }; // Kind of a hack for now
             }
 
             var content = await response.Content.ReadAsStringAsync();
             var vatResponse = JsonConvert.DeserializeObject<VatResponse>(content);
             return vatResponse;
+        }
+
+        public async Task<bool> IsUnique(string vatNumber)
+        {
+            var establishment = await _unitOfWork.EstablishmentRepo.GetWhere(e => e.VatNumber == vatNumber).SingleOrDefaultAsync();
+            return establishment == null;
         }
     }
 }

@@ -18,6 +18,11 @@ namespace DrinkFinder.Api.Validators
             _shortCodeService = shortCodeService;
             _vatService = vatService;
 
+            CreateRules();
+        }
+
+        private void CreateRules()
+        {
             When(createEstab => createEstab.ShortCode != null, () =>
             {
                 RuleFor(createEstab => createEstab.ShortCode)
@@ -28,7 +33,7 @@ namespace DrinkFinder.Api.Validators
                     .DependentRules(() =>
                     {
                         RuleFor(createEstab => createEstab.ShortCode)
-                            .MustAsync(IsAvailableShortCode).WithMessage("{PropertyValue} is already taken, please choose something else.");
+                            .MustAsync(IsAvailableShortCode).WithMessage("'{PropertyValue}' is already taken. Please choose something else.");
                     });
             });
 
@@ -42,6 +47,7 @@ namespace DrinkFinder.Api.Validators
 
             RuleFor(createEstab => createEstab.VatNumber)
                 .NotEmpty().WithMessage("Cannot be null or empty.")
+                .MustAsync(IsUniqueVatNumber).WithMessage("'{PropertyValue}' is already used. Please ensure you've entered the correct VAT number for your establishment.")
 
                 .DependentRules(() =>
                 {
@@ -73,15 +79,20 @@ namespace DrinkFinder.Api.Validators
                 .SetValidator(new ContactInfoValidator());
         }
 
-        public async Task<bool> IsAvailableShortCode(string shortCode, CancellationToken token)
+        private async Task<bool> IsAvailableShortCode(string shortCode, CancellationToken token)
         {
             return await _shortCodeService.IsAvailable(shortCode);
         }
 
-        public async Task<bool> IsValidVatNumber(string vatNumber, CancellationToken token)
+        private async Task<bool> IsValidVatNumber(string vatNumber, CancellationToken token)
         {
             var vatResponse = await _vatService.Validate(vatNumber);
             return vatResponse.IsValid && vatResponse.IsFormatValid;
+        }
+
+        private async Task<bool> IsUniqueVatNumber(string vatNumber, CancellationToken token)
+        {
+            return await _vatService.IsUnique(vatNumber);
         }
     }
 }
