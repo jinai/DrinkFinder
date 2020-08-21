@@ -1,8 +1,10 @@
 ﻿using DrinkFinder.Common.Enums;
+using DrinkFinder.Common.Extensions;
 using DrinkFinder.MvcClient.Models;
 using DrinkFinder.MvcClient.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -28,18 +30,26 @@ namespace DrinkFinder.MvcClient.Controllers
         {
             IEnumerable<EstablishmentModel> establishments;
 
-            if (!User.Identity.IsAuthenticated)
+            try
             {
-                if (day != null)
+                if (User.Identity.IsAuthenticated)
                 {
-                    return Unauthorized();
+                    day ??= DateTime.Now.DayOfWeek.ToIsoDay();
+                    establishments = await _establishmentService.GetAllOpenOn((IsoDay)day);
                 }
+                else
+                {
+                    if (day != null)
+                    {
+                        return Unauthorized();
+                    }
 
-                establishments = await _establishmentService.GetAll();
+                    establishments = await _establishmentService.GetAll();
+                }
             }
-            else
+            catch (Exception) // TODO: Better exception handling
             {
-                establishments = await _establishmentService.GetAllOpenOn((IsoDay)day);
+                establishments = new List<EstablishmentModel>();
             }
 
             var markers = await _geocodingService.GetMarkers(establishments);
