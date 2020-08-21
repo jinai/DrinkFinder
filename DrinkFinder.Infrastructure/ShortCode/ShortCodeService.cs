@@ -2,6 +2,7 @@
 using DrinkFinder.Infrastructure.Persistence.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DrinkFinder.Infrastructure.ShortCode
@@ -12,7 +13,7 @@ namespace DrinkFinder.Infrastructure.ShortCode
         public const int MaxSize = 20;
         public const int MinSize = 3;
         private readonly IUnitOfWork _unitOfWork;
-        private const int _generationTimeout = 5000; // Milliseconds
+        private const int GenerationTimeout = 5000; // Milliseconds
 
         public ShortCodeService(IUnitOfWork unitOfWork)
         {
@@ -26,26 +27,19 @@ namespace DrinkFinder.Infrastructure.ShortCode
                 return false;
             }
 
-            foreach (char c in shortCode)
-            {
-                if (!AllowedCharacters.Contains(c, StringComparison.Ordinal))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return shortCode.All(c => AllowedCharacters.Contains(c, StringComparison.Ordinal));
         }
 
         public async Task<bool> IsAvailable(string shortCode)
         {
-            var establishment = await _unitOfWork.EstablishmentRepo.GetWhere(e => e.ShortCode == shortCode).SingleOrDefaultAsync();
+            var establishment = await _unitOfWork.EstablishmentRepo.GetWhere(e => e.ShortCode == shortCode)
+                .SingleOrDefaultAsync();
             return establishment == null;
         }
 
         public async Task<string> NewShortCode()
         {
-            var timeout = TimeSpan.FromMilliseconds(_generationTimeout);
+            var timeout = TimeSpan.FromMilliseconds(GenerationTimeout);
             var task = TryGenerateShortCode();
             string shortCode;
 
@@ -73,18 +67,18 @@ namespace DrinkFinder.Infrastructure.ShortCode
 
             while (true)
             {
-                for (int i = 0; i < buffer.Length; i++)
+                for (var i = 0; i < buffer.Length; i++)
                 {
                     buffer[i] = AllowedCharacters[random.Next(AllowedCharacters.Length)];
                 }
 
                 var candidate = new string(buffer);
                 var available = await IsAvailable(candidate);
-                if (available)
-                {
-                    shortCode = candidate;
-                    break;
-                }
+
+                if (!available) continue;
+
+                shortCode = candidate;
+                break;
             }
 
             return shortCode;

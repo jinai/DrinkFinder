@@ -39,10 +39,8 @@ namespace DrinkFinder.Api.Services
 
             if (parameters.Includes != null)
             {
-                foreach (var include in parameters.Includes)
-                {
-                    establishments = establishments.Include(include);
-                };
+                establishments =
+                    parameters.Includes.Aggregate(establishments, (current, include) => current.Include(include));
             }
 
             if (parameters.UserId != Guid.Empty)
@@ -68,7 +66,8 @@ namespace DrinkFinder.Api.Services
 
             if (parameters.Day != null)
             {
-                establishments = establishments.Include(e => e.BusinessHours).Where(e => e.BusinessHours.Any(bh => bh.Day == parameters.Day && bh.OpeningHour != null));
+                establishments = establishments.Include(e => e.BusinessHours).Where(e =>
+                    e.BusinessHours.Any(bh => bh.Day == parameters.Day && bh.OpeningHour != null));
             }
 
             establishments = establishments.Paginate(parameters);
@@ -90,10 +89,7 @@ namespace DrinkFinder.Api.Services
 
             if (parameters?.Includes != null)
             {
-                foreach (var include in parameters.Includes)
-                {
-                    establishments = establishments.Include(include);
-                };
+                establishments = parameters.Includes.Aggregate(establishments, (current, include) => current.Include(include));
             }
 
             var establishment = await establishments.SingleOrDefaultAsync();
@@ -147,7 +143,7 @@ namespace DrinkFinder.Api.Services
 
             try
             {
-                int result = await _unitOfWork.SaveAsync();
+                var result = await _unitOfWork.SaveAsync();
                 return result;
             }
             catch (DbUpdateException)

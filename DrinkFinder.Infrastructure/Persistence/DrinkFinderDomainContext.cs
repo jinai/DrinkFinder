@@ -1,7 +1,6 @@
 ﻿using DrinkFinder.Infrastructure.Persistence.Entities;
 using DrinkFinder.Infrastructure.Persistence.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Reflection;
 using System.Threading;
@@ -46,14 +45,12 @@ namespace DrinkFinder.Infrastructure.Persistence
                         {
                             entry.Entity.AddedDate = DateTimeOffset.Now;
                         }
+
                         entry.Entity.IsDeleted = false;
                         break;
                     case EntityState.Modified:
                         // Only overwrite if it wasn't explicitly set
-                        if (entry.Entity.ModifiedDate == default)
-                        {
-                            entry.Entity.ModifiedDate = DateTimeOffset.Now;
-                        }
+                        entry.Entity.ModifiedDate ??= DateTimeOffset.Now;
                         break;
                     case EntityState.Deleted:
                         entry.State = EntityState.Unchanged;

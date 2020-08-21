@@ -48,18 +48,19 @@ namespace DrinkFinder.Infrastructure.Persistence
         }
 
         #region IDisposable Support
-        private bool disposedValue; // To detect redundant calls
+
+        private bool _disposedValue; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (_disposedValue) return;
+
+            if (disposing)
             {
-                if (disposing)
-                {
-                    _context.Dispose();
-                }
-                disposedValue = true;
+                _context.Dispose();
             }
+
+            _disposedValue = true;
         }
 
         public void Dispose()
@@ -67,6 +68,7 @@ namespace DrinkFinder.Infrastructure.Persistence
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         #endregion
     }
 }

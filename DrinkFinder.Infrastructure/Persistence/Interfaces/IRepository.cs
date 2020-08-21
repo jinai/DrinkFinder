@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace DrinkFinder.Infrastructure.Persistence.Interfaces
 {
-    public interface IRepository<TEntity, TId> where TEntity : IEntity<TId>
+    public interface IRepository<TEntity, in TId> where TEntity : IEntity<TId>
     {
         IQueryable<TEntity> GetAll();
         IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> predicate);

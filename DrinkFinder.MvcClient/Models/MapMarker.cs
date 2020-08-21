@@ -1,5 +1,4 @@
 ﻿using DrinkFinder.Common.Enums;
-using System;
 using System.Collections.Generic;
 
 namespace DrinkFinder.MvcClient.Models

@@ -76,7 +76,7 @@ namespace DrinkFinder.Api.Services
 
             try
             {
-                int result = await _unitOfWork.SaveAsync();
+                var result = await _unitOfWork.SaveAsync();
                 return result;
             }
             catch (DbUpdateException)

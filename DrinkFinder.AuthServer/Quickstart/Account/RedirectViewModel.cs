@@ -3,7 +3,7 @@
 
 
 
-namespace IdentityServerHost.Quickstart.UI
+namespace DrinkFinder.AuthServer.Quickstart.Account
 {
     public class RedirectViewModel
     {

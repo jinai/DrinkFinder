@@ -10,7 +10,7 @@ namespace DrinkFinder.Infrastructure.Persistence
                                                                       where TId : IEquatable<TId>
     {
         private readonly DrinkFinderDomainContext _context;
-        private protected readonly DbSet<TEntity> _set;
+        private readonly DbSet<TEntity> _set;
 
         public Repository(DrinkFinderDomainContext context)
         {
@@ -49,12 +49,13 @@ namespace DrinkFinder.Infrastructure.Persistence
             {
                 _set.Attach(entity);
             }
+
             _set.Remove(entity);
         }
 
         public void Remove(TId id)
         {
-            TEntity entity = new TEntity() { Id = id };
+            var entity = new TEntity() { Id = id };
             Remove(entity);
         }
     }

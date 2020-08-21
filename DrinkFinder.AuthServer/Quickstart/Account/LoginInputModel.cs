@@ -4,7 +4,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace DrinkFinder.AuthServer.Quickstart.Account
 {
     public class LoginInputModel
     {

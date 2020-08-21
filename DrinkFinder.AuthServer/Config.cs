@@ -9,7 +9,7 @@ namespace DrinkFinder.AuthServer
     {
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
-            return new IdentityResource[]
+            return new[]
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
@@ -26,7 +26,7 @@ namespace DrinkFinder.AuthServer
 
         public static IEnumerable<ApiScope> GetApiScopes()
         {
-            return new ApiScope[]
+            return new[]
             {
                 new ApiScope
                 {
@@ -53,7 +53,7 @@ namespace DrinkFinder.AuthServer
 
         public static IEnumerable<ApiResource> GetApiResources()
         {
-            return new ApiResource[]
+            return new[]
             {
                 new ApiResource("drinkfinder.api", "DrinkFinder API")
                 {
@@ -65,7 +65,7 @@ namespace DrinkFinder.AuthServer
 
         public static IEnumerable<Client> GetClients()
         {
-            return new Client[]
+            return new[]
             {
                 new Client
                 {
@@ -119,7 +119,7 @@ namespace DrinkFinder.AuthServer
                         "news.read",
                         "news.write"
                     }
-                },
+                }
             };
         }
     }

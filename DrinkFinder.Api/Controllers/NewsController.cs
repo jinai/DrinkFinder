@@ -18,12 +18,10 @@ namespace DrinkFinder.Api.Controllers
     public class NewsController : ControllerBase
     {
         private readonly INewsService _newsService;
-        private readonly IEstablishmentService _establishmentService;
 
-        public NewsController(INewsService newsService, IEstablishmentService establishmentService)
+        public NewsController(INewsService newsService)
         {
             _newsService = newsService;
-            _establishmentService = establishmentService;
         }
 
         [HttpGet]

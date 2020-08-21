@@ -1,5 +1,4 @@
-﻿using DrinkFinder.Common.Enums;
-using DrinkFinder.MvcClient.Models;
+﻿using DrinkFinder.MvcClient.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
