@@ -118,7 +118,7 @@ namespace DrinkFinder.Api.Services
 
             var establishmentEntity = _mapper.Map<Establishment>(createEstablishmentDto);
             establishmentEntity.UserId = userId;
-            establishmentEntity.Status = EstablishmentStatus.Pending; // Explicitly set it as Pending in case the default changes
+            establishmentEntity.Status = EstablishmentStatus.Pending;
 
             _unitOfWork.EstablishmentRepo.Add(establishmentEntity);
             await _unitOfWork.SaveAsync();

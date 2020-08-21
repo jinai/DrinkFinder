@@ -2,9 +2,9 @@
 {
     public enum EstablishmentType
     {
-        Bar,
-        NightClub,
-        MusicVenue,
-        StudentCircle
+        Bar = 0,
+        NightClub = 1,
+        MusicVenue = 2,
+        StudentCircle = 3
     }
 }
