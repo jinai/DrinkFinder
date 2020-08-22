@@ -35,7 +35,7 @@ namespace DrinkFinder.MvcClient.Services
                     Description = establishment.Description,
                     Type = establishment.Type,
                     Logo = establishment.Logo,
-                    FormattedAddress = result.FormattedAddress,
+                    FormattedAddress = inputAddress,
                     BusinessHours = establishment.BusinessHours,
                 };
 

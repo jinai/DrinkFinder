@@ -18,9 +18,18 @@ window.initMap = function () {
 
     $.getJSON(url, function (payload) {
         console.log(payload);
+
+        const markers = [];
         $.each(payload, function (i, apiMarker) {
-            addMarker(apiMarker, map);
+            markers.push(addMarker(apiMarker, map));
         });
+
+        const bounds = new window.google.maps.LatLngBounds();
+        for (let i = 0; i < markers.length; i++) {
+            bounds.extend(markers[i].getPosition());
+        }
+
+        map.fitBounds(bounds);
     });
 };
 
@@ -91,4 +100,6 @@ function addMarker(apiMarker, map) {
             activeInfoWindow.close();
         }
     });
+
+    return marker;
 }
