@@ -44,7 +44,7 @@ namespace DrinkFinder.MvcClient.Services
 
         public async Task<EstablishmentModel> GetByShortCode(string shortCode)
         {
-            var response = await _client.GetAsync($"establishments?ShortCode={shortCode}&includes=BusinessHours&includes=Pictures");
+            var response = await _client.GetAsync($"establishments?shortCode={shortCode}&includes=BusinessHours&includes=Pictures");
 
             if (!response.IsSuccessStatusCode)
             {
@@ -58,6 +58,18 @@ namespace DrinkFinder.MvcClient.Services
         public async Task<IEnumerable<EstablishmentModel>> GetAllOpenOn(IsoDay day)
         {
             var response = await _client.GetAsync($"establishments?day={day}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(GenerateExceptionMessage(response));
+            }
+
+            return JsonConvert.DeserializeObject<IEnumerable<EstablishmentModel>>(await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<IEnumerable<EstablishmentModel>> GetAllForUser(Guid userId)
+        {
+            var response = await _client.GetAsync($"establishments?userId={userId}&includes=BusinessHours&includes=Pictures");
 
             if (!response.IsSuccessStatusCode)
             {

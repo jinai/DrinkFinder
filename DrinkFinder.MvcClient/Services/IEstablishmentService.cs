@@ -12,5 +12,6 @@ namespace DrinkFinder.MvcClient.Services
         Task<EstablishmentModel> GetById(Guid establishmentId);
         Task<EstablishmentModel> GetByShortCode(string shortCode);
         Task<IEnumerable<EstablishmentModel>> GetAllOpenOn(IsoDay day);
+        Task<IEnumerable<EstablishmentModel>> GetAllForUser(Guid userId);
     }
 }

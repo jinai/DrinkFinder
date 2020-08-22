@@ -1,0 +1,57 @@
+﻿@model IEnumerable<DrinkFinder.MvcClient.Models.EstablishmentModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>My establishments</h1>
+
+<table class="table table-hover">
+    <caption>My establishments</caption>
+    <thead class="thead-dark">
+        <tr class="d-flex">
+            <th class="col-2">
+                @Html.DisplayNameFor(model => model.ShortCode)
+            </th>
+            <th class="col-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="col-2">
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th class="col-2">
+                @Html.DisplayNameFor(model => model.VatNumber)
+            </th>
+            <th class="col-2">
+                @Html.DisplayNameFor(model => model.AddedDate)
+            </th>
+            <th class="col-2">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="d-flex">
+                <td class="col-2">
+                    @Html.DisplayFor(modelItem => item.ShortCode)
+                </td>
+                <td class="col-2">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="col-2">
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td class="col-2">
+                    @Html.DisplayFor(modelItem => item.VatNumber)
+                </td>
+                <td class="col-2">
+                    @Html.DisplayFor(modelItem => item.AddedDate)
+                </td>
+                <td class="col-2">
+                    @Html.ActionLink("Details", "Details", "Establishments", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

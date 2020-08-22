@@ -11,6 +11,7 @@ namespace DrinkFinder.MvcClient.Models
     public class EstablishmentModel
     {
         public Guid Id { get; set; }
+        [Display(Name = "Short code")]
         public string ShortCode { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
