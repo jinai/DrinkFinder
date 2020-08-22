@@ -9,7 +9,7 @@ namespace DrinkFinder.Infrastructure.ShortCode
 {
     public class ShortCodeService : IShortCodeService
     {
-        public const string AllowedCharacters = "abcdefghijklmnopqrstuvwxyz0123456789-_";
+        public const string AllowedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
         public const int MaxSize = 20;
         public const int MinSize = 3;
         private readonly IUnitOfWork _unitOfWork;
