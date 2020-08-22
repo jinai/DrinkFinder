@@ -24,11 +24,6 @@ namespace DrinkFinder.MvcClient.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         [Authorize]
         public async Task<IActionResult> Secure()
         {
