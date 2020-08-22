@@ -21,7 +21,7 @@ namespace DrinkFinder.Api
             }
 
             // Check if seed file exists first
-            var seedFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "entities_seed.json");
+            var seedFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory!, "entities_seed.json");
             if (!File.Exists(seedFile))
             {
                 return;

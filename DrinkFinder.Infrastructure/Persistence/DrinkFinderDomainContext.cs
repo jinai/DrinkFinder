@@ -25,8 +25,8 @@ namespace DrinkFinder.Infrastructure.Persistence
             }
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            base.OnModelCreating(builder);
 
+            // Filter out soft deleted entities
             builder.Entity<Establishment>().HasQueryFilter(e => !e.IsDeleted);
             builder.Entity<News>().HasQueryFilter(e => !e.IsDeleted);
             builder.Entity<Picture>().HasQueryFilter(e => !e.IsDeleted);
