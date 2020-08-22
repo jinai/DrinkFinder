@@ -41,8 +41,8 @@ function today() {
     return weekdays[new Date().getDay()];
 }
 
-function hoursNull(hours) {
-    return hours.openingHour === "00:00:00" && hours.closingHour === "00:00:00";
+function isClosedToday(hours) {
+    return hours.openingHour === null || hours.closingHour === null;
 }
 
 function addMarker(apiMarker, map) {
@@ -51,7 +51,7 @@ function addMarker(apiMarker, map) {
     let closingHour = "-";
     if (apiMarker.businessHours.length > 0) {
         const hours = apiMarker.businessHours.filter(x => x.day === today())[0];
-        if (!hoursNull(hours)) {
+        if (!isClosedToday(hours)) {
             openingHour = hours.openingHour.slice(0, -3);
             closingHour = hours.closingHour.slice(0, -3);
         }
@@ -66,7 +66,11 @@ function addMarker(apiMarker, map) {
             </div>
             <div class="info">
                 <p>Type : <strong>${apiMarker.type}</strong></p>
-                <p>Opening : <strong>${openingHour}</strong><br>Closing : <strong>${closingHour}</strong></p>
+                <p>
+                    <strong>${today()}</strong><br>
+                    Opening : <strong>${openingHour}</strong><br>
+                    Closing : <strong>${closingHour}</strong>
+                </p>
                 <br>
                 <p><strong>${apiMarker.formattedAddress}</strong></p>
                 <p><a href="/e/${apiMarker.shortCode}">Details</p>

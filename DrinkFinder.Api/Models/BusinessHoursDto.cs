@@ -6,7 +6,7 @@ namespace DrinkFinder.Api.Models
     public class BusinessHoursDto
     {
         public IsoDay Day { get; set; }
-        public TimeSpan OpeningHour { get; set; }
-        public TimeSpan ClosingHour { get; set; }
+        public TimeSpan? OpeningHour { get; set; }
+        public TimeSpan? ClosingHour { get; set; }
     }
 }
