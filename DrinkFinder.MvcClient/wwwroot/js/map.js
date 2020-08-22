@@ -57,9 +57,10 @@ function addMarker(apiMarker, map) {
             </div>
             <div class="info">
                 <p>Type : <strong>${apiMarker.type}</strong></p>
-                <p>Ouverture : <strong>${openingHour}</strong><br>Fermeture : <strong>${closingHour}</strong></p>
+                <p>Opening : <strong>${openingHour}</strong><br>Closing : <strong>${closingHour}</strong></p>
                 <br>
                 <p><strong>${apiMarker.formattedAddress}</strong></p>
+                <p><a href="/e/${apiMarker.shortCode}">Details</p>
             </div>
         </div>
     `;

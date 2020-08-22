@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DrinkFinder.Common.ValueObjects
 {
     public class ContactInfo : ValueObject
     {
+        [Display(Name = "Professional email")]
         public string ProfessionalEmail { get; private set; }
+        [Display(Name = "Public email")]
         public string PublicEmail { get; private set; }
+        [Display(Name = "Phone number")]
         public string PhoneNumber { get; private set; }
 
         private ContactInfo() { }

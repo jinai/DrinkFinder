@@ -1,0 +1,117 @@
+﻿@using DrinkFinder.Common.Extensions
+@model DrinkFinder.MvcClient.Models.EstablishmentModel
+
+@{
+    ViewData["Title"] = $"Details - {Model.Name}";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Html.DisplayFor(model => model.Name)</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FormattedAddress)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FormattedAddress)
+        </dd>
+        @if (Model.ContactInfo.PhoneNumber != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ContactInfo.PhoneNumber)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ContactInfo.PhoneNumber)
+            </dd>
+        }
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ContactInfo.ProfessionalEmail)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ContactInfo.ProfessionalEmail)
+        </dd>
+        @if (Model.ContactInfo.PublicEmail != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ContactInfo.PublicEmail)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ContactInfo.PublicEmail)
+            </dd>
+        }
+        @if (Model.Website != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Website)
+            </dt>
+            <dd class="col-sm-10">
+                <a href="@Html.DisplayFor(model => model.Website)">@Html.DisplayFor(model => model.Website)</a>
+            </dd>
+        }
+        @if (Model.Socials?.Instagram != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Socials.Instagram)
+            </dt>
+            <dd class="col-sm-10">
+                <a href="@Html.DisplayFor(model => model.Socials.Instagram)">@Html.DisplayFor(model => model.Socials.Instagram)</a>
+            </dd>
+        }
+        @if (Model.Socials?.Facebook != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Socials.Facebook)
+            </dt>
+            <dd class="col-sm-10">
+                <a href="@Html.DisplayFor(model => model.Socials.Facebook)">@Html.DisplayFor(model => model.Socials.Facebook)</a>
+            </dd>
+        }
+        @if (Model.Socials?.Twitter != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Socials.Twitter)
+            </dt>
+            <dd class="col-sm-10">
+                <a href="@Html.DisplayFor(model => model.Socials.Twitter)">@Html.DisplayFor(model => model.Socials.Twitter)</a>
+            </dd>
+        }
+        @if (Model.Socials?.LinkedIn != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Socials.LinkedIn)
+            </dt>
+            <dd class="col-sm-10">
+                <a href="@Html.DisplayFor(model => model.Socials.LinkedIn)">@Html.DisplayFor(model => model.Socials.LinkedIn)</a>
+            </dd>
+        }
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AddedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AddedDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.VatNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.VatNumber)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

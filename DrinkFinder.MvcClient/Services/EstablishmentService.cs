@@ -3,6 +3,7 @@ using DrinkFinder.MvcClient.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -31,7 +32,7 @@ namespace DrinkFinder.MvcClient.Services
 
         public async Task<EstablishmentModel> GetById(Guid establishmentId)
         {
-            var response = await _client.GetAsync($"establishments/{establishmentId}");
+            var response = await _client.GetAsync($"establishments/{establishmentId}?includes=BusinessHours&includes=Pictures");
 
             if (!response.IsSuccessStatusCode)
             {
@@ -39,6 +40,19 @@ namespace DrinkFinder.MvcClient.Services
             }
 
             return JsonConvert.DeserializeObject<EstablishmentModel>(await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<EstablishmentModel> GetByShortCode(string shortCode)
+        {
+            var response = await _client.GetAsync($"establishments?ShortCode={shortCode}&includes=BusinessHours&includes=Pictures");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(GenerateExceptionMessage(response));
+            }
+
+            var establishments = JsonConvert.DeserializeObject<List<EstablishmentModel>>(await response.Content.ReadAsStringAsync());
+            return establishments.SingleOrDefault();
         }
 
         public async Task<IEnumerable<EstablishmentModel>> GetAllOpenOn(IsoDay day)
