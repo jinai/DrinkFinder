@@ -6,6 +6,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Scripts {
+    <link href="~/css/pictures.css" rel="stylesheet" />
+}
+
 <h1>@Html.DisplayFor(model => model.Name)</h1>
 
 <div>
@@ -59,7 +63,7 @@
                 @Html.DisplayNameFor(model => model.Website)
             </dt>
             <dd class="col-sm-10">
-                <a href="@Html.DisplayFor(model => model.Website)">@Html.DisplayFor(model => model.Website)</a>
+                <a href="@Model.Website">@Model.Website</a>
             </dd>
         }
         @if (Model.Socials?.Instagram != null)
@@ -68,7 +72,7 @@
                 @Html.DisplayNameFor(model => model.Socials.Instagram)
             </dt>
             <dd class="col-sm-10">
-                <a href="@Html.DisplayFor(model => model.Socials.Instagram)">@Html.DisplayFor(model => model.Socials.Instagram)</a>
+                <a href="@Model.Socials.Instagram">@Model.Socials.Instagram</a>
             </dd>
         }
         @if (Model.Socials?.Facebook != null)
@@ -77,7 +81,7 @@
                 @Html.DisplayNameFor(model => model.Socials.Facebook)
             </dt>
             <dd class="col-sm-10">
-                <a href="@Html.DisplayFor(model => model.Socials.Facebook)">@Html.DisplayFor(model => model.Socials.Facebook)</a>
+                <a href="@Model.Socials.Facebook">@Model.Socials.Facebook</a>
             </dd>
         }
         @if (Model.Socials?.Twitter != null)
@@ -86,7 +90,7 @@
                 @Html.DisplayNameFor(model => model.Socials.Twitter)
             </dt>
             <dd class="col-sm-10">
-                <a href="@Html.DisplayFor(model => model.Socials.Twitter)">@Html.DisplayFor(model => model.Socials.Twitter)</a>
+                <a href="@Model.Socials.Twitter">@Model.Socials.Twitter</a>
             </dd>
         }
         @if (Model.Socials?.LinkedIn != null)
@@ -95,7 +99,7 @@
                 @Html.DisplayNameFor(model => model.Socials.LinkedIn)
             </dt>
             <dd class="col-sm-10">
-                <a href="@Html.DisplayFor(model => model.Socials.LinkedIn)">@Html.DisplayFor(model => model.Socials.LinkedIn)</a>
+                <a href="@Model.Socials.LinkedIn">@Model.Socials.LinkedIn</a>
             </dd>
         }
         <dt class="col-sm-2">
@@ -111,6 +115,88 @@
             @Html.DisplayFor(model => model.VatNumber)
         </dd>
     </dl>
+    @if (Model.BusinessHours.Count > 0)
+    {
+        <hr />
+        <h4>@Html.DisplayNameFor(model => model.BusinessHours)</h4>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Monday)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Monday)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Tuesday)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Tuesday)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Wednesday)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Wednesday)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Thursday)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Thursday)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Friday)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Friday)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Saturday)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Saturday)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Sunday)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Sunday)
+            </dd>
+        </dl>
+    }
+    @if (Model.Pictures.Count > 0)
+    {
+        <hr />
+        <h4>@Html.DisplayNameFor(model => model.Pictures)</h4>
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div id="pictures" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        @for (var index = 0; index < Model.Pictures.Count; index++)
+                        {
+                            <li data-target="#pictures" data-slide-to="@index" class="@(index == 0 ? "active" : "")"></li>
+                        }
+                    </ol>
+                    <div class="carousel-inner">
+                        @foreach (var (index, item) in Model.Pictures.Enumerated())
+                        {
+                            <div class="carousel-item @(index == 0 ? "active" : "")">
+                                <img class="d-block w-100 img-fluid" src="@item" alt="Picture @(index + 1)">
+                            </div>
+                        }
+                    </div>
+                    <a class="carousel-control-prev" href="#pictures" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#pictures" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 <div>
     <a asp-action="Index">Back to List</a>
